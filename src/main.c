@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/13 14:04:42 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/10/13 18:47:07 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-#include "MLX42/MLX42.h"
+#include "MLX42/include/MLX42/MLX42.h"
 #define WIDTH 256
 #define HEIGHT 256
 
@@ -42,15 +42,25 @@ int32_t	main(void)
 	if (!mlx)
 		ft_error();
 
-	/* Do stuff */
-
 	// Create and display the image.
 	mlx_image_t* img = mlx_new_image(mlx, 256, 256);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
 
-	// Even after the image is being displayed, we can still modify the buffer.
-	mlx_put_pixel(img, 0, 0, 0xFF0000FF);
+	/* Do stuff */
+	int x = 0;
+	int y;
+
+	while (x < WIDTH)
+	{
+		y = 0;
+		while (y < HEIGHT)
+		{
+			mlx_put_pixel(img, x, y, 0xFF0000FF);
+			y++;
+		}
+		x++;
+	}
 
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!

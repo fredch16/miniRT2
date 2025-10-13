@@ -6,7 +6,7 @@
 #    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/10/13 14:19:32 by fredchar         ###   ########.fr        #
+#    Updated: 2025/10/13 18:41:54 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME :=		miniRT
 
 CC :=		cc
 CFLAGS :=	-Wall -Wextra -Werror -g -Ofast
-LDFLAGS :=	-lmlx42 -lglfw -lGL -lm -ldl -pthread
+LDFLAGS :=	-lglfw -lGL -lm -ldl -pthread
 LIBFT :=	include/libft/libft.a
 LIBMLX :=	include/MLX42
 
