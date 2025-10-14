@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:59:52 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/13 14:05:57 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/10/14 15:44:36 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
  * @param height The height of the window.
  * @param delta_time The time difference between the previous frame and the current frame.
  */
-typedef struct mlx
-{
-	void*		window;
-	void*		context;
-	int32_t		width;
-	int32_t		height;
-	double		delta_time;
-}	mlx_t;
+// typedef struct mlx
+// {
+// 	void*		window;
+// 	void*		context;
+// 	int32_t		width;
+// 	int32_t		height;
+// 	double		delta_time;
+// }	mlx_t;

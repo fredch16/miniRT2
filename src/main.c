@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/13 18:47:07 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/10/14 15:49:47 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,16 @@ static void ft_error(void)
 	exit(EXIT_FAILURE);
 }
 
-// Print the window width and height.
-static void ft_hook(void* param)
+void	mlx_hook(mlx_key_data_t mlx_key_data, void *param)
 {
-	const mlx_t* mlx = param;
+	mlx_t *mlx = param;
 
-	printf("WIDTH: %d | HEIGHT: %d\n", mlx->width, mlx->height);
+	if (mlx_key_data.key == MLX_KEY_ESCAPE)
+	{
+		//free
+		printf("WINDOW IS BEING CLOSED DUE TO ESCAPE KEY\n");
+		mlx_close_window(mlx);
+	}
 }
 
 int32_t	main(void)
@@ -64,7 +68,7 @@ int32_t	main(void)
 
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
-	mlx_loop_hook(mlx, ft_hook, mlx);
+	mlx_key_hook(mlx, mlx_hook, mlx);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
