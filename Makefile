@@ -6,7 +6,7 @@
 #    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/10/13 18:41:54 by fredchar         ###   ########.fr        #
+#    Updated: 2025/10/15 14:03:41 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,12 +23,14 @@ SRCD :=		src
 OBJD :=		obj
 
 SRCS :=		$(SRCD)/main.c \
+			$(SRCD)/minimath/matrix1.c \
+			$(SRCD)/minimath/equal.c \
 
 OBJS :=		$(SRCS:$(SRCD)/%.c=$(OBJD)/%.o)
 
 # Create object subdirectories
 OBJ_DIRS :=	$(OBJD) \
-			$(OBJD)/lexical_analysis \
+			$(OBJD)/minimath \
 
 all: libmlx $(NAME)
 
@@ -60,7 +62,9 @@ fclean: clean
 	@$(MAKE) -C include/libft fclean
 	@rm -f $(NAME)
 
-re: fclean all
+re:
+	$(MAKE) fclean
+	$(MAKE) all
 
 .PHONY: all clean fclean re
 
