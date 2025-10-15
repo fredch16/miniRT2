@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/15 17:57:45 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/10/15 18:12:51 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,10 @@ int32_t	main(void)
 	printf("Mag is | %10.5f |\n", (tuple_mag(point(1, 2, -3))));
 	printf("Norm is: ");
 	print_tuple4(tuple_norm(vector(1, 2, 3)));
+	printf("Dot is | %10.5f |\n", tuple_dot(vector(1, 2, 3), vector(2, 3, 4)));
+
+	printf("Cross is: ");
+	print_tuple4(tuple_cro(vector(1, 2, 3), vector(3, 4, 5)));
 	int x = 0;
 	int y;
 	while (x < WIDTH)

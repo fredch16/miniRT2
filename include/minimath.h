@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:09:38 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/15 17:55:46 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/10/15 18:12:30 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ t_tuple	tuple_scd(const t_tuple a, const double k);
 
 double	tuple_mag(const t_tuple a);
 t_tuple	tuple_norm(const t_tuple a);
+double	tuple_dot(const t_tuple a, const t_tuple b);
+t_tuple	tuple_cro(const t_tuple a, const t_tuple b);
 
 // create_tuples.c
 
