@@ -6,7 +6,7 @@
 #    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/10/15 14:03:41 by fredchar         ###   ########.fr        #
+#    Updated: 2025/10/15 15:14:16 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ OBJD :=		obj
 SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/minimath/matrix1.c \
 			$(SRCD)/minimath/equal.c \
+			$(SRCD)/minimath/tuples1.c \
 
 OBJS :=		$(SRCS:$(SRCD)/%.c=$(OBJD)/%.o)
 
