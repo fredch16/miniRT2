@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/15 15:48:26 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/10/15 17:57:45 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,12 @@ int32_t	main(void)
 	t_tuple test1, test2;
 	test1 = point(3, 2, 1);
 	test2 = point(5, 6, 7);
-	t_tuple res = tuple_sub(&test1, &test2);
+	t_tuple res = tuple_add(test1, test2);
 	print_tuple4(res);
+	print_tuple4(tuple_neg(point(1, 2, -3)));
+	printf("Mag is | %10.5f |\n", (tuple_mag(point(1, 2, -3))));
+	printf("Norm is: ");
+	print_tuple4(tuple_norm(vector(1, 2, 3)));
 	int x = 0;
 	int y;
 	while (x < WIDTH)

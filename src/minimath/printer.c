@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:38:35 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/15 15:40:28 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/10/15 17:23:46 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ void	print_matrix4(t_matrix4 mat)
 void	print_tuple4(t_tuple tup)
 {
 	if (tup.w == 1)
-		printf("The POINT is as follows\n");
+		printf("The POINT (w = 1) is as follows\n");
+	else if (tup.w == 0)
+		printf("The VECTOR (w = 0) is as follows\n");
 	else
-		printf("The VECTOR is as follows\n");
+		printf("The TUPLE (w = %10.5f) is as follows\n", tup.w);
 	printf("| x = %10.5f |\n", tup.x);
 	printf("| y = %10.5f |\n", tup.y);
 	printf("| z = %10.5f |\n", tup.z);
