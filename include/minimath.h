@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:09:38 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/15 14:07:20 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/10/15 15:42:07 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,23 @@ typedef struct s_matrix4
 	t_tuple	c[4];
 }	t_matrix4;
 
+// printer.c
+
 void	print_matrix4(t_matrix4 mat);
+void	print_tuple4(t_tuple tup);
 
 // equal.c
 
 bool	equal(double a, double b);
 bool	equal_tuple(t_tuple a, t_tuple b);
 bool	equal_matrix(t_matrix4 a, t_matrix4 b);
+
+// tuple_ops1.c
+t_tuple	tuple_sub(const t_tuple *a, const t_tuple *b);
+
+// create_tuples.c
+
+t_tuple	point(double x, double y, double z);
+t_tuple	vector(double x, double y, double z);
 
 #endif

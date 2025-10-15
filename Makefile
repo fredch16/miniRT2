@@ -6,15 +6,15 @@
 #    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/10/15 15:14:16 by fredchar         ###   ########.fr        #
+#    Updated: 2025/10/15 15:59:09 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME :=		miniRT
 
 CC :=		cc
-CFLAGS :=	-Wall -Wextra -Werror -g -Ofast
-LDFLAGS :=	-lglfw -lGL -lm -ldl -pthread
+CFLAGS :=	-Wall -Wextra -Werror -g -Ofast -flto -03
+LDFLAGS :=	-lglfw -lGL -lm -ldl -pthread -flto
 LIBFT :=	include/libft/libft.a
 LIBMLX :=	include/MLX42
 
@@ -25,7 +25,9 @@ OBJD :=		obj
 SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/minimath/matrix1.c \
 			$(SRCD)/minimath/equal.c \
-			$(SRCD)/minimath/tuples1.c \
+			$(SRCD)/minimath/create_tuples.c \
+			$(SRCD)/minimath/printer.c \
+			$(SRCD)/minimath/tuple_ops1.c \
 
 OBJS :=		$(SRCS:$(SRCD)/%.c=$(OBJD)/%.o)
 

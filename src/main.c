@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/15 14:10:30 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/10/15 15:48:26 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,13 @@ int32_t	main(void)
 	else
 		printf("These two are NOTTTTTTTTTTTT equal!\n");
 
+
+	printf("subtracting vector 1 from 2\n");
+	t_tuple test1, test2;
+	test1 = point(3, 2, 1);
+	test2 = point(5, 6, 7);
+	t_tuple res = tuple_sub(&test1, &test2);
+	print_tuple4(res);
 	int x = 0;
 	int y;
 	while (x < WIDTH)
