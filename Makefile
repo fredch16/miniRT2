@@ -6,14 +6,14 @@
 #    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/10/15 15:59:09 by fredchar         ###   ########.fr        #
+#    Updated: 2025/10/15 16:09:30 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME :=		miniRT
 
 CC :=		cc
-CFLAGS :=	-Wall -Wextra -Werror -g -Ofast -flto -03
+CFLAGS :=	-Wall -Wextra -Werror -g -Ofast -flto -O3
 LDFLAGS :=	-lglfw -lGL -lm -ldl -pthread -flto
 LIBFT :=	include/libft/libft.a
 LIBMLX :=	include/MLX42
