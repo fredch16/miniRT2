@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/22 17:37:58 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/10/22 18:39:17 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ int32_t	main(void)
 	t_mat testmatrix, testmatrix2;
 	t_vec	c0, c1, c2, c3;
 
-	c0 = vector(1, 5, 9);
-	c0.w = 5;
-	c1 = vector(2, 6, 8);
-	c1.w = 4;
-	c2 = vector(3, 7, 7);
-	c2.w = 3;
-	c3 = vector(4, 8, 6);
-	c3.w = 2;
+	c0 = vector(1, 2, 8);
+	c0.w = 0;
+	c1 = vector(2, 4, 6);
+	c1.w = 0;
+	c2 = vector(3, 4, 4);
+	c2.w = 0;
+	c3 = vector(4, 2, 1);
+	c3.w = 1;
 
 	testmatrix.c[0] = c0;
 	testmatrix.c[1] = c1;
@@ -112,11 +112,11 @@ int32_t	main(void)
 
 	printf("testmatrix\n");
 	print_mat(testmatrix);
-	printf("testmatrix2\n");
-	print_mat(testmatrix2);
-	t_mat new = mat_mul_mat(testmatrix, testmatrix2);
+	t_vec vecvec = point(1, 2, 3);
+	print_vec4(vecvec);
+	print_vec4(mat_mul_vec(testmatrix, vecvec));
 
-	print_mat(new);
+	
 	while (x < WIDTH)
 	{
 		y = 0;
