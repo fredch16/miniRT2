@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/15 18:12:51 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/10/22 17:37:58 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,34 +54,37 @@ int32_t	main(void)
 	/* Do stuff */
 
 
-	t_matrix4 testmatrix;
-	t_tuple	c0, c1, c2, c3;
-	c0.x = 1;
-	c0.y = 5.5;
-	c0.z = 9;
-	c0.w = 13.5;
-	c1.x = 2;
-	c1.y = 6.5;
-	c1.z = 10;
-	c1.w = 14.5;
-	c2.x = 3;
-	c2.y = 7.5;
-	c2.z = 11;
-	c2.w = 15.5;
-	c3.x = 4;
-	c3.y = 8.5;
-	c3.z = 12;
-	c3.w = 16.5;
+	t_mat testmatrix, testmatrix2;
+	t_vec	c0, c1, c2, c3;
+
+	c0 = vector(1, 5, 9);
+	c0.w = 5;
+	c1 = vector(2, 6, 8);
+	c1.w = 4;
+	c2 = vector(3, 7, 7);
+	c2.w = 3;
+	c3 = vector(4, 8, 6);
+	c3.w = 2;
 
 	testmatrix.c[0] = c0;
 	testmatrix.c[1] = c1;
 	testmatrix.c[2] = c2;
 	testmatrix.c[3] = c3;
-	print_matrix4(testmatrix);
-	t_matrix4 testmatrix2;
-	testmatrix2 = testmatrix;
-	testmatrix2.c[0].x = 1.000001;
-	print_matrix4(testmatrix2);
+
+	// second
+	c0 = vector(-2, 3, 4);
+	c0.w = 1;
+	c1 = vector(1, 2, 3);
+	c1.w = 2;
+	c2 = vector(2, 1, 6);
+	c2.w = 7;
+	c3 = vector(3, -1, 5);
+	c3.w = 8;
+
+	testmatrix2.c[0] = c0;
+	testmatrix2.c[1] = c1;
+	testmatrix2.c[2] = c2;
+	testmatrix2.c[3] = c3;
 
 	if (equal_matrix(testmatrix, testmatrix2))
 		printf("These two are equal!\n");
@@ -90,21 +93,30 @@ int32_t	main(void)
 
 
 	printf("subtracting vector 1 from 2\n");
-	t_tuple test1, test2;
+	t_vec test1, test2;
 	test1 = point(3, 2, 1);
 	test2 = point(5, 6, 7);
-	t_tuple res = tuple_add(test1, test2);
-	print_tuple4(res);
-	print_tuple4(tuple_neg(point(1, 2, -3)));
+	t_vec res = tuple_add(test1, test2);
+	print_vec4(res);
+	print_vec4(tuple_neg(point(1, 2, -3)));
 	printf("Mag is | %10.5f |\n", (tuple_mag(point(1, 2, -3))));
 	printf("Norm is: ");
-	print_tuple4(tuple_norm(vector(1, 2, 3)));
+	print_vec4(tuple_norm(vector(1, 2, 3)));
 	printf("Dot is | %10.5f |\n", tuple_dot(vector(1, 2, 3), vector(2, 3, 4)));
 
 	printf("Cross is: ");
-	print_tuple4(tuple_cro(vector(1, 2, 3), vector(3, 4, 5)));
+	print_vec4(tuple_cro(vector(1, 2, 3), vector(3, 4, 5)));
 	int x = 0;
 	int y;
+
+
+	printf("testmatrix\n");
+	print_mat(testmatrix);
+	printf("testmatrix2\n");
+	print_mat(testmatrix2);
+	t_mat new = mat_mul_mat(testmatrix, testmatrix2);
+
+	print_mat(new);
 	while (x < WIDTH)
 	{
 		y = 0;

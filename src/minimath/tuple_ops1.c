@@ -6,16 +6,16 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:20:02 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/15 17:40:29 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/10/22 16:00:59 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniRT.h"
 
 // THE SAME CODE
-// inline t_tuple	tuple_sub(t_tuple *a, t_tuple *b)
+// inline t_vec	tuple_sub(t_vec *a, t_vec *b)
 // {
-// 	t_tuple	c;
+// 	t_vec	c;
 
 // 	c.x = a.x - b.x;
 // 	c.y = a.y - b.y;
@@ -24,28 +24,28 @@
 // 	return (c);
 // }
 
-inline t_tuple	tuple_sub(const t_tuple a, const t_tuple b)
+inline t_vec	tuple_sub(const t_vec a, const t_vec b)
 {
-	return ((t_tuple){a.x - b.x, a.y - b.y,	a.z - b.z, a.w - b.w});
+	return ((t_vec){a.x - b.x, a.y - b.y,	a.z - b.z, a.w - b.w});
 }
 
-inline t_tuple	tuple_add(const t_tuple a, const t_tuple b)
+inline t_vec	tuple_add(const t_vec a, const t_vec b)
 {
-	return ((t_tuple){a.x + b.x, a.y + b.y,	a.z + b.z, a.w + b.w});
+	return ((t_vec){a.x + b.x, a.y + b.y,	a.z + b.z, a.w + b.w});
 }
 
-inline t_tuple	tuple_neg(const t_tuple a)
+inline t_vec	tuple_neg(const t_vec a)
 {
-	return ((t_tuple){-a.x, -a.y, -a.z, -a.w});
+	return ((t_vec){-a.x, -a.y, -a.z, -a.w});
 }
 
-inline t_tuple	tuple_scm(const double k, const t_tuple a)
+inline t_vec	tuple_scm(const double k, const t_vec a)
 {
-	return ((t_tuple){k * a.x, k * a.y, k * a.z, k * a.w});
+	return ((t_vec){k * a.x, k * a.y, k * a.z, k * a.w});
 }
 
 // USE SCM WHEN POSSIBLE SCD IS SLOWER
-inline t_tuple	tuple_scd(const t_tuple a, const double k)
+inline t_vec	tuple_scd(const t_vec a, const double k)
 {
-	return ((t_tuple){a.x / k, a.y / k, a.z / k, a.w / k});
+	return ((t_vec){a.x / k, a.y / k, a.z / k, a.w / k});
 }

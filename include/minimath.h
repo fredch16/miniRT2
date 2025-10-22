@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:09:38 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/15 18:12:30 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/10/22 17:32:16 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,52 +19,55 @@
 // w value is in place to specify a vector or a point
 // w = 0 indicates a vector
 // w = 1 indicates a point
-typedef struct s_tuple
+typedef struct s_vec
 {
 	double	x;
 	double	y;
 	double	z;
 	double	w;
-}	t_tuple;
+}	t_vec;
 
 // each matrix will consist of 4 columns which will be represented
 // using the previously defined vectors (tuples)
-typedef struct s_matrix4
+typedef struct s_mat
 {
-	t_tuple	c[4];
-}	t_matrix4;
+	t_vec	c[4];
+}	t_mat;
 
 // printer.c
 
-void	print_matrix4(t_matrix4 mat);
-void	print_tuple4(t_tuple tup);
+void	print_mat(t_mat mat);
+void	print_vec4(t_vec tup);
 
 // equal.c
 
 bool	equal(double a, double b);
-bool	equal_tuple(t_tuple a, t_tuple b);
-bool	equal_matrix(t_matrix4 a, t_matrix4 b);
+bool	equal_tuple(t_vec a, t_vec b);
+bool	equal_matrix(t_mat a, t_mat b);
 
 // tuple_ops1.c
 
-t_tuple	tuple_sub(const t_tuple a, const t_tuple b);
-t_tuple	tuple_add(const t_tuple a, const t_tuple b);
-t_tuple	tuple_neg(const t_tuple a);
-t_tuple	tuple_scm(const double k, const t_tuple a);
-t_tuple	tuple_scd(const t_tuple a, const double k);
+t_vec	tuple_sub(const t_vec a, const t_vec b);
+t_vec	tuple_add(const t_vec a, const t_vec b);
+t_vec	tuple_neg(const t_vec a);
+t_vec	tuple_scm(const double k, const t_vec a);
+t_vec	tuple_scd(const t_vec a, const double k);
 
 // tuple_ops2.c
 
-double	tuple_mag(const t_tuple a);
-t_tuple	tuple_norm(const t_tuple a);
-double	tuple_dot(const t_tuple a, const t_tuple b);
-t_tuple	tuple_cro(const t_tuple a, const t_tuple b);
+double	tuple_mag(const t_vec a);
+t_vec	tuple_norm(const t_vec a);
+double	tuple_dot(const t_vec a, const t_vec b);
+t_vec	tuple_cro(const t_vec a, const t_vec b);
 
-// create_tuples.c
+// create.c
 
-t_tuple	point(double x, double y, double z);
-t_tuple	vector(double x, double y, double z);
+t_vec	point(double x, double y, double z);
+t_vec	vector(double x, double y, double z);
 
+// matmul.c
 
+t_mat	mat_mul_mat(const t_mat a, const t_mat b);
+t_vec	mat_mul_vec(const t_mat m, const t_vec v);
 
 #endif

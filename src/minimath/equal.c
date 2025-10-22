@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 13:52:10 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/15 15:52:49 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/10/22 16:01:52 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ inline bool	equal(const double a, const double b)
 		return (false);
 }
 
-// bool equal_tuple(t_tuple a, t_tuple b)
+// bool equal_tuple(t_vec a, t_vec b)
 // {
 // 	if (!equal(a.x, b.x))
 // 		return (false);
@@ -33,7 +33,7 @@ inline bool	equal(const double a, const double b)
 // 	return (true);
 // }
 
-inline bool	equal_tuple(const t_tuple a, const t_tuple b)
+inline bool	equal_tuple(const t_vec a, const t_vec b)
 {
 	return (equal(a.x, b.x)
 		&& equal(a.y, b.y)
@@ -41,7 +41,7 @@ inline bool	equal_tuple(const t_tuple a, const t_tuple b)
 		&& equal(a.w, b.w));
 }
 
-inline bool	equal_matrix(const t_matrix4 a, const t_matrix4 b)
+inline bool	equal_matrix(const t_mat a, const t_mat b)
 {
 	int	i;
 

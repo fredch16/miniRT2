@@ -6,13 +6,13 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:38:35 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/15 17:23:46 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/10/22 16:02:00 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniRT.h"
 
-void	print_matrix4(t_matrix4 mat)
+void	print_mat(t_mat mat)
 {
 	printf("Matrix is as follows:\n");
 	printf("| %10.5f | %10.5f | %10.5f | %10.5f |\n", mat.c[0].x, mat.c[1].x, mat.c[2].x, mat.c[3].x);
@@ -21,7 +21,7 @@ void	print_matrix4(t_matrix4 mat)
 	printf("| %10.5f | %10.5f | %10.5f | %10.5f |\n", mat.c[0].w, mat.c[1].w, mat.c[2].w, mat.c[3].w);
 }
 
-void	print_tuple4(t_tuple tup)
+void	print_vec4(t_vec tup)
 {
 	if (tup.w == 1)
 		printf("The POINT (w = 1) is as follows\n");
