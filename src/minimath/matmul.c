@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:16:16 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/22 17:32:19 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/10/24 17:03:32 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,18 @@ inline t_mat	mat_mul_mat(const t_mat a, const t_mat b)
 	res.c[2] = mat_mul_vec(a, b.c[2]);
 	res.c[3] = mat_mul_vec(a, b.c[3]);
 	return (res);
+}
+
+inline t_mat	mat_transpose(const t_mat a)
+{
+	t_vec	c0;
+	t_vec	c1;
+	t_vec	c2;
+	t_vec	c3;
+
+	c0 = tuple(a.c[0].x, a.c[1].x, a.c[2].x, a.c[3].x);
+	c1 = tuple(a.c[0].y, a.c[1].y, a.c[2].y, a.c[3].y);
+	c2 = tuple(a.c[0].z, a.c[1].z, a.c[2].z, a.c[3].z);
+	c3 = tuple(a.c[0].w, a.c[1].w, a.c[2].w, a.c[3].w);
+	return (mat(c0, c1, c2, c3));
 }

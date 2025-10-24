@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/22 18:39:17 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/10/24 17:04:13 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,8 @@ int32_t	main(void)
 
 	printf("testmatrix\n");
 	print_mat(testmatrix);
-	t_vec vecvec = point(1, 2, 3);
-	print_vec4(vecvec);
-	print_vec4(mat_mul_vec(testmatrix, vecvec));
+	print_mat(mat_transpose(mat_idt()));
+	// print_mat(mat_mul_mat(testmatrix, mat_idt()));
 
 	
 	while (x < WIDTH)

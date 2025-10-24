@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:09:38 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/22 17:32:16 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/10/24 17:03:02 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,14 @@ t_vec	tuple_cro(const t_vec a, const t_vec b);
 
 t_vec	point(double x, double y, double z);
 t_vec	vector(double x, double y, double z);
+t_vec	tuple(double x, double y, double z, double w);
+t_mat	mat(const t_vec col0, const t_vec col1, const t_vec col2, const t_vec col3);
+t_mat	mat_idt();
 
 // matmul.c
 
 t_mat	mat_mul_mat(const t_mat a, const t_mat b);
 t_vec	mat_mul_vec(const t_mat m, const t_vec v);
+t_mat	mat_transpose(const t_mat a);
 
 #endif
