@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/28 01:36:19 by swied            ###   ########.fr       */
+/*   Updated: 2025/10/28 02:49:44 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,32 @@ int32_t	main(void)
 	printf("\nDeterminante: %.2f\n", mat_determinant(test_det));
 	
 	printf("\nDeterminante der Identitätsmatrix: %.2f\n", mat_determinant(mat_idt()));
+
+	// Test der Matrix-Invertierung
+	printf("\n=== TEST MATRIX INVERSION ===\n");
+	t_mat test_inv;
+	test_inv.c[0] = tuple(-5, 2, 6, -8);
+	test_inv.c[1] = tuple(1, -5, 1, 8);
+	test_inv.c[2] = tuple(7, 7, -6, -7);
+	test_inv.c[3] = tuple(1, -3, 7, 4);
+	
+	printf("Original Matrix A:\n");
+	print_mat(test_inv);
+	
+	printf("\nDeterminante: %.2f\n", mat_determinant(test_inv));
+	printf("Ist invertierbar: %s\n", mat_is_invertible(test_inv) ? "JA" : "NEIN");
+	
+	if (mat_is_invertible(test_inv))
+	{
+		t_mat inverted = mat_inverse(test_inv);
+		printf("\nInvertierte Matrix A⁻¹:\n");
+		print_mat(inverted);
+		
+		// Verification: A × A⁻¹ sollte Identitätsmatrix ergeben
+		t_mat identity_test = mat_mul_mat(test_inv, inverted);
+		printf("\nA × A⁻¹ (sollte Identität sein):\n");
+		print_mat(identity_test);
+	}
 
 	
 	while (x < WIDTH)

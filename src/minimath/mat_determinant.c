@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 01:36:26 by swied             #+#    #+#             */
-/*   Updated: 2025/10/28 01:55:02 by swied            ###   ########.fr       */
+/*   Updated: 2025/10/28 02:49:45 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ Das Endergebnis ist die Determinante der gesamten 4×4-Matrix.
 */
 
 // Hilfsfunktion: Holt ein Element aus der Matrix (row, col)
-static inline double	mat_get(const t_mat m, int row, int col)
+inline double	mat_get(const t_mat m, int row, int col)
 {
 	if (row == 0)
 		return (m.c[col].x);
@@ -36,7 +36,7 @@ static inline double	mat_get(const t_mat m, int row, int col)
 }
 
 // Berechnet die 3x3 Determinante direkt für eine Submatrix
-static double	det_3x3_sub(const t_mat m, int skip_row, int skip_col)
+double	det_3x3_sub(const t_mat m, int skip_row, int skip_col)
 {
 	double	vals[9];
 	int		i;

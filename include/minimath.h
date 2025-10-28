@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:09:38 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/28 01:57:22 by swied            ###   ########.fr       */
+/*   Updated: 2025/10/28 02:49:41 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,13 @@ t_mat	mat_transpose(const t_mat a);
 
 // mat_determinant.c
 
+double	mat_get(const t_mat m, int row, int col);
+double	det_3x3_sub(const t_mat m, int skip_row, int skip_col);
 double	mat_determinant(const t_mat m);
+
+// mat_inverse.c
+
+bool	mat_is_invertible(const t_mat m);
+t_mat	mat_inverse(const t_mat m);
 
 #endif
