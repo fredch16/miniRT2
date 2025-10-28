@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/28 15:40:57 by swied            ###   ########.fr       */
+/*   Updated: 2025/10/28 15:52:07 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,45 @@ int32_t	main(void)
 	printf("Vektor nach Translation: ");
 	print_vec4(v_translated);
 	printf("Sollte unverändert sein (w=0)\n");
+
+	// Test der Skalierung
+	printf("\n=== TEST SCALING ===\n");
+	t_mat scale_transform = scaling(2, 3, 4);
+	t_vec p2 = point(-4, 6, 8);
+	
+	printf("Original Punkt: ");
+	print_vec4(p2);
+	
+	t_vec scaled = mat_mul_vec(scale_transform, p2);
+	printf("Nach Scaling(2, 3, 4): ");
+	print_vec4(scaled);
+	printf("Erwartet: (-8, 18, 32)\n");
+	
+	// Test: Skalierung auf Vektor
+	t_vec v2 = vector(-4, 6, 8);
+	t_vec v_scaled = mat_mul_vec(scale_transform, v2);
+	printf("\nVektor vor Scaling: ");
+	print_vec4(v2);
+	printf("Vektor nach Scaling(2, 3, 4): ");
+	print_vec4(v_scaled);
+	printf("Erwartet: (-8, 18, 32)\n");
+	
+	// Test: Inverse Skalierung
+	t_mat inv_scale = mat_inverse(scale_transform);
+	t_vec inv_scaled = mat_mul_vec(inv_scale, v2);
+	printf("\nMit inverser Skalierung: ");
+	print_vec4(inv_scaled);
+	printf("Erwartet: (-2, 2, 2) = v * (1/2, 1/3, 1/4)\n");
+	
+	// Test: Reflection (Spiegelung mit negativer Skalierung)
+	t_mat reflect = scaling(-1, 1, 1);
+	t_vec p3 = point(2, 3, 4);
+	t_vec reflected = mat_mul_vec(reflect, p3);
+	printf("\nPunkt vor Reflection: ");
+	print_vec4(p3);
+	printf("Nach Reflection(-1, 1, 1): ");
+	print_vec4(reflected);
+	printf("Erwartet: (-2, 3, 4) - Spiegelung an der YZ-Ebene\n");
 
 	
 	while (x < WIDTH)

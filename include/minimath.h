@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:09:38 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/28 15:40:53 by swied            ###   ########.fr       */
+/*   Updated: 2025/10/28 15:52:05 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,6 @@ t_mat	mat_inverse(const t_mat m);
 // transformations.c
 
 t_mat	translation(double x, double y, double z);
+t_mat	scaling(double x, double y, double z);
 
 #endif
