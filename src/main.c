@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/28 02:49:44 by swied            ###   ########.fr       */
+/*   Updated: 2025/10/28 15:40:57 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,35 @@ int32_t	main(void)
 		printf("\nA × A⁻¹ (sollte Identität sein):\n");
 		print_mat(identity_test);
 	}
+
+	// Test der Translation
+	printf("\n=== TEST TRANSLATION ===\n");
+	t_mat transform = translation(5, -3, 2);
+	t_vec p = point(-3, 4, 5);
+	
+	printf("Original Punkt: ");
+	print_vec4(p);
+	
+	t_vec translated = mat_mul_vec(transform, p);
+	printf("Nach Translation(5, -3, 2): ");
+	print_vec4(translated);
+	printf("Erwartet: (2, 1, 7)\n");
+	
+	// Test: Inverse Translation
+	t_mat inv_transform = mat_inverse(transform);
+	t_vec back = mat_mul_vec(inv_transform, translated);
+	printf("\nMit inverser Translation zurück: ");
+	print_vec4(back);
+	printf("Sollte wieder (-3, 4, 5) sein\n");
+	
+	// Test: Translation verändert Vektoren NICHT
+	t_vec v = vector(-3, 4, 5);
+	t_vec v_translated = mat_mul_vec(transform, v);
+	printf("\nVektor vor Translation: ");
+	print_vec4(v);
+	printf("Vektor nach Translation: ");
+	print_vec4(v_translated);
+	printf("Sollte unverändert sein (w=0)\n");
 
 	
 	while (x < WIDTH)
