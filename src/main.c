@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/24 17:04:13 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/10/28 01:36:19 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,20 @@ int32_t	main(void)
 	print_mat(testmatrix);
 	print_mat(mat_transpose(mat_idt()));
 	// print_mat(mat_mul_mat(testmatrix, mat_idt()));
+
+	// Test der Determinanten-Berechnung
+	printf("\n=== TEST DETERMINANTE ===\n");
+	t_mat test_det;
+	test_det.c[0] = tuple(-2, -8, 3, 5);
+	test_det.c[1] = tuple(-3, 1, 7, 3);
+	test_det.c[2] = tuple(1, 2, -9, 6);
+	test_det.c[3] = tuple(-6, 7, 7, -9);
+	
+	printf("Test Matrix:\n");
+	print_mat(test_det);
+	printf("\nDeterminante: %.2f\n", mat_determinant(test_det));
+	
+	printf("\nDeterminante der Identitätsmatrix: %.2f\n", mat_determinant(mat_idt()));
 
 	
 	while (x < WIDTH)

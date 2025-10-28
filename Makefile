@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 13:42:12 by apregitz          #+#    #+#              #
-#    Updated: 2025/10/24 15:37:54 by fredchar         ###   ########.fr        #
+#    Updated: 2025/10/28 01:36:17 by swied            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/minimath/tuple_ops1.c \
 			$(SRCD)/minimath/tuple_ops2.c \
 			$(SRCD)/minimath/matmul.c \
+			$(SRCD)/minimath/mat_determinant.c \
 
 OBJS :=		$(SRCS:$(SRCD)/%.c=$(OBJD)/%.o)
 

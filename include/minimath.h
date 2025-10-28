@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimath.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:09:38 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/24 17:03:02 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/10/28 01:57:22 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,9 @@ t_mat	mat_idt();
 t_mat	mat_mul_mat(const t_mat a, const t_mat b);
 t_vec	mat_mul_vec(const t_mat m, const t_vec v);
 t_mat	mat_transpose(const t_mat a);
+
+// mat_determinant.c
+
+double	mat_determinant(const t_mat m);
 
 #endif
