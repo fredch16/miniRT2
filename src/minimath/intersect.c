@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   intersect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/13 13:28:44 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/30 15:34:24 by fredchar         ###   ########.fr       */
+/*   Created: 2025/10/29 19:27:35 by fredchar          #+#    #+#             */
+/*   Updated: 2025/10/30 15:36:17 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "../../include/miniRT.h"
 
-# define EPSILON 0.00001
-
-# include "libft/libft.h"
-// # include "MLX42/include/MLX42/MLX42.h"
-# include "mymlx.h"
-# include "minimath.h"
-# include "types.h"
-
-# include <unistd.h>
-# include <math.h>
-# include <stdbool.h>
-# include <stdlib.h>
-
-#endif
+// test this
+t_vec	ray_pos(t_ray ray, double t_val)
+{
+	return (tuple_add(ray.origin, tuple_scm(t_val, ray.direction)));
+}

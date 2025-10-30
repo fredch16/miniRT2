@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   matinv.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/13 13:28:44 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/30 15:34:24 by fredchar         ###   ########.fr       */
+/*   Created: 2025/10/24 17:09:28 by fredchar          #+#    #+#             */
+/*   Updated: 2025/10/24 17:09:36 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "../../include/miniRT.h"
 
-# define EPSILON 0.00001
-
-# include "libft/libft.h"
-// # include "MLX42/include/MLX42/MLX42.h"
-# include "mymlx.h"
-# include "minimath.h"
-# include "types.h"
-
-# include <unistd.h>
-# include <math.h>
-# include <stdbool.h>
-# include <stdlib.h>
-
-#endif
+inline double	mat_det(const t_mat a)
+{
+	
+}

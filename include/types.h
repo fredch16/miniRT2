@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/13 13:28:44 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/30 15:34:24 by fredchar         ###   ########.fr       */
+/*   Created: 2025/10/30 15:27:52 by fredchar          #+#    #+#             */
+/*   Updated: 2025/10/30 15:30:57 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef TYPES_H
+# define TYPES_H
 
-# define EPSILON 0.00001
+# include "miniRT.h"
 
-# include "libft/libft.h"
-// # include "MLX42/include/MLX42/MLX42.h"
-# include "mymlx.h"
-# include "minimath.h"
-# include "types.h"
+typedef struct s_ray
+{
+	t_vec	origin;
+	t_vec	direction;
+}	t_ray;
 
-# include <unistd.h>
-# include <math.h>
-# include <stdbool.h>
-# include <stdlib.h>
 
 #endif
