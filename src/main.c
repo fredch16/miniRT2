@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/28 15:52:07 by swied            ###   ########.fr       */
+/*   Updated: 2025/10/30 23:48:29 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,6 +222,58 @@ int32_t	main(void)
 	printf("Nach Reflection(-1, 1, 1): ");
 	print_vec4(reflected);
 	printf("Erwartet: (-2, 3, 4) - Spiegelung an der YZ-Ebene\n");
+
+	// Test der Rotation
+	printf("\n=== TEST ROTATION ===\n");
+	
+	// Test: Rotation um X-Achse (90 Grad = PI/2)
+	t_mat half_quarter_x = rotation_x(M_PI / 4);
+	t_vec p4 = point(0, 1, 0);
+	t_vec rotated_x_half = mat_mul_vec(half_quarter_x, p4);
+	printf("Punkt (0,1,0) nach Rotation X (45°): ");
+	print_vec4(rotated_x_half);
+	printf("Erwartet: (0, √2/2, √2/2) ≈ (0, 0.707, 0.707)\n");
+	
+	t_mat full_quarter_x = rotation_x(M_PI / 2);
+	t_vec rotated_x_full = mat_mul_vec(full_quarter_x, p4);
+	printf("Punkt (0,1,0) nach Rotation X (90°): ");
+	print_vec4(rotated_x_full);
+	printf("Erwartet: (0, 0, 1)\n");
+	
+	// Test: Inverse Rotation (gegen Uhrzeigersinn)
+	t_mat inv_quarter_x = mat_inverse(half_quarter_x);
+	t_vec inv_rotated_x = mat_mul_vec(inv_quarter_x, p4);
+	printf("Punkt (0,1,0) nach inverser Rotation X (45°): ");
+	print_vec4(inv_rotated_x);
+	printf("Erwartet: (0, √2/2, -√2/2) ≈ (0, 0.707, -0.707)\n");
+	
+	// Test: Rotation um Y-Achse
+	t_mat half_quarter_y = rotation_y(M_PI / 4);
+	t_vec p5 = point(0, 0, 1);
+	t_vec rotated_y_half = mat_mul_vec(half_quarter_y, p5);
+	printf("\nPunkt (0,0,1) nach Rotation Y (45°): ");
+	print_vec4(rotated_y_half);
+	printf("Erwartet: (√2/2, 0, √2/2) ≈ (0.707, 0, 0.707)\n");
+	
+	t_mat full_quarter_y = rotation_y(M_PI / 2);
+	t_vec rotated_y_full = mat_mul_vec(full_quarter_y, p5);
+	printf("Punkt (0,0,1) nach Rotation Y (90°): ");
+	print_vec4(rotated_y_full);
+	printf("Erwartet: (1, 0, 0)\n");
+	
+	// Test: Rotation um Z-Achse
+	t_mat half_quarter_z = rotation_z(M_PI / 4);
+	t_vec p6 = point(0, 1, 0);
+	t_vec rotated_z_half = mat_mul_vec(half_quarter_z, p6);
+	printf("\nPunkt (0,1,0) nach Rotation Z (45°): ");
+	print_vec4(rotated_z_half);
+	printf("Erwartet: (-√2/2, √2/2, 0) ≈ (-0.707, 0.707, 0)\n");
+	
+	t_mat full_quarter_z = rotation_z(M_PI / 2);
+	t_vec rotated_z_full = mat_mul_vec(full_quarter_z, p6);
+	printf("Punkt (0,1,0) nach Rotation Z (90°): ");
+	print_vec4(rotated_z_full);
+	printf("Erwartet: (-1, 0, 0)\n");
 
 	
 	while (x < WIDTH)

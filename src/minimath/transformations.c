@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 15:41:08 by swied             #+#    #+#             */
-/*   Updated: 2025/10/28 15:53:44 by swied            ###   ########.fr       */
+/*   Updated: 2025/10/30 23:48:16 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,59 @@ t_mat	scaling(double x, double y, double z)
 	result.c[0].x = x;
 	result.c[1].y = y;
 	result.c[2].z = z;
+	return (result);
+}
+
+/*
+Rotiert um die X-Achse.
+
+- Parameter r in Radiant (nicht Grad!)
+*/
+
+t_mat	rotation_x(double r)
+{
+	t_mat	result;
+
+	result = mat_idt();
+	result.c[1].y = cos(r);
+	result.c[1].z = sin(r);
+	result.c[2].y = -sin(r);
+	result.c[2].z = cos(r);
+	return (result);
+}
+
+/*
+Rotiert um die Y-Achse.
+
+- Parameter r in Radiant (nicht Grad!)
+*/
+
+t_mat	rotation_y(double r)
+{
+	t_mat	result;
+
+	result = mat_idt();
+	result.c[0].x = cos(r);
+	result.c[0].z = -sin(r);
+	result.c[2].x = sin(r);
+	result.c[2].z = cos(r);
+	return (result);
+}
+
+/*
+Rotiert um die Z-Achse.
+
+- Parameter r in Radiant (nicht Grad!)
+*/
+
+t_mat	rotation_z(double r)
+{
+	t_mat	result;
+
+	result = mat_idt();
+	result.c[0].x = cos(r);
+	result.c[0].y = sin(r);
+	result.c[1].x = -sin(r);
+	result.c[1].y = cos(r);
 	return (result);
 }
