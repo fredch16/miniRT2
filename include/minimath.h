@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimath.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:09:38 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/28 15:52:05 by swied            ###   ########.fr       */
+/*   Updated: 2025/10/30 23:25:36 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,14 @@
 # define MINIMATH_H
 
 # include "miniRT.h"
+# include "types.h"
 # include <stdbool.h>
-
-// w value is in place to specify a vector or a point
-// w = 0 indicates a vector
-// w = 1 indicates a point
-typedef struct s_vec
-{
-	double	x;
-	double	y;
-	double	z;
-	double	w;
-}	t_vec;
-
-// each matrix will consist of 4 columns which will be represented
-// using the previously defined vectors (tuples)
-typedef struct s_mat
-{
-	t_vec	c[4];
-}	t_mat;
 
 // printer.c
 
 void	print_mat(t_mat mat);
 void	print_vec4(t_vec tup);
+void	print_xs(t_xsn *xs);
 
 // equal.c
 
@@ -67,6 +51,7 @@ t_vec	vector(double x, double y, double z);
 t_vec	tuple(double x, double y, double z, double w);
 t_mat	mat(const t_vec col0, const t_vec col1, const t_vec col2, const t_vec col3);
 t_mat	mat_idt();
+t_ray	ray(t_vec origin, t_vec direction);
 
 // matmul.c
 
@@ -89,5 +74,18 @@ t_mat	mat_inverse(const t_mat m);
 
 t_mat	translation(double x, double y, double z);
 t_mat	scaling(double x, double y, double z);
+
+// intersections.c
+
+t_vec	ray_pos(t_ray ray, double t_val);
+t_xsn	*intersect_sp(t_ray ray, t_obj *o);
+t_xsn	*x_hit(t_xsn *xs);
+
+// lists.c
+
+t_xsn	*x_new(t_obj *o, double t);
+void	x_add_back(t_xsn **xlist, t_xsn *n);
+t_obj	*obj_create(enum e_obj_type ot);
+void	obj_add_back(t_obj **objlist, t_obj *n);
 
 #endif

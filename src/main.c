@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/28 15:52:07 by swied            ###   ########.fr       */
+/*   Updated: 2025/10/30 23:28:29 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,6 +222,22 @@ int32_t	main(void)
 	printf("Nach Reflection(-1, 1, 1): ");
 	print_vec4(reflected);
 	printf("Erwartet: (-2, 3, 4) - Spiegelung an der YZ-Ebene\n");
+
+	t_xsn *xs;
+	t_obj *o = obj_create(OT_SPHERE);
+	t_ray r = ray(point(0, 0, -5), vector(0, 0, 1));
+	printf("testing with RAY:\nOrigin: ");
+	print_vec4(r.origin);
+	printf("and direction: ");
+	print_vec4(r.direction);
+
+	xs = intersect_sp(r, o);
+	print_xs(xs);
+	t_xsn *hit = x_hit(xs);
+	if (!hit)
+		printf("No hit\n");
+	else
+		printf("HIT found at | t = %10.5f | ", hit->t);
 
 	
 	while (x < WIDTH)
