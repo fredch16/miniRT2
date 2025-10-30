@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:09:38 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/30 23:48:32 by swied            ###   ########.fr       */
+/*   Updated: 2025/10/30 23:55:38 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,9 @@ t_mat	scaling(double x, double y, double z);
 t_mat	rotation_x(double r);
 t_mat	rotation_y(double r);
 t_mat	rotation_z(double r);
+
+// shearing.c
+
+t_mat	shearing(double xy, double xz, double yx, double yz, double zx, double zy);
 
 #endif

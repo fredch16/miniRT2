@@ -6,7 +6,7 @@
 #    By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/28 16:10:43 by swied             #+#    #+#              #
-#    Updated: 2025/10/28 16:10:48 by swied            ###   ########.fr        #
+#    Updated: 2025/10/30 23:55:40 by swied            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/minimath/mat_determinant.c \
 			$(SRCD)/minimath/mat_inverse.c \
 			$(SRCD)/minimath/transformations.c \
+			$(SRCD)/minimath/shearing.c \
 
 OBJS :=		$(SRCS:$(SRCD)/%.c=$(OBJD)/%.o)
 
