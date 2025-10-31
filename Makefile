@@ -6,7 +6,7 @@
 #    By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/28 16:10:43 by swied             #+#    #+#              #
-#    Updated: 2025/10/31 00:05:21 by swied            ###   ########.fr        #
+#    Updated: 2025/10/31 16:21:14 by swied            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/minimath/shearing.c \
 			$(SRCD)/minimath/intersect.c \
 			$(SRCD)/minimath/lists.c \
+			$(SRCD)/minimath/rays.c \
 
 OBJS :=		$(SRCS:$(SRCD)/%.c=$(OBJD)/%.o)
 

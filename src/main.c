@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/30 23:56:28 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/10/31 01:58:08 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "MLX42/include/MLX42/MLX42.h"
-#define WIDTH 256
-#define HEIGHT 256
+#define WIDTH 1600 
+#define HEIGHT 900 
 
 // Exit the program as failure.
 static void ft_error(void)
@@ -41,13 +41,13 @@ int32_t	main(void)
 {
 
 	// MLX allows you to define its core behaviour before startup.
-	mlx_set_setting(MLX_MAXIMIZED, true);
+	// mlx_set_setting(MLX_MAXIMIZED, true);
 	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "42Balls", true);
 	if (!mlx)
 		ft_error();
 
 	// Create and display the image.
-	mlx_image_t* img = mlx_new_image(mlx, 256, 256);
+	mlx_image_t* img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
 
@@ -275,16 +275,31 @@ int32_t	main(void)
 	print_vec4(rotated_z_full);
 	printf("Erwartet: (-1, 0, 0)\n");
 
-	
+	t_ray	r;
+	t_obj	*o = obj_create(OT_SPHERE);
+	o->transform = translation(0, 0, 28.5);
+
+	r = ray(point(0, 0, -5), vector(0, 0, 1));
+	t_xsn *xs = intersect_sp(r, o);
+	print_xs(xs);
+
+	r = ray(point(0, 0, -5), vector(-4, 2.5, 5));
 	while (x < WIDTH)
 	{
 		y = 0;
+		r.direction.y = 2.5;
 		while (y < HEIGHT)
 		{
-			mlx_put_pixel(img, x, y, 0xFF0000FF);
+			t_xsn *xs = intersect_sp(r, o);
+			if (x_hit(xs))
+				mlx_put_pixel(img, x, y, 0xFF0000FF);
+			else
+				mlx_put_pixel(img, x, y, 0x000000FF);
 			y++;
+			r.direction.y -= 0.005;
 		}
 		x++;
+		r.direction.x += 0.005;
 	}
 
 	// Register a hook and pass mlx as an optional param.

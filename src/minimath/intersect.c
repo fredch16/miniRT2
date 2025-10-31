@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 19:27:35 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/30 23:28:14 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/10/31 01:39:22 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_xsn	*intersect_sp(t_ray ray, t_obj *o)
 	t_quadratic	q;
 	t_xsn	*xs;
 
+	ray = ray_transform(ray, mat_inverse(o->transform));
 	sp_to_ray = tuple_sub(ray.origin, point(0, 0, 0));
 	q.a = tuple_dot(ray.direction, ray.direction);
 	q.b = 2 * tuple_dot(ray.direction, sp_to_ray);

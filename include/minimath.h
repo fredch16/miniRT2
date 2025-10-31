@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:09:38 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/31 00:04:45 by swied            ###   ########.fr       */
+/*   Updated: 2025/10/31 16:21:41 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,10 @@ t_xsn	*x_new(t_obj *o, double t);
 void	x_add_back(t_xsn **xlist, t_xsn *n);
 t_obj	*obj_create(enum e_obj_type ot);
 void	obj_add_back(t_obj **objlist, t_obj *n);
+
+// rays.c
+
+t_ray	ray_transform(t_ray r, t_mat m);
 
 // shearing.c
 
