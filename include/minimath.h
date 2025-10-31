@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:09:38 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/30 23:54:29 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/10/31 01:20:43 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,9 @@ t_xsn	*x_new(t_obj *o, double t);
 void	x_add_back(t_xsn **xlist, t_xsn *n);
 t_obj	*obj_create(enum e_obj_type ot);
 void	obj_add_back(t_obj **objlist, t_obj *n);
+
+// rays.c
+
+t_ray	ray_transform(t_ray r, t_mat m);
 
 #endif

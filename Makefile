@@ -6,7 +6,7 @@
 #    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/28 16:10:43 by swied             #+#    #+#              #
-#    Updated: 2025/10/30 22:50:28 by fredchar         ###   ########.fr        #
+#    Updated: 2025/10/31 01:20:21 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/minimath/transformations.c \
 			$(SRCD)/minimath/intersect.c \
 			$(SRCD)/minimath/lists.c \
+			$(SRCD)/minimath/rays.c \
 
 OBJS :=		$(SRCS:$(SRCD)/%.c=$(OBJD)/%.o)
 
