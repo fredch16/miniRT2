@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:09:38 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/31 01:20:43 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/01 17:55:58 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,9 @@ void	obj_add_back(t_obj **objlist, t_obj *n);
 // rays.c
 
 t_ray	ray_transform(t_ray r, t_mat m);
+
+// normals.c
+
+t_vec	normal_at_sp(t_obj *o, t_vec p);
 
 #endif
