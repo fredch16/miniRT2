@@ -3,17 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   normals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 17:39:14 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/01 17:55:52 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/01 20:03:32 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniRT.h"
 
-inline t_vec	normal_at_sp(t_obj *o, t_vec p)
+/*
+Transforming Normals:
+
+1. Inverse the matrix
+2. Transpose the inversed matrix
+3. Multiply with the object normal
+4. Set w to 0 to reset translation effect
+5. return the normalized world normal
+*/
+
+t_vec	normal_at_sp(t_obj *o, t_vec world_point)
 {
-	(void)o;
-	return (tuple_norm(tuple_sub(p, point(0, 0, 0))));
+	t_mat	inverse;
+	t_mat	transpose_inverse;
+	t_vec	object_point;
+	t_vec	object_normal;
+	t_vec	world_normal;
+
+	inverse = mat_inverse(o->transform);
+	object_point = mat_mul_vec(inverse, world_point);
+	object_normal = tuple_sub(object_point, point(0, 0, 0));
+	transpose_inverse = mat_transpose(inverse);
+	world_normal = mat_mul_vec(transpose_inverse, object_normal);
+	world_normal.w = 0;
+	return (tuple_norm(world_normal));
 }
