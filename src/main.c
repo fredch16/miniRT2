@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/01 21:02:00 by swied            ###   ########.fr       */
+/*   Updated: 2025/11/01 21:43:23 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,14 @@ int32_t	main(void)
 	t_ray	r;
 	t_obj	*o = obj_create(OT_SPHERE);
 	o->transform = mat_idt();
+	// set standard material
+	t_material mater;
+
+	mater.ambient = 0.1;
+	mater.diffuse = 0.9;
+	mater.specular = 0.9;
+	mater.shininess = 200;
+	o->material = mater;
 
 	int x = 0;
 	int y = 0;
