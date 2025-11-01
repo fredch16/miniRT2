@@ -5,9 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/14 15:09:38 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/31 16:21:41 by swied            ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2025/11/01 23:52:51 by swied            ###   ########.fr       */
 /*                                                                            */
+/* ************************************************************************** */
+
 /* ************************************************************************** */
 
 #ifndef MINIMATH_H
@@ -98,5 +100,15 @@ t_ray	ray_transform(t_ray r, t_mat m);
 // shearing.c
 
 t_mat	shearing(double xy, double xz, double yx, double yz, double zx, double zy);
+
+// normals.c
+
+t_vec	normal_at_sp(t_obj *o, t_vec p);
+t_vec	reflect(t_vec in, t_vec normal);
+
+// lighting.c
+
+t_colour	lighting(t_material *material, t_point_light light,
+				t_vec point, t_vec eyev, t_vec normalv);
 
 #endif
