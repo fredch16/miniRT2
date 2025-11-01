@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/01 20:00:41 by swied            ###   ########.fr       */
+/*   Updated: 2025/11/01 21:02:00 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,6 @@ int32_t	main(void)
 
 	/* Do stuff */
 
-
-
-
 	// === TEST: Computing the normal on a transformed sphere ===
 	printf("\n=== TEST: Transformed Sphere Normal ===\n");
 	
@@ -82,6 +79,22 @@ int32_t	main(void)
 	print_vec4(n);
 	printf("\nErwartet: (0, 0.97014, -0.24254)\n");
 	printf("Tatsächlich: (%.5f, %.5f, %.5f)\n", n.x, n.y, n.z);
+
+	// === TEST: Reflecting a vector off a slanted surface ===
+	printf("\n\n=== TEST: Reflecting a vector off a slanted surface ===\n");
+	
+	t_vec v = vector(0, -1, 0);
+	double sqrt2_div_2 = sqrt(2) / 2;
+	t_vec normal = vector(sqrt2_div_2, sqrt2_div_2, 0);
+	t_vec r_reflected = reflect(v, normal);
+	
+	printf("Incoming vector v: ");
+	print_vec4(v);
+	printf("Surface normal n (√2/2, √2/2, 0): ");
+	print_vec4(normal);
+	printf("Reflected vector r: ");
+	print_vec4(r_reflected);
+	printf("Erwartet: (1, 0, 0)\n");
 
 	t_ray	r;
 	t_obj	*o = obj_create(OT_SPHERE);
