@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 17:39:14 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/01 20:03:32 by swied            ###   ########.fr       */
+/*   Updated: 2025/11/01 20:36:22 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,12 @@ t_vec	normal_at_sp(t_obj *o, t_vec world_point)
 	world_normal = mat_mul_vec(transpose_inverse, object_normal);
 	world_normal.w = 0;
 	return (tuple_norm(world_normal));
+}
+
+inline t_vec	reflect(t_vec in, t_vec normal)
+{
+	t_vec	new_normal;
+
+	new_normal = tuple_scm(2 * tuple_dot(in, normal), normal);
+	return (tuple_sub(in, new_normal));
 }
