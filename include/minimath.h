@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:09:38 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/01 20:36:43 by swied            ###   ########.fr       */
+/*   Updated: 2025/11/01 23:16:51 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,10 @@ t_ray	ray_transform(t_ray r, t_mat m);
 
 t_vec	normal_at_sp(t_obj *o, t_vec p);
 t_vec	reflect(t_vec in, t_vec normal);
+
+// lighting.c
+
+t_colour	lighting(t_material *material, t_point_light light,
+				t_vec point, t_vec eyev, t_vec normalv);
 
 #endif
