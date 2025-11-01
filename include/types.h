@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 15:27:52 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/01 21:40:37 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/01 23:12:26 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,20 @@ enum e_obj_type
 	OT_CYLINDER
 };
 
+typedef struct s_colour
+{
+	double	red;
+	double	green;
+	double	blue;
+}	t_colour;
+
 typedef struct s_material
 {
 	double	ambient;
 	double	diffuse;
 	double	specular;
 	double	shininess;
+	t_colour	colour;
 }	t_material;
 
 typedef struct s_obj
@@ -83,13 +91,6 @@ typedef struct s_xsn
 	t_obj	*xs_obj;
 	struct s_xsn	*next;
 }	t_xsn;
-
-typedef struct s_colour
-{
-	double	red;
-	double	green;
-	double	blue;
-}	t_colour;
 
 typedef struct s_rgb
 {
