@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/01 17:56:11 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/01 20:00:41 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <math.h>
 #include "MLX42/include/MLX42/MLX42.h"
+
+#ifndef M_PI
+# define M_PI 3.14159265358979323846
+#endif
+
 #define WIDTH 1600 
 #define HEIGHT 900 
 
@@ -56,13 +62,30 @@ int32_t	main(void)
 
 
 
+	// === TEST: Computing the normal on a transformed sphere ===
+	printf("\n=== TEST: Transformed Sphere Normal ===\n");
+	
+	t_obj *s = obj_create(OT_SPHERE);
+	
+	// m ← scaling(1, 0.5, 1) * rotation_z(π/5)
+	// WICHTIG: Reihenfolge! Erst rotation_z, dann scaling (rechts nach links)
+	t_mat m = mat_mul_mat(scaling(1, 0.5, 1), rotation_z(M_PI / 5));
+	s->transform = m;
+	
+	// n ← normal_at(s, point(0, √2/2, -√2/2))
+	double sqrt2_div2 = sqrt(2) / 2;
+	t_vec n = normal_at_sp(s, point(0, sqrt2_div2, -sqrt2_div2));
+	
+	printf("Sphere Transform: scaling(1, 0.5, 1) × rotation_z(π/5)\n");
+	printf("Point: (0, %.5f, %.5f)\n", sqrt2_div2, -sqrt2_div2);
+	printf("Normal:\n");
+	print_vec4(n);
+	printf("\nErwartet: (0, 0.97014, -0.24254)\n");
+	printf("Tatsächlich: (%.5f, %.5f, %.5f)\n", n.x, n.y, n.z);
+
 	t_ray	r;
 	t_obj	*o = obj_create(OT_SPHERE);
-	o->transform = translation(0, 0, 0.0);
-
-	print_vec4(normal_at_sp(o, point(1, 0, 0)));
-	print_vec4(normal_at_sp(o, point(0, 1, 0)));
-	print_vec4(normal_at_sp(o, point(0, 0, 1)));
+	o->transform = mat_idt();
 
 	int x = 0;
 	int y = 0;
