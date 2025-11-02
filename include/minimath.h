@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimath.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:09:38 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/02 15:47:36 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/02 16:39:02 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,10 @@ t_vec	ray_pos(t_ray ray, double t_val);
 t_xsn	*intersect_sp(t_ray ray, t_obj *o);
 t_xsn	*x_hit(t_xsn *xs);
 t_xsn	*intersect_world(t_world *w, t_ray r);
+
+// list_intersect.c
+
+t_xsn	*x_sort(t_xsn *xs);
 
 // lists.c
 
