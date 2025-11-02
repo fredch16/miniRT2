@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 15:27:52 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/01 23:12:26 by swied            ###   ########.fr       */
+/*   Updated: 2025/11/02 15:46:14 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,11 @@ typedef struct s_point_light
 	t_vec		position;
 	double		intensity;
 }	t_point_light;
+
+typedef struct	s_world
+{
+	t_obj			*obj_list;
+	t_point_light	light;
+}	t_world;
 
 #endif

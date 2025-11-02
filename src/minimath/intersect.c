@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 19:27:35 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/31 01:39:22 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/02 16:03:49 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ t_xsn	*intersect_sp(t_ray ray, t_obj *o)
 {
 	t_vec		sp_to_ray;
 	t_quadratic	q;
-	t_xsn	*xs;
+	t_xsn		*xs;
 
+	xs = NULL;
 	ray = ray_transform(ray, mat_inverse(o->transform));
 	sp_to_ray = tuple_sub(ray.origin, point(0, 0, 0));
 	q.a = tuple_dot(ray.direction, ray.direction);
@@ -64,6 +65,22 @@ t_xsn	*x_hit(t_xsn *xs)
 	}
 	return (hit);
 
+}
+
+t_xsn	*intersect_world(t_world *w, t_ray r)
+{
+	t_obj	*tmp;
+	t_xsn	*xs;
+
+	xs = NULL;
+	tmp = w->obj_list;
+	while (tmp)
+	{
+		if (tmp->type == OT_SPHERE)
+			x_add_back(&xs, intersect_sp(r, tmp));
+		tmp = tmp->next;
+	}
+	return (xs);
 }
 
 // t_xsn	*intersect_sp(t_ray ray, t_obj *o)

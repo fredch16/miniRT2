@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/01 23:49:54 by swied            ###   ########.fr       */
+/*   Updated: 2025/11/02 15:56:18 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int32_t	main(void)
 	// Setup sphere at origin with red material
 	t_obj *sphere = obj_create(OT_SPHERE);
 	sphere->transform = mat_idt();  // Identity = centered at (0,0,0)
-	sphere->material = (t_material){0.1, 0.9, 0.9, 200, {0, 1, 1}};
+	sphere->material = (t_material){0.1, 0.9, 0.9, 200, {1, 0.2, 1}};
 	
 	// Setup light source (top-left behind camera)
 	t_point_light light = {{1, 1, 1}, point(-10, 10, -10), 1.0};
@@ -108,6 +108,17 @@ int32_t	main(void)
 				mlx_put_pixel(img, x, y, 0x000000FF);
 		}
 	}
+	t_world world;
+	t_obj	*s1 = obj_create(OT_SPHERE); 
+	t_obj	*s2 = obj_create(OT_SPHERE); 
+	s1->material = (t_material){0.9, 0.7, 0.2, 200, {0.8, 1.0, 0.6}};
+	s2->transform = scaling(0.5, 0.5, 0.5);
+	t_point_light l = (t_point_light){{1, 1, 1}, {-10, 10, -10, 1}, 1};
+	world.light = l;
+	obj_add_back(&s1, s2);
+	world.obj_list = s1;
+
+	print_xs(intersect_world(&world, ray(point(0, 0, -5), vector(0, 0, 1))));
 
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!

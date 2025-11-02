@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:38:35 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/30 22:59:26 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/02 16:00:54 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	print_xs(t_xsn *xs)
 {
 	t_xsn	*tmp;
 
+	tmp = NULL;
 	if (!xs)
 	{
 		printf("No intersections found\n");
@@ -47,10 +48,12 @@ void	print_xs(t_xsn *xs)
 	while (tmp)
 	{
 		printf("Intersection found at | t = %10.5f | ", tmp->t);
-		if (tmp->xs_obj->type == OT_SPHERE)
+		if (tmp->xs_obj && tmp->xs_obj->type == OT_SPHERE)
 			printf("with type SPHERE\n");
-		else
+		else if (tmp->xs_obj)
 			printf("with type UNKNOWN\n");
+		else
+			printf("with NO object attached\n");
 		tmp = tmp->next;
 	}
 }
