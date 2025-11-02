@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/02 21:04:33 by swied            ###   ########.fr       */
+/*   Updated: 2025/11/02 21:18:48 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int32_t	main(void)
 	t_obj *s1 = obj_create(OT_SPHERE);
 	t_obj *s2 = obj_create(OT_SPHERE);
 	
-	s1->material = (t_material){0.1, 0.7, 0.2, 200, {0.8, 1.0, 0.6}};
+	s1->material = (t_material){0.1, 0.7, 0.2, 200, {0, 1.0, 1.0}};
 	s2->transform = scaling(0.5, 0.5, 0.5);
 	
 	obj_add_back(&s1, s2);
@@ -76,17 +76,7 @@ int32_t	main(void)
 		{
 			t_ray r = ray_for_pixel(cam, x, y);
 			t_colour color = colour_at(&world, r);
-			
-			// Convert color to RGBA (clamp to 0-255)
-			int red = (int)(color.red * 255);
-			int green = (int)(color.green * 255);
-			int blue = (int)(color.blue * 255);
-			if (red > 255) red = 255;
-			if (green > 255) green = 255;
-			if (blue > 255) blue = 255;
-			
-			uint32_t rgba = (red << 24) | (green << 16) | (blue << 8) | 0xFF;
-			mlx_put_pixel(img, x, y, rgba);
+			mlx_put_pixel(img, x, y, colour_to_rgba(color));
 		}
 	}
 
