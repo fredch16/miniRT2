@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/02 18:19:07 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/02 18:45:19 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,18 +110,16 @@ int32_t	main(void)
 	}
 	t_world world;
 	t_obj	*s1 = obj_create(OT_SPHERE); 
-	// t_obj	*s2 = obj_create(OT_SPHERE); 
+	t_obj	*s2 = obj_create(OT_SPHERE); 
 	s1->material = (t_material){0.9, 0.7, 0.2, 200, {0.8, 1.0, 0.6}};
-	// s2->transform = scaling(0.5, 0.5, 0.5);
+	s2->transform = scaling(0.5, 0.5, 0.5);
 	t_point_light l = (t_point_light){{1, 1, 1}, {-10, 10, -10, 1}, 1};
 	world.light = l;
-	// obj_add_back(&s1, s2);
+	obj_add_back(&s1, s2);
 	world.obj_list = s1;
 
-	print_xs(intersect_world(&world, ray(point(0, 0, -5), vector(0, 0, 1))));
-	t_ray r = ray(point(0, 0, 0), vector(0, 0, 1));
-	t_xsn *exy = x_new(s1, 1);
-	print_comps(prep_comps(exy, r));
+	t_ray r = ray(point(0, 0, -5), vector(0, 0, 1));
+	print_colour(colour_at(&world, r));
 	
 
 	// Register a hook and pass mlx as an optional param.

@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:09:38 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/02 18:36:42 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/02 18:44:33 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	print_mat(t_mat mat);
 void	print_vec4(t_vec tup);
 void	print_xs(t_xsn *xs);
 void	print_comps(t_comps comps);
+void	print_colour(t_colour col);
 
 // equal.c
 
@@ -114,5 +115,6 @@ t_colour	lighting(t_material *material, t_point_light light,
 // computations.c
 
 t_comps	prep_comps(t_xsn *xs, t_ray r);
+t_colour	colour_at(t_world *w, t_ray r);
 
 #endif

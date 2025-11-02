@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 16:36:47 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/02 18:34:47 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/02 18:41:56 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,19 @@ t_comps	prep_comps(t_xsn *xs, t_ray r)
 t_colour	shade_hit(t_world *w, t_comps c)
 {
 	return (lighting(&(c.obj->material), w->light, c.point, c.eyev, c.normalv));
+}
+
+t_colour	colour_at(t_world *w, t_ray r)
+{
+	t_xsn	*xs;
+	t_xsn	*hit;
+
+	xs = NULL;
+	hit = NULL;
+	xs = intersect_world(w, r);
+	hit = x_hit(xs);
+	if (!hit)
+		return ((t_colour){0, 0, 0});
+	else
+		return(shade_hit(w, prep_comps(hit, r)));
 }

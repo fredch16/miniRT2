@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:38:35 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/02 17:42:15 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/02 18:43:20 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,10 @@ void	print_comps(t_comps comps)
 	print_vec4(comps.eyev);
 	printf("normalv:\n");
 	print_vec4(comps.normalv);
+}
+
+void	print_colour(t_colour col)
+{
+	printf("Colour -> r = %10.5f | g = %10.5f | b = %10.5f\n",
+		col.red, col.green, col.blue);
 }
