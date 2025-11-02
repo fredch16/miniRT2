@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/01 23:49:54 by swied            ###   ########.fr       */
+/*   Updated: 2025/11/02 22:43:12 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,43 @@ int32_t	main(void)
 	// Setup sphere at origin with red material
 	t_obj *sphere = obj_create(OT_SPHERE);
 	sphere->transform = mat_idt();  // Identity = centered at (0,0,0)
-	sphere->material = (t_material){0.1, 0.9, 0.9, 200, {0, 1, 1}};
+	sphere->material = (t_material){0.1, 0.9, 0.9, 200, {1, 0.2, 1}};
 	
 	// Setup light source (top-left behind camera)
-	t_point_light light = {{1, 1, 1}, point(-10, 10, -10), 1.0};
 	
+
+
+	t_world world;
+	t_obj	*s1 = obj_create(OT_SPHERE); 
+	t_obj	*s2 = obj_create(OT_SPHERE); 
+	s1->material = (t_material){0.1, 0.7, 0.3, 200, {0.1, 1.0, 0.5}};
+	s1->transform = translation(-0.5, 1, 0.5);
+	s1->material = (t_material){0.1, 0.7, 0.2, 200, {0.8, 1.0, 0.6}};
+	t_mat mat = mat_mul_mat(rotation_x(M_PI / 2), scaling(10, 0.01, 10));
+	mat = mat_mul_mat(rotation_y(M_PI / 4), mat);
+	mat = mat_mul_mat(translation(0, 0, 5), mat);
+	s2->material = (t_material){0.1, 0.7, 0.2, 0, {1.0, 0.9, 0.9}};
+	s2->transform = mat;
+	obj_add_back(&s1, s2);
+	world.obj_list = s1;
+
+	// t_obj	*s3 = obj_create(OT_SPHERE);
+	// s3->transform = translation(0, 0, 1);
+	// world.obj_list = s3;
+	world.light = (t_point_light){{1, 1, 1}, {-10, 10, -10, 1}, 1};
+
+	t_ray r = ray(point(0, 0, -10), vector(0, 0, 1));
+	print_colour(colour_at(&world, r));
+
 	// Camera setup
-	t_vec ray_origin = point(0, 0, -5);  // Camera 5 units back
+	t_vec ray_origin = point(0, 4, -200);  // Camera 5 units back
 	double wall_z = 10;  // Canvas in front of sphere
 	double wall_size = 7.0;
 	double aspect = (double)WIDTH / (double)HEIGHT;
 	double pixel_size = wall_size / HEIGHT;
 	double half_height = wall_size / 2;
 	double half_width = (wall_size * aspect) / 2;
-	
+
 	for (int y = 0; y < HEIGHT; y++)
 	{
 		double world_y = half_height - pixel_size * y;
@@ -81,18 +104,7 @@ int32_t	main(void)
 			t_vec direction = tuple_norm(tuple_sub(target, ray_origin));
 			t_ray r = ray(ray_origin, direction);
 			
-			t_xsn *xs = intersect_sp(r, sphere);
-			t_xsn *hit = x_hit(xs);
-			
-			if (hit)
-			{
-				t_vec hit_point = ray_pos(r, hit->t);
-				t_vec normal = normal_at_sp(sphere, hit_point);
-				t_vec eye = tuple_scm(-1, r.direction);
-				
-				t_colour color = lighting(&sphere->material,
-										light, hit_point, eye, normal);
-				
+			t_colour color = colour_at(&world, r);
 				// Convert color to RGBA (clamp to 0-255)
 				int red = (int)(color.red * 255);
 				int green = (int)(color.green * 255);
@@ -104,10 +116,9 @@ int32_t	main(void)
 				uint32_t rgba = (red << 24) | (green << 16) | (blue << 8) | 0xFF;
 				mlx_put_pixel(img, x, y, rgba);
 			}
-			else
-				mlx_put_pixel(img, x, y, 0x000000FF);
 		}
-	}
+		
+	
 
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!

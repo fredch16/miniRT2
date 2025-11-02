@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimath.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2025/11/01 23:52:51 by swied            ###   ########.fr       */
+/*   Updated: 2025/11/02 22:58:12 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 void	print_mat(t_mat mat);
 void	print_vec4(t_vec tup);
 void	print_xs(t_xsn *xs);
+void	print_comps(t_comps comps);
+void	print_colour(t_colour col);
 
 // equal.c
 
@@ -85,6 +87,11 @@ t_mat	rotation_z(double r);
 t_vec	ray_pos(t_ray ray, double t_val);
 t_xsn	*intersect_sp(t_ray ray, t_obj *o);
 t_xsn	*x_hit(t_xsn *xs);
+t_xsn	*intersect_world(t_world *w, t_ray r);
+
+// list_intersect.c
+
+t_xsn	*x_sort(t_xsn *xs);
 
 // lists.c
 
@@ -108,7 +115,11 @@ t_vec	reflect(t_vec in, t_vec normal);
 
 // lighting.c
 
-t_colour	lighting(t_material *material, t_point_light light,
-				t_vec point, t_vec eyev, t_vec normalv);
+t_colour	lighting(t_material material, t_point_light light, t_comps c, bool in_shade);
+
+// computations.c
+
+t_comps	prep_comps(t_xsn *xs, t_ray r);
+t_colour	colour_at(t_world *w, t_ray r);
 
 #endif

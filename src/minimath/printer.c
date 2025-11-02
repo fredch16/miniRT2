@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:38:35 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/30 22:59:26 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/02 18:43:20 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	print_xs(t_xsn *xs)
 {
 	t_xsn	*tmp;
 
+	tmp = NULL;
 	if (!xs)
 	{
 		printf("No intersections found\n");
@@ -47,10 +48,45 @@ void	print_xs(t_xsn *xs)
 	while (tmp)
 	{
 		printf("Intersection found at | t = %10.5f | ", tmp->t);
-		if (tmp->xs_obj->type == OT_SPHERE)
+		if (tmp->xs_obj && tmp->xs_obj->type == OT_SPHERE)
 			printf("with type SPHERE\n");
-		else
+		else if (tmp->xs_obj)
 			printf("with type UNKNOWN\n");
+		else
+			printf("with NO object attached\n");
 		tmp = tmp->next;
 	}
+}
+
+void	print_comps(t_comps comps)
+{
+	printf("---- t_comps ----\n");
+	printf("t = %10.5f\n", comps.t);
+	if (comps.obj)
+	{
+		printf("obj ptr = %p | type = ", (void *)comps.obj);
+		if (comps.obj->type == OT_SPHERE)
+			printf("SPHERE\n");
+		else if (comps.obj->type == OT_PLANE)
+			printf("PLANE\n");
+		else if (comps.obj->type == OT_CYLINDER)
+			printf("CYLINDER\n");
+		else
+			printf("UNKNOWN(%d)\n", comps.obj->type);
+	}
+	else
+		printf("obj = NULL\n");
+	printf("inside = %s\n", comps.inside ? "true" : "false");
+	printf("point:\n");
+	print_vec4(comps.point);
+	printf("eyev:\n");
+	print_vec4(comps.eyev);
+	printf("normalv:\n");
+	print_vec4(comps.normalv);
+}
+
+void	print_colour(t_colour col)
+{
+	printf("Colour -> r = %10.5f | g = %10.5f | b = %10.5f\n",
+		col.red, col.green, col.blue);
 }
