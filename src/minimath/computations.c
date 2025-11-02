@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   computations.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 16:36:47 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/02 23:02:13 by swied            ###   ########.fr       */
+/*   Updated: 2025/11/02 23:17:36 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ t_colour	colour_at(t_world *w, t_ray r)
 	t_comps comps;
 	comps = prep_comps(hit, r);
 	// print_comps(comps);
-	t_colour col = lighting(comps.obj->material, w->light, comps.point, comps.eyev, comps.normalv);
+	in_shade = is_shadowed(w, comps.over_point);
+	t_colour col = lighting(xs->xs_obj->material, w->light, comps, in_shade);
 	return (col);
 }

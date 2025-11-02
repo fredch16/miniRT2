@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/02 23:03:56 by swied            ###   ########.fr       */
+/*   Updated: 2025/11/02 23:26:23 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,8 @@ int32_t	main(void)
 	
 	// Add all objects to the world
 	// Temporarily disable walls to see all spheres
-	// obj_add_back(&floor, left_wall);
-	// obj_add_back(&floor, right_wall);
+	obj_add_back(&floor, left_wall);
+	obj_add_back(&floor, right_wall);
 	obj_add_back(&floor, middle);
 	obj_add_back(&floor, right);
 	obj_add_back(&floor, left);
@@ -114,7 +114,7 @@ int32_t	main(void)
 
 	// Setup camera - positioned to see all three spheres
 	t_camera cam = camera(WIDTH, HEIGHT, M_PI / 3);  // 60° FOV
-	cam.transform = view_transform(point(0, 1.5, -5), point(0, 1, 0), vector(0, 1, 0));
+	cam.transform = view_transform(point(0, 1.5, -80), point(0, 1, 0), vector(0, 1, 0));
 
 	// Render scene
 	for (int y = 0; y < HEIGHT; y++)
