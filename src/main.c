@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/02 18:45:19 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/02 19:00:55 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int32_t	main(void)
 				t_vec normal = normal_at_sp(sphere, hit_point);
 				t_vec eye = tuple_scm(-1, r.direction);
 				
-				t_colour color = lighting(&sphere->material,
+				t_colour color = lighting(sphere->material,
 										light, hit_point, eye, normal);
 				
 				// Convert color to RGBA (clamp to 0-255)
@@ -111,7 +111,7 @@ int32_t	main(void)
 	t_world world;
 	t_obj	*s1 = obj_create(OT_SPHERE); 
 	t_obj	*s2 = obj_create(OT_SPHERE); 
-	s1->material = (t_material){0.9, 0.7, 0.2, 200, {0.8, 1.0, 0.6}};
+	s1->material = (t_material){0.1, 0.7, 0.2, 200, {0.8, 1.0, 0.6}};
 	s2->transform = scaling(0.5, 0.5, 0.5);
 	t_point_light l = (t_point_light){{1, 1, 1}, {-10, 10, -10, 1}, 1};
 	world.light = l;
