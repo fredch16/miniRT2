@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/02 22:43:12 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/02 23:12:36 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,6 @@ int32_t	main(void)
 	obj_add_back(&s1, s2);
 	world.obj_list = s1;
 
-	// t_obj	*s3 = obj_create(OT_SPHERE);
-	// s3->transform = translation(0, 0, 1);
-	// world.obj_list = s3;
 	world.light = (t_point_light){{1, 1, 1}, {-10, 10, -10, 1}, 1};
 
 	t_ray r = ray(point(0, 0, -10), vector(0, 0, 1));
