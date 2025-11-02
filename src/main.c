@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/02 21:18:48 by swied            ###   ########.fr       */
+/*   Updated: 2025/11/02 22:49:34 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,68 @@ int32_t	main(void)
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
 
-	// Setup world with two spheres
+	// Setup world with six spheres - "Putting It Together" from the book
 	t_world world;
-	t_obj *s1 = obj_create(OT_SPHERE);
-	t_obj *s2 = obj_create(OT_SPHERE);
 	
-	s1->material = (t_material){0.1, 0.7, 0.2, 200, {0, 1.0, 1.0}};
-	s2->transform = scaling(0.5, 0.5, 0.5);
+	// 1. Floor - extremely flattened sphere with matte texture
+	t_obj *floor = obj_create(OT_SPHERE);
+	floor->transform = scaling(10, 0.01, 10);
+	floor->material = (t_material){0.1, 0.9, 0, 200, {1, 0.9, 0.9}};
+	floor->material.specular = 0;
 	
-	obj_add_back(&s1, s2);
-	world.obj_list = s1;
+	// 2. Left wall - same scale and color as floor, rotated and translated
+	// Transform order: scale -> rotate_x -> rotate_y -> translate
+	t_obj *left_wall = obj_create(OT_SPHERE);
+	left_wall->transform = mat_mul_mat(mat_mul_mat(mat_mul_mat(
+		translation(0, 0, 5),
+		rotation_y(-M_PI / 4)),
+		rotation_x(M_PI / 2)),
+		scaling(10, 0.01, 10));
+	left_wall->material = floor->material;
+	
+	// 3. Right wall - identical to left wall but rotated opposite in y
+	t_obj *right_wall = obj_create(OT_SPHERE);
+	right_wall->transform = mat_mul_mat(mat_mul_mat(mat_mul_mat(
+		translation(0, 0, 5),
+		rotation_y(M_PI / 4)),
+		rotation_x(M_PI / 2)),
+		scaling(10, 0.01, 10));
+	right_wall->material = floor->material;
+	
+	// 4. Middle - large green sphere (unit sphere) translated upward
+	t_obj *middle = obj_create(OT_SPHERE);
+	middle->transform = translation(-0.5, 1, 0.5);
+	middle->material = (t_material){0.1, 0.7, 0.3, 200, {0.1, 1, 0.5}};
+	
+	// 5. Right - smaller green sphere scaled in half
+	t_obj *right = obj_create(OT_SPHERE);
+	right->transform = mat_mul_mat(
+		translation(1.5, 0.5, -0.5),
+		scaling(0.5, 0.5, 0.5));
+	right->material = (t_material){0.1, 0.7, 0.3, 200, {0.5, 1, 0.1}};
+	
+	// 6. Left - smallest sphere scaled by a third
+	t_obj *left = obj_create(OT_SPHERE);
+	left->transform = mat_mul_mat(
+		translation(-1.5, 0.33, -0.75),
+		scaling(0.33, 0.33, 0.33));
+	left->material = (t_material){0.1, 0.7, 0.3, 200, {1, 0.8, 0.1}};
+	
+	// Add all objects to the world
+	// Temporarily disable walls to see all spheres
+	// obj_add_back(&floor, left_wall);
+	// obj_add_back(&floor, right_wall);
+	obj_add_back(&floor, middle);
+	obj_add_back(&floor, right);
+	obj_add_back(&floor, left);
+	world.obj_list = floor;
+	
+	// Light source - white, shining from above and to the left
 	world.light = (t_point_light){{1, 1, 1}, point(-10, 10, -10), 1.0};
 
-	// Setup camera
+	// Setup camera - positioned to see all three spheres
 	t_camera cam = camera(WIDTH, HEIGHT, M_PI / 3);  // 60° FOV
-	cam.transform = view_transform(point(0, 0, -5), point(0, 0, 0), vector(0, 1, 0));
+	cam.transform = view_transform(point(0, 1.5, -5), point(0, 1, 0), vector(0, 1, 0));
 
 	// Render scene
 	for (int y = 0; y < HEIGHT; y++)
