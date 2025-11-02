@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+         #
+#    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/28 16:10:43 by swied             #+#    #+#              #
-#    Updated: 2025/11/01 22:28:25 by swied            ###   ########.fr        #
+#    Updated: 2025/11/02 18:16:14 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/minimath/rays.c \
 			$(SRCD)/minimath/normals.c \
 			$(SRCD)/minimath/lighting.c \
+			$(SRCD)/minimath/computations.c \
 
 OBJS :=		$(SRCS:$(SRCD)/%.c=$(OBJD)/%.o)
 

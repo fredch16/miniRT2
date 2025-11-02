@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 15:27:52 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/02 15:46:14 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/02 15:36:10fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "miniRT.h"
 # include "minimath.h" // remove when fixing types
+# include <stdbool.h>
 
 
 
@@ -111,5 +112,16 @@ typedef struct	s_world
 	t_obj			*obj_list;
 	t_point_light	light;
 }	t_world;
+
+typedef struct	s_comps
+{
+	double	t;
+	t_obj	*obj;
+	t_vec	point;
+	t_vec	eyev;
+	t_vec	normalv;
+	bool	inside;
+}	t_comps;
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:38:35 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/02 16:00:54 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/02 17:42:15 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,31 @@ void	print_xs(t_xsn *xs)
 			printf("with NO object attached\n");
 		tmp = tmp->next;
 	}
+}
+
+void	print_comps(t_comps comps)
+{
+	printf("---- t_comps ----\n");
+	printf("t = %10.5f\n", comps.t);
+	if (comps.obj)
+	{
+		printf("obj ptr = %p | type = ", (void *)comps.obj);
+		if (comps.obj->type == OT_SPHERE)
+			printf("SPHERE\n");
+		else if (comps.obj->type == OT_PLANE)
+			printf("PLANE\n");
+		else if (comps.obj->type == OT_CYLINDER)
+			printf("CYLINDER\n");
+		else
+			printf("UNKNOWN(%d)\n", comps.obj->type);
+	}
+	else
+		printf("obj = NULL\n");
+	printf("inside = %s\n", comps.inside ? "true" : "false");
+	printf("point:\n");
+	print_vec4(comps.point);
+	printf("eyev:\n");
+	print_vec4(comps.eyev);
+	printf("normalv:\n");
+	print_vec4(comps.normalv);
 }
