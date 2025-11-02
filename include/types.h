@@ -118,6 +118,7 @@ typedef struct	s_comps
 	double	t;
 	t_obj	*obj;
 	t_vec	point;
+	t_vec	over_point;
 	t_vec	eyev;
 	t_vec	normalv;
 	bool	inside;

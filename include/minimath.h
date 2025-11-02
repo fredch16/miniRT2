@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:09:38 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/02 18:56:00 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/02 19:33:28 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,7 @@ t_vec	reflect(t_vec in, t_vec normal);
 
 // lighting.c
 
-t_colour	lighting(t_material material, t_point_light light,
-				t_vec point, t_vec eyev, t_vec normalv);
+t_colour	lighting(t_material material, t_point_light light, t_comps c, bool in_shade);
 
 // computations.c
 

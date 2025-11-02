@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 21:47:29 by swied             #+#    #+#             */
-/*   Updated: 2025/11/02 18:54:02 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/02 21:30:33 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,15 @@ static t_colour	colour_add(t_colour c1, t_colour c2)
 	return (result);
 }
 
-static t_colour	calc_specular(t_material m, t_point_light light,
-					t_vec lightv, t_vec eyev, t_vec normalv)
+static t_colour	calc_specular(t_material m, t_point_light light, t_vec lightv, t_comps c)
 {
 	t_vec		reflectv;
 	double		reflect_dot_eye;
 	double		factor;
 	t_colour	spec;
 
-	reflectv = reflect(tuple_scm(-1, lightv), normalv);
-	reflect_dot_eye = tuple_dot(reflectv, eyev);
+	reflectv = reflect(tuple_scm(-1, lightv), c.normalv);
+	reflect_dot_eye = tuple_dot(reflectv, c.eyev);
 	if (reflect_dot_eye <= 0)
 		return (colour(0, 0, 0));
 	factor = pow(reflect_dot_eye, m.shininess);
@@ -66,8 +65,7 @@ static t_colour	calc_specular(t_material m, t_point_light light,
 	return (spec);
 }
 
-t_colour	lighting(t_material material, t_point_light light,
-				t_vec point, t_vec eyev, t_vec normalv)
+t_colour	lighting(t_material material, t_point_light light, t_comps c, bool in_shade)
 {
 	t_colour	effective_color;
 	t_colour	ambient;
@@ -78,9 +76,9 @@ t_colour	lighting(t_material material, t_point_light light,
 
 	effective_color = colour_mul(material.colour, light.colour);
 	effective_color = colour_scm(light.intensity, effective_color);
-	lightv = tuple_norm(tuple_sub(light.position, point));
+	lightv = tuple_norm(tuple_sub(light.position, c.point));
 	ambient = colour_scm(material.ambient, effective_color);
-	light_dot_normal = tuple_dot(lightv, normalv);
+	light_dot_normal = tuple_dot(lightv, c.normalv);
 	if (light_dot_normal < 0)
 	{
 		diffuse = colour(0, 0, 0);
@@ -90,7 +88,12 @@ t_colour	lighting(t_material material, t_point_light light,
 	{
 		diffuse = colour_scm(material.diffuse * light_dot_normal,
 				effective_color);
-		specular = calc_specular(material, light, lightv, eyev, normalv);
+		specular = calc_specular(material, light, lightv, c);
 	}
-	return (colour_add(colour_add(ambient, diffuse), specular));
+	if (in_shade)
+	{
+		return (ambient);
+	}
+	else
+		return (colour_add(colour_add(ambient, diffuse), specular));
 }
