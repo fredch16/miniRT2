@@ -124,5 +124,16 @@ typedef struct	s_comps
 	bool	inside;
 }	t_comps;
 
+typedef struct	s_camera
+{
+	int		hsize;
+	int		vsize;
+	double	field_of_view;
+	t_mat	transform;
+	double	pixel_size;
+	double	half_width;
+	double	half_height;
+}	t_camera;
+
 
 #endif
