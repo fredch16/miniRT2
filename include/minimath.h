@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:09:38 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/02 18:16:06 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/02 18:36:42 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,10 @@ t_vec	ray_pos(t_ray ray, double t_val);
 t_xsn	*intersect_sp(t_ray ray, t_obj *o);
 t_xsn	*x_hit(t_xsn *xs);
 t_xsn	*intersect_world(t_world *w, t_ray r);
+
+// list_intersect.c
+
+t_xsn	*x_sort(t_xsn *xs);
 
 // lists.c
 

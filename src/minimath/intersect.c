@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 19:27:35 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/02 16:03:49 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/02 16:39:16 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ t_xsn	*intersect_world(t_world *w, t_ray r)
 			x_add_back(&xs, intersect_sp(r, tmp));
 		tmp = tmp->next;
 	}
+	x_sort(xs);
 	return (xs);
 }
 
