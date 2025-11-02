@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimath.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:09:38 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/02 18:56:00 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/02 19:34:42 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,9 @@ t_colour	lighting(t_material material, t_point_light light,
 
 t_comps	prep_comps(t_xsn *xs, t_ray r);
 t_colour	colour_at(t_world *w, t_ray r);
+
+// camera.c
+
+t_mat	view_transform(t_vec from, t_vec to, t_vec up);
 
 #endif
