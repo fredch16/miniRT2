@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 19:26:23 by swied             #+#    #+#             */
-/*   Updated: 2025/11/02 20:11:09 by swied            ###   ########.fr       */
+/*   Updated: 2025/11/02 21:00:18 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,20 @@ t_camera	camera(int hsize, int vsize, double field_of_view)
 	}
 	cam.pixel_size = (cam.half_width * 2.0) / (double)hsize;
 	return (cam);
+}
+
+t_ray	ray_for_pixel(t_camera cam, int px, int py)
+{
+	t_vec	pixel;
+	t_vec	origin;
+	t_mat	inverse;
+	double	world_x;
+	double	world_y;
+
+	world_x = cam.half_width - (((double)px + 0.5) * cam.pixel_size);
+	world_y = cam.half_height - (((double)py + 0.5) * cam.pixel_size);
+	inverse = mat_inverse(cam.transform);
+	pixel = mat_mul_vec(inverse, point(world_x, world_y, -1));
+	origin = mat_mul_vec(inverse, point(0, 0, 0));
+	return (ray(origin, tuple_norm(tuple_sub(pixel, origin))));
 }

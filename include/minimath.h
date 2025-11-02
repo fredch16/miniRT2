@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:09:38 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/02 19:51:27 by swied            ###   ########.fr       */
+/*   Updated: 2025/11/02 20:36:26 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,6 @@ t_colour	colour_at(t_world *w, t_ray r);
 
 t_mat		view_transform(t_vec from, t_vec to, t_vec up);
 t_camera	camera(int hsize, int vsize, double field_of_view);
+t_ray		ray_for_pixel(t_camera cam, int px, int py);
 
 #endif
