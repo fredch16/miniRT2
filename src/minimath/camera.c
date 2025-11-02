@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 19:26:23 by swied             #+#    #+#             */
-/*   Updated: 2025/11/02 19:34:17 by swied            ###   ########.fr       */
+/*   Updated: 2025/11/02 20:11:09 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,30 @@ t_mat   view_transform(t_vec from, t_vec to, t_vec up)
         tuple(0, 0, 0, 1)
     );
     return (mat_mul_mat(orientation, translation(-from.x, -from.y, -from.z)));
+}
+
+t_camera	camera(int hsize, int vsize, double field_of_view)
+{
+	t_camera	cam;
+	double		half_view;
+	double		aspect;
+
+	cam.hsize = hsize;
+	cam.vsize = vsize;
+	cam.field_of_view = field_of_view;
+	cam.transform = mat_idt();
+	half_view = tan(field_of_view * 0.5);
+	aspect = (double)hsize / (double)vsize;
+	if (aspect >= 1.0)
+	{
+		cam.half_width = half_view;
+		cam.half_height = half_view / aspect;
+	}
+	else
+	{
+		cam.half_width = half_view * aspect;
+		cam.half_height = half_view;
+	}
+	cam.pixel_size = (cam.half_width * 2.0) / (double)hsize;
+	return (cam);
 }
