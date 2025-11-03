@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   computations.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 16:36:47 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/02 23:17:36 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/03 17:19:29 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ t_comps	prep_comps(t_xsn *xs, t_ray r)
 	comps.obj = xs->xs_obj;
 	comps.point = ray_pos(r, comps.t);
 	comps.eyev = tuple_neg(r.direction);
-	comps.normalv = normal_at_sp(comps.obj, comps.point);
+	if (comps.obj->type == OT_SPHERE)
+		comps.normalv = normal_at_sp(comps.obj, comps.point);
+	else if (comps.obj->type == OT_PLANE)
+		comps.normalv = normal_at_pl(comps.obj, comps.point);
 	if (tuple_dot(comps.normalv, comps.eyev) < 0)
 	{
 		comps.inside = true;

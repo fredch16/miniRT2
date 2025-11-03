@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 19:27:35 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/02 22:55:11 by swied            ###   ########.fr       */
+/*   Updated: 2025/11/03 17:19:22 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,23 @@ t_xsn	*intersect_sp(t_ray ray, t_obj *o)
 	return (xs);
 }
 
+t_xsn	*intersect_pl(t_ray ray, t_obj *o)
+{
+	t_xsn	*xs;
+	double	t;
+
+	ray = ray_transform(ray, mat_inverse(o->transform));
+	if (fabs(ray.direction.y) < EPSILON)
+		return (NULL);
+	t = -ray.origin.y / ray.direction.y;
+	if (t > EPSILON)
+	{
+		xs = x_new(o, t);
+		return (xs);
+	}
+	return (NULL);
+}
+
 t_xsn	*x_hit(t_xsn *xs)
 {
 	t_xsn	*tmp;
@@ -78,6 +95,8 @@ t_xsn	*intersect_world(t_world *w, t_ray r)
 	{
 		if (tmp->type == OT_SPHERE)
 			x_add_back(&xs, intersect_sp(r, tmp));
+		else if (tmp->type == OT_PLANE)
+			x_add_back(&xs, intersect_pl(r, tmp));
 		tmp = tmp->next;
 	}
 	xs = x_sort(xs);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/02 23:26:23 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/03 17:20:42 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,15 @@ int32_t	main(void)
 	t_world world;
 	
 	// 1. Floor - extremely flattened sphere with matte texture
-	t_obj *floor = obj_create(OT_SPHERE);
+	t_obj *floor = obj_create(OT_PLANE);
 	floor->transform = scaling(10, 0.01, 10);
+	// floor->transform = rotation_z(M_PI);
 	floor->material = (t_material){0.1, 0.9, 0, 200, {1, 0.9, 0.9}};
 	floor->material.specular = 0;
 	
 	// 2. Left wall - same scale and color as floor, rotated and translated
 	// Transform order: scale -> rotate_x -> rotate_y -> translate
-	t_obj *left_wall = obj_create(OT_SPHERE);
+	t_obj *left_wall = obj_create(OT_PLANE);
 	left_wall->transform = mat_mul_mat(mat_mul_mat(mat_mul_mat(
 		translation(0, 0, 5),
 		rotation_y(-M_PI / 4)),
@@ -73,7 +74,7 @@ int32_t	main(void)
 	left_wall->material = floor->material;
 	
 	// 3. Right wall - identical to left wall but rotated opposite in y
-	t_obj *right_wall = obj_create(OT_SPHERE);
+	t_obj *right_wall = obj_create(OT_PLANE);
 	right_wall->transform = mat_mul_mat(mat_mul_mat(mat_mul_mat(
 		translation(0, 0, 5),
 		rotation_y(M_PI / 4)),
@@ -114,11 +115,16 @@ int32_t	main(void)
 
 	// Setup camera - positioned to see all three spheres
 	t_camera cam = camera(WIDTH, HEIGHT, M_PI / 3);  // 60° FOV
-	cam.transform = view_transform(point(0, 1.5, -80), point(0, 1, 0), vector(0, 1, 0));
+	cam.transform = view_transform(point(0, 1.5, -20), point(0, 1, 0), vector(0, 1, 0));
 
 	// Render scene
+	printf("Starting render: %dx%d pixels...\n", WIDTH, HEIGHT);
 	for (int y = 0; y < HEIGHT; y++)
 	{
+		// Progress indicator every 10%
+		if (y % (HEIGHT / 10) == 0)
+			printf("Rendering progress: %.1f%%\n", (float)y / HEIGHT * 100);
+			
 		for (int x = 0; x < WIDTH; x++)
 		{
 			t_ray r = ray_for_pixel(cam, x, y);
@@ -126,6 +132,7 @@ int32_t	main(void)
 			mlx_put_pixel(img, x, y, colour_to_rgba(color));
 		}
 	}
+	printf("Render complete!\n");
 
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
