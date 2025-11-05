@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 19:27:35 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/03 17:19:22 by swied            ###   ########.fr       */
+/*   Updated: 2025/11/05 15:53:56 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,42 @@ t_xsn	*intersect_pl(t_ray ray, t_obj *o)
 	return (NULL);
 }
 
+/*
+x² + z² = 1 (Grundgleichung Zylinder)
+at² + bt + c = 0 (Finale quadtratische Gleichung)
+a = dx² + dz² (Koeffizient von t²)
+b = 2(ox×dx + oz×dz) (Koeffizient von t)
+c = ox² + oz² - 1 (Konstanter Term)
+*/
+t_xsn	*intersect_cy(t_ray ray, t_obj *o)
+{
+	t_quadratic	q;
+	t_xsn		*xs;
+
+	xs = NULL;
+	ray = ray_transform(ray, mat_inverse(o->transform));
+	q.a = ray.direction.x * ray.direction.x + ray.direction.z * ray.direction.z;
+	if (fabs(q.a) < EPSILON)
+		return (NULL);
+	q.b = 2 * (ray.origin.x * ray.direction.x + ray.origin.z * ray.direction.z);
+	q.c = ray.origin.x * ray.origin.x + ray.origin.z * ray.origin.z - 1;
+	q.d = (q.b * q.b) - (4 * q.a * q.c);
+	if (q.d < 0)
+		return (NULL);
+	q.t1 = (-q.b - sqrt(q.d)) / (2 * q.a);
+	q.t2 = (-q.b + sqrt(q.d)) / (2 * q.a);
+	if (q.t1 > EPSILON)
+		xs = x_new(o, q.t1);
+	if (q.t2 > EPSILON)
+	{
+		if (xs)
+			x_add_back(&xs, x_new(o, q.t2));
+		else
+			xs = x_new(o, q.t2);
+	}
+	return (xs);
+}
+
 t_xsn	*x_hit(t_xsn *xs)
 {
 	t_xsn	*tmp;
@@ -97,6 +133,8 @@ t_xsn	*intersect_world(t_world *w, t_ray r)
 			x_add_back(&xs, intersect_sp(r, tmp));
 		else if (tmp->type == OT_PLANE)
 			x_add_back(&xs, intersect_pl(r, tmp));
+		else if (tmp->type == OT_CYLINDER)
+			x_add_back(&xs, intersect_cy(r, tmp));
 		tmp = tmp->next;
 	}
 	xs = x_sort(xs);

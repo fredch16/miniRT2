@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 16:36:47 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/03 17:19:29 by swied            ###   ########.fr       */
+/*   Updated: 2025/11/05 17:25:39 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_comps	prep_comps(t_xsn *xs, t_ray r)
 		comps.normalv = normal_at_sp(comps.obj, comps.point);
 	else if (comps.obj->type == OT_PLANE)
 		comps.normalv = normal_at_pl(comps.obj, comps.point);
+	else if (comps.obj->type == OT_CYLINDER)
+		comps.normalv = normal_at_cy(comps.obj, comps.point);
 	if (tuple_dot(comps.normalv, comps.eyev) < 0)
 	{
 		comps.inside = true;

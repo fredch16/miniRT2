@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/03 17:20:42 by swied            ###   ########.fr       */
+/*   Updated: 2025/11/04 18:08:33 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # define M_PI 3.14159265358979323846
 #endif
 
-#define WIDTH 1600 
-#define HEIGHT 900 
+#define WIDTH 1080 
+#define HEIGHT 920 
 
 // Exit the program as failure.
 static void ft_error(void)
@@ -60,8 +60,14 @@ int32_t	main(void)
 	t_obj *floor = obj_create(OT_PLANE);
 	floor->transform = scaling(10, 0.01, 10);
 	// floor->transform = rotation_z(M_PI);
-	floor->material = (t_material){0.1, 0.9, 0, 200, {1, 0.9, 0.9}};
+	floor->material = (t_material){0.1, 0.9, 0, 200, {0.8, 0.8, 1}};
 	floor->material.specular = 0;
+
+	// Ceiling
+	t_obj *ceiling = obj_create(OT_PLANE);
+	ceiling->transform = translation(0, 6, 0);
+	ceiling->material = floor->material;
+	ceiling->material.colour = (t_colour){0.8, 0.8, 1};
 	
 	// 2. Left wall - same scale and color as floor, rotated and translated
 	// Transform order: scale -> rotate_x -> rotate_y -> translate
@@ -72,6 +78,7 @@ int32_t	main(void)
 		rotation_x(M_PI / 2)),
 		scaling(10, 0.01, 10));
 	left_wall->material = floor->material;
+	left_wall->material.colour = (t_colour){1, 0, 0};
 	
 	// 3. Right wall - identical to left wall but rotated opposite in y
 	t_obj *right_wall = obj_create(OT_PLANE);
@@ -81,6 +88,7 @@ int32_t	main(void)
 		rotation_x(M_PI / 2)),
 		scaling(10, 0.01, 10));
 	right_wall->material = floor->material;
+	right_wall->material.colour = (t_colour){0, 1, 0};
 	
 	// 4. Middle - large green sphere (unit sphere) translated upward
 	t_obj *middle = obj_create(OT_SPHERE);
@@ -101,21 +109,30 @@ int32_t	main(void)
 		scaling(0.33, 0.33, 0.33));
 	left->material = (t_material){0.1, 0.7, 0.3, 200, {1, 0.8, 0.1}};
 	
+	// 7. Cylinder - positioned in the center
+	t_obj *cylinder = obj_create(OT_CYLINDER);
+	cylinder->transform = mat_mul_mat(
+		translation(0, 1, -1.5),
+		scaling(0.3, 1.5, 0.3));
+	cylinder->material = (t_material){0.1, 0.8, 0.2, 50, {0.8, 0.2, 0.9}};
+	
 	// Add all objects to the world
 	// Temporarily disable walls to see all spheres
 	obj_add_back(&floor, left_wall);
 	obj_add_back(&floor, right_wall);
+	obj_add_back(&floor, ceiling);
 	obj_add_back(&floor, middle);
 	obj_add_back(&floor, right);
 	obj_add_back(&floor, left);
+	obj_add_back(&floor, cylinder);
 	world.obj_list = floor;
 	
 	// Light source - white, shining from above and to the left
-	world.light = (t_point_light){{1, 1, 1}, point(-10, 10, -10), 1.0};
+	world.light = (t_point_light){{1, 1, 1}, point(0, 3, -3), 1.0};
 
 	// Setup camera - positioned to see all three spheres
 	t_camera cam = camera(WIDTH, HEIGHT, M_PI / 3);  // 60° FOV
-	cam.transform = view_transform(point(0, 1.5, -20), point(0, 1, 0), vector(0, 1, 0));
+	cam.transform = view_transform(point(0, 1.5, -10), point(0, 1, 0), vector(0, 1, 0));
 
 	// Render scene
 	printf("Starting render: %dx%d pixels...\n", WIDTH, HEIGHT);
