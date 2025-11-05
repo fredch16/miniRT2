@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lists.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 20:56:22 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/02 16:38:24 by swied            ###   ########.fr       */
+/*   Updated: 2025/11/05 13:02:40 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,34 @@ void	obj_add_back(t_obj **objlist, t_obj *n)
 	else
 	{
 		tmp = *objlist;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = n;
+	}
+}
+
+t_parse_node	*pn_new(char *content)
+{
+	t_parse_node	*new;
+
+	new = ft_calloc(1, sizeof(t_parse_node));
+	if (!new)
+		return (NULL);
+	new->content = content;
+	return (new);
+}
+
+void	pn_add_back(t_parse_node **pnlist, t_parse_node *n)
+{
+	t_parse_node	*tmp;
+
+	if (!pnlist || !n)
+		return ;
+	if (!*pnlist)
+		*pnlist = n;
+	else
+	{
+		tmp = *pnlist;
 		while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = n;

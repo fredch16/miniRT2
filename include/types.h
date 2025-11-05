@@ -93,6 +93,12 @@ typedef struct s_xsn
 	struct s_xsn	*next;
 }	t_xsn;
 
+typedef struct	s_parse_node
+{
+	char				*content;
+	struct s_parse_node	*next;
+}	t_parse_node;
+
 typedef struct s_rgb
 {
 	int32_t	r;

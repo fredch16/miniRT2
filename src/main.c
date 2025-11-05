@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/03 17:20:42 by swied            ###   ########.fr       */
+/*   Updated: 2025/11/05 13:07:12 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,17 @@ void	mlx_hook(mlx_key_data_t mlx_key_data, void *param)
 	}
 }
 
-int32_t	main(void)
+int32_t	main(int ac, char **av)
 {
+	if (ac != 2)
+	{
+		printf("USAGE: ./miniRT <scene.rt>\n");
+		return (-1);
+	}
+	t_parse_node *pn;
+	pn = pn_from_file(av[1]);
+	pn_print(pn);
+
 	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "miniRT - Ray Tracer", true);
 	if (!mlx)
 		ft_error();

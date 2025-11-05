@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/13 13:28:44 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/05 13:00:25 by fredchar         ###   ########.fr       */
+/*   Created: 2025/11/05 12:35:08 by fredchar          #+#    #+#             */
+/*   Updated: 2025/11/05 13:02:52 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "miniRT.h"
 
-# define EPSILON 0.00001
+t_parse_node	*pn_new(char *content);
+void			pn_add_back(t_parse_node **pnlist, t_parse_node *n);
 
-# include "libft/libft.h"
-// # include "MLX42/include/MLX42/MLX42.h"
-# include "mymlx.h"
-# include "minimath.h"
-# include "types.h"
-# include "parser.h"
-
-# include <unistd.h>
-# include <math.h>
-# include <stdbool.h>
-# include <stdlib.h>
-
-#endif
+/* Build a null-terminated linked list of parse nodes from a file */
+t_parse_node	*pn_from_file(const char *filepath);
+void		pn_print(t_parse_node *head);
