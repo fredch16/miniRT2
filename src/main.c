@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/05 15:35:23 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/06 12:46:52 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,10 @@ int	main(int ac, char **av)
 	t_parse_node	*pn;
 	pn = pn_from_file(av[1]);
 	pn_print(pn);
+	if (verify_pn_list(pn) < 0)
+		return (printf("Incorrect object entered!\n"), -1);
+	printf("OKAYYYY LETS GO\n");
+	return (0);
 
 	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "miniRT - Ray Tracer", true);
 	if (!mlx)

@@ -6,7 +6,7 @@
 #    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/28 16:10:43 by swied             #+#    #+#              #
-#    Updated: 2025/11/05 13:04:07 by fredchar         ###   ########.fr        #
+#    Updated: 2025/11/06 12:47:43 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,10 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/minimath/list_intersect.c \
 			$(SRCD)/minimath/camera.c \
 			$(SRCD)/minimath/colour.c \
-			$(SRCD)/parser/parser.c
+			$(SRCD)/parser/parser.c \
+			$(SRCD)/parser/validate.c \
+			$(SRCD)/parser/verify_line_objs.c \
+			$(SRCD)/parser/verify_line_other.c \
 
 
 OBJS :=		$(SRCS:$(SRCD)/%.c=$(OBJD)/%.o)
