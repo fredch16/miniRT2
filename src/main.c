@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/04 18:08:33 by swied            ###   ########.fr       */
+/*   Updated: 2025/11/07 17:57:12 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,11 @@ int32_t	main(void)
 	left->material = (t_material){0.1, 0.7, 0.3, 200, {1, 0.8, 0.1}};
 	
 	// 7. Cylinder - positioned in the center
+	// Begrenzt von y=-1 bis y=1 (Höhe = 2), mit Deckeln
 	t_obj *cylinder = obj_create(OT_CYLINDER);
+	cylinder->min_y = -1.0;  // Untere Grenze
+	cylinder->max_y = 1.0;   // Obere Grenze
+	cylinder->closed = true; // Mit Deckeln
 	cylinder->transform = mat_mul_mat(
 		translation(0, 1, -1.5),
 		scaling(0.3, 1.5, 0.3));
