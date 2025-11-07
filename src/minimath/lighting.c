@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 21:47:29 by swied             #+#    #+#             */
-/*   Updated: 2025/11/07 14:33:19 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/07 19:57:11 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,19 @@ t_colour	lighting(t_material material, t_world *w, t_comps c, bool in_shade)
 	t_vec		lightv;
 	double		light_dot_normal;
 
+	// printf("1\n");
+	// print_colour(material.colour);
+	// print_colour(w->ambient);
 	ambient = colour_mul(material.colour, w->ambient);
+	// printf("2\n");
 	ambient = colour_scm(material.ambient, ambient);
+	// print_colour(ambient);
+	
 	if (in_shade)
 		return (ambient);
 	effective_color = colour_mul(material.colour, w->light.colour);
 	effective_color = colour_scm(w->light.intensity, effective_color);
 	lightv = tuple_norm(tuple_sub(w->light.position, c.point));
-	ambient = colour_scm(material.ambient, effective_color);
 	light_dot_normal = tuple_dot(lightv, c.normalv);
 	if (light_dot_normal < 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 14:42:13 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/07 16:35:43 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/07 17:46:07 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,21 @@ t_colour atocol(char *str)
 		str++;
 	col.blue = mul * ft_atoi(++str);
 	return (col);
+}
+
+t_vec	ato3dcrds(char *str)
+{
+	t_vec	res;
+
+	res.x = ft_atod(str);
+	while (*str != ',')
+		str++;
+	res.y = ft_atod(++str);
+	while (*str != ',')
+		str++;
+	res.z = ft_atod(++str);
+	res.w = 1;
+	return (res);
 }
 
 char	*skip_spaces(char *str)

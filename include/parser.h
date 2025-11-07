@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 12:35:08 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/07 16:37:00 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/07 19:14:28 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,18 @@ int				parse_rgb_triplet(char **src, t_colour *out);
 
 // pnlist_to_world.c
 
-int				parse_ambient(t_world *w, t_parse_node *n);
 int				construct_world(t_world *w, t_parse_node *n);
 
 // parse_utils.c
 
 t_colour 		atocol(char *str);
+t_vec			ato3dcrds(char *str);
+
+// parse_line_other.c
+
+int				parse_ambient(t_world *w, t_parse_node *n);
+int				parse_light(t_world *w, t_parse_node *n);
+
+// parse_line_objs.c
+
+int				parse_sphere(t_world *w, t_parse_node *n);
