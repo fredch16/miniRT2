@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 19:27:35 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/05 15:53:56 by swied            ###   ########.fr       */
+/*   Updated: 2025/11/07 17:58:40 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,46 @@ t_xsn	*intersect_pl(t_ray ray, t_obj *o)
 }
 
 /*
+Helper: Prüft ob ein Schnittpunkt innerhalb der Höhengrenzen liegt
+*/
+static bool	check_cylinder_cap(t_ray ray, double t)
+{
+	double	x;
+	double	z;
+
+	x = ray.origin.x + t * ray.direction.x;
+	z = ray.origin.z + t * ray.direction.z;
+	return ((x * x + z * z) <= 1.0);
+}
+
+/*
+Helper: Berechnet Schnittpunkte mit den Zylinderdeckeln
+*/
+static void	intersect_caps(t_ray ray, t_obj *o, t_xsn **xs)
+{
+	double	t;
+
+	if (!o->closed || fabs(ray.direction.y) < EPSILON)
+		return ;
+	t = (o->min_y - ray.origin.y) / ray.direction.y;
+	if (t > EPSILON && check_cylinder_cap(ray, t))
+	{
+		if (*xs)
+			x_add_back(xs, x_new(o, t));
+		else
+			*xs = x_new(o, t);
+	}
+	t = (o->max_y - ray.origin.y) / ray.direction.y;
+	if (t > EPSILON && check_cylinder_cap(ray, t))
+	{
+		if (*xs)
+			x_add_back(xs, x_new(o, t));
+		else
+			*xs = x_new(o, t);
+	}
+}
+
+/*
 x² + z² = 1 (Grundgleichung Zylinder)
 at² + bt + c = 0 (Finale quadtratische Gleichung)
 a = dx² + dz² (Koeffizient von t²)
@@ -73,28 +113,36 @@ t_xsn	*intersect_cy(t_ray ray, t_obj *o)
 {
 	t_quadratic	q;
 	t_xsn		*xs;
+	double		y1;
+	double		y2;
 
 	xs = NULL;
 	ray = ray_transform(ray, mat_inverse(o->transform));
 	q.a = ray.direction.x * ray.direction.x + ray.direction.z * ray.direction.z;
 	if (fabs(q.a) < EPSILON)
-		return (NULL);
+	{
+		intersect_caps(ray, o, &xs);
+		return (xs);
+	}
 	q.b = 2 * (ray.origin.x * ray.direction.x + ray.origin.z * ray.direction.z);
 	q.c = ray.origin.x * ray.origin.x + ray.origin.z * ray.origin.z - 1;
 	q.d = (q.b * q.b) - (4 * q.a * q.c);
 	if (q.d < 0)
-		return (NULL);
+		return (xs);
 	q.t1 = (-q.b - sqrt(q.d)) / (2 * q.a);
 	q.t2 = (-q.b + sqrt(q.d)) / (2 * q.a);
-	if (q.t1 > EPSILON)
+	y1 = ray.origin.y + q.t1 * ray.direction.y;
+	if (q.t1 > EPSILON && y1 > o->min_y && y1 < o->max_y)
 		xs = x_new(o, q.t1);
-	if (q.t2 > EPSILON)
+	y2 = ray.origin.y + q.t2 * ray.direction.y;
+	if (q.t2 > EPSILON && y2 > o->min_y && y2 < o->max_y)
 	{
 		if (xs)
 			x_add_back(&xs, x_new(o, q.t2));
 		else
 			xs = x_new(o, q.t2);
 	}
+	intersect_caps(ray, o, &xs);
 	return (xs);
 }
 
