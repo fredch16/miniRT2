@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:04:28 by fredchar          #+#    #+#             */
-/*   Updated: 2025/06/09 14:20:19 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/07 13:17:22 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,9 @@ int				ft_printf(const char *format, ...);
 // get_next_line function
 
 char			*get_next_line(int fd);
+
+/* ascii to double */
+double			ft_atod(char *str);
 
 //	bonus / linked list functions
 

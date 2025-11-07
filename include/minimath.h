@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimath.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:09:38 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/03 16:43:54 by swied            ###   ########.fr       */
+/*   Updated: 2025/11/07 14:24:42 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,9 @@ t_vec	reflect(t_vec in, t_vec normal);
 
 // lighting.c
 
-t_colour	lighting(t_material material, t_point_light light, t_comps c, bool in_shade);
+t_colour	lighting(t_material material, t_world *w, t_comps c, bool in_shade);
+t_colour	colour_mul(t_colour c1, t_colour c2);
+t_colour	colour_scm(double scalar, t_colour c);
 
 // computations.c
 

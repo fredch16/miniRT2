@@ -117,6 +117,8 @@ typedef struct	s_world
 {
 	t_obj			*obj_list;
 	t_point_light	light;
+	t_colour		ambient;
+
 }	t_world;
 
 typedef struct	s_comps
