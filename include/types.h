@@ -72,6 +72,9 @@ typedef struct s_obj
 	t_mat			transform;
 	struct s_obj	*next;
 	t_material		material;
+	double			min_y;
+	double			max_y;
+	bool			closed;
 }	t_obj;
 
 typedef struct s_quadratic
