@@ -30,6 +30,7 @@ SRCS :=			ft_isalnum.c \
 				ft_toupper.c \
 				ft_tolower.c \
 				ft_strlen.c \
+				ft_atod.c \
 				ft_atoi.c \
 				ft_memset.c \
 				ft_bzero.c \

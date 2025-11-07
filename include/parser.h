@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 12:35:08 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/06 17:49:07 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/07 16:37:00 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,15 @@ int 			full_empty(char *content);
 
 /* parser helper utilities */
 char			*skip_spaces(char *p);
-int			parse_double_range(char **src, double min, double max, double *out);
-int			parse_rgb_triplet(char **src, t_colour *out);
+char			*move_to_space(char *str);
+int				parse_double_range(char **src, double min, double max, double *out);
+int				parse_rgb_triplet(char **src, t_colour *out);
 
 // pnlist_to_world.c
 
-int	parse_ambient(t_world *w, t_parse_node *n);
-int	construct_world(t_world *w, t_parse_node *n);
+int				parse_ambient(t_world *w, t_parse_node *n);
+int				construct_world(t_world *w, t_parse_node *n);
+
+// parse_utils.c
+
+t_colour 		atocol(char *str);

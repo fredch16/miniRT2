@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:17:45 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/07 14:15:55 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/07 16:50:49 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,19 @@
 
 int	parse_ambient(t_world *w, t_parse_node *n)
 {
-	char	*p;
-	t_colour	col;
+	printf("parsing ambient\n");
+	char		*p;
+	double		intensity;
 
 	if (!w || !n || !n->content)
 		return (-1);
-	/* advance past the 'A' identifier */
 	p = n->content + 1;
-	/* parse_double_range and parse_rgb_triplet skip leading whitespace */
-	w->ambient.intensity = ft_atod(p);
-	w->ambient.colour = col;
-	w->light.position = point(0, 0, 0);
+	intensity = ft_atod(p);
+	p = skip_spaces(p);
+	p = move_to_space(p);
+	p = skip_spaces(p);
+	w->ambient = atocol(p);
+	w->ambient = colour_scm(intensity, w->ambient);
 	return (0);
 }
 
