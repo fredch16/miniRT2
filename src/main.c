@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/08 00:00:58 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/08 01:08:30 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@
 #include <math.h>
 #include "MLX42/include/MLX42/MLX42.h"
 
-#ifndef M_PI
-# define M_PI 3.14159265358979323846
-#endif
 
 #define WIDTH 800
 #define HEIGHT 600 

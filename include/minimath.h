@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:09:38 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/07 14:24:42 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/08 01:08:46 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include "miniRT.h"
 # include "types.h"
 # include <stdbool.h>
+# ifndef M_PI
+#  define M_PI 3.14159265358979323846
+# endif
 
 // printer.c
 

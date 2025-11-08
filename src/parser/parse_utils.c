@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 14:42:13 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/07 17:46:07 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/08 01:40:09 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_vec	ato3dcrds(char *str)
 	while (*str != ',')
 		str++;
 	res.z = ft_atod(++str);
-	res.w = 1;
+	res.w = 0;
 	return (res);
 }
 

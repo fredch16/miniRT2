@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 12:35:08 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/07 19:14:28 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/08 01:11:31 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,3 +57,4 @@ int				parse_light(t_world *w, t_parse_node *n);
 // parse_line_objs.c
 
 int				parse_sphere(t_world *w, t_parse_node *n);
+int				parse_plane(t_world *w, t_parse_node *n);
