@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 18:29:46 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/08 01:45:24 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/08 01:46:09 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ inline	t_material	material_default_pl()
 
 int	parse_sphere(t_world *w, t_parse_node *n)
 {
-	printf("parsing sphere\n");
 	char		*p;
 	t_obj		*sp;
 	t_vec		centre;
@@ -40,8 +39,6 @@ int	parse_sphere(t_world *w, t_parse_node *n)
 	p = move_to_space(p);
 	p = skip_spaces(p);
 	radius = ft_atod(p) * 0.5; // remember because this is radius x2
-	printf("Incoming is the sphere coords and also here is the radius |%10.5f|\n", radius);
-	print_vec4(centre);
 	sp->transform = mat_mul_mat( \
 		translation(centre.x, centre.y, centre.z), \
 		scaling(radius, radius, radius));
@@ -76,7 +73,6 @@ t_mat	rotation_from_axis_angle(t_vec axis, double angle)
 
 int	parse_plane(t_world *w, t_parse_node *n)
 {
-	printf("parsing PLANE\n");
 	char		*p;
 	t_obj		*pl;
 	t_vec		centre;
@@ -92,8 +88,6 @@ int	parse_plane(t_world *w, t_parse_node *n)
 	p = move_to_space(p);
 	p = skip_spaces(p);
 	normal = ato3dcrds(p);
-	printf("read normal is \n");
-	print_vec4(normal);
 	t_vec	up_default = {0, 1, 0, 0};
 
 	// in the case of the input vector being equal to default
@@ -103,17 +97,12 @@ int	parse_plane(t_world *w, t_parse_node *n)
 		pl->transform = mat_mul_mat(translation(centre.x, centre.y, centre.z), rotation_x(M_PI));
 	else
 	{
-		print_vec4(up_default);
 		t_vec	axis = tuple_norm(tuple_cro(up_default, normal));
 		double	angle = acos(tuple_dot(normal, up_default));
-		printf("ANGLE |%10.5f|\n", angle);
 		t_mat	rotate = rotation_from_axis_angle(axis, angle);
 		t_mat	translate = translation(centre.x, centre.y, centre.z);
 		pl->transform = mat_mul_mat(translate, rotate);
 	}
-	// printf("Incoming is the PLANE coords and also here is the rotation entry \n");
-	// print_vec4(centre);
-	// print_mat(pl->transform);
 	p = move_to_space(p);
 	pl->material.colour = atocol(p);
 	obj_add_back(&w->obj_list, pl);
