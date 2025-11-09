@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 12:35:08 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/09 15:52:52 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/09 22:40:13 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int				construct_world(t_world *w, t_parse_node *n);
 
 t_colour 		atocol(char *str);
 t_vec			ato3dcrds(char *str);
+int				allowed_chars(char *str);
 
 // parse_line_other.c
 

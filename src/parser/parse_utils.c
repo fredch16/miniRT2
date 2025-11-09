@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 14:42:13 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/08 01:40:09 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/09 23:17:57 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,15 @@ char	*move_to_space(char *str)
 	while (*str && *str != ' ')
 		str++;
 	return (str);
+}
+
+int	allowed_chars(char *str)
+{
+	while (*str)
+	{
+		if (!(ft_isdigit(*str) || *str == '.' || *str == ',' || *str == '-' || ft_isspace(*str)))
+			return (0);
+		str++;
+	}
+	return (1);
 }

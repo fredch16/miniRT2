@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 18:29:46 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/09 16:03:13 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/09 23:15:14 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	parse_sphere(t_world *w, t_parse_node *n)
 	sp = obj_create(OT_SPHERE);
 	sp->material = material_default_sp();
 	p = n->content + 3;
+	if (!allowed_chars(p))
+		return (-1);
 	centre = ato3dcrds(p);
 	p = skip_spaces(p);
 	p = move_to_space(p);

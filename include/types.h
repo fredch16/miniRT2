@@ -124,12 +124,21 @@ typedef struct	s_camera
 	double	half_height;
 }	t_camera;
 
+typedef struct	s_parser
+{
+	bool	error_flag;
+	int		A_count;
+	int		L_count;
+	int		C_count;
+}	t_parser;
+
 typedef struct	s_world
 {
 	t_obj			*obj_list;
 	t_point_light	light;
 	t_colour		ambient;
 	t_camera		camera;
+	t_parser		parser;
 }	t_world;
 
 typedef struct	s_comps
@@ -142,6 +151,5 @@ typedef struct	s_comps
 	t_vec	normalv;
 	bool	inside;
 }	t_comps;
-
 
 #endif
