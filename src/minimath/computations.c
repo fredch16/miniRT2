@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 16:36:47 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/09 23:43:14 by swied            ###   ########.fr       */
+/*   Updated: 2025/11/10 00:20:56 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ bool	is_shadowed(t_world *w, t_vec point)
 	r = ray(point, poi_to_light);
 	xs = intersect_world(w, r);
 	xs = x_hit(xs);
-	if (xs && xs->t < distance)
+	if (xs && xs->t < (distance - EPSILON))
 		return (true);
 	else
 		return (false);
