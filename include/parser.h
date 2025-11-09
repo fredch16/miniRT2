@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 12:35:08 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/08 01:11:31 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/09 15:52:52 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_vec			ato3dcrds(char *str);
 
 int				parse_ambient(t_world *w, t_parse_node *n);
 int				parse_light(t_world *w, t_parse_node *n);
+int				parse_camera(t_world *w, t_parse_node *n);
 
 // parse_line_objs.c
 

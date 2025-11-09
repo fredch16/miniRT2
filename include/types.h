@@ -113,12 +113,23 @@ typedef struct s_point_light
 	double		intensity;
 }	t_point_light;
 
+typedef struct	s_camera
+{
+	int		hsize;
+	int		vsize;
+	double	field_of_view;
+	t_mat	transform;
+	double	pixel_size;
+	double	half_width;
+	double	half_height;
+}	t_camera;
+
 typedef struct	s_world
 {
 	t_obj			*obj_list;
 	t_point_light	light;
 	t_colour		ambient;
-
+	t_camera		camera;
 }	t_world;
 
 typedef struct	s_comps
@@ -131,17 +142,6 @@ typedef struct	s_comps
 	t_vec	normalv;
 	bool	inside;
 }	t_comps;
-
-typedef struct	s_camera
-{
-	int		hsize;
-	int		vsize;
-	double	field_of_view;
-	t_mat	transform;
-	double	pixel_size;
-	double	half_width;
-	double	half_height;
-}	t_camera;
 
 
 #endif

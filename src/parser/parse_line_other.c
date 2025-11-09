@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 17:22:59 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/07 18:30:58 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/09 16:35:59 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,35 @@ int	parse_light(t_world *w, t_parse_node *n)
 	w->light.colour = atocol(p);
 	printf("Light colour:\n");
 	print_colour(w->light.colour);
+	return (0);
+}
+
+int	parse_camera(t_world *w, t_parse_node *n)
+{
+	printf("Parsing camera\n");
+	char		*p;
+	t_vec		pos;
+	t_vec		to;
+	double		FOV;
+	if (!w || !n || !n->content)
+		return (-1);
+	p = n->content + 1;
+	p = skip_spaces(p);
+	pos = ato3dcrds(p);
+	p = move_to_space(p);
+	p = skip_spaces(p);
+	to = ato3dcrds(p);
+	to = tuple_add(pos, to);
+	p = move_to_space(p);
+	p = skip_spaces(p);
+	FOV = ft_atod(p);
+	printf("FOV parsed as |%10.5f|\n", FOV);
+	if (FOV < 0 || FOV > 180)
+		return (printf("FOV out of range |0-180|\n"), -1);
+	t_camera cam = camera(WIDTH, HEIGHT, (M_PI / 180.0) * FOV);
+	cam.transform = view_transform(pos, to, vector(0, 1, 0));
+	w->camera = cam;
+	/* debug prints */
+	print_mat(w->camera.transform);
 	return (0);
 }

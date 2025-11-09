@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 18:29:46 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/08 01:46:09 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/09 16:03:13 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ inline	t_material	material_default_pl()
 
 int	parse_sphere(t_world *w, t_parse_node *n)
 {
+	printf("Parsing sphere\n");
 	char		*p;
 	t_obj		*sp;
 	t_vec		centre;
@@ -73,6 +74,7 @@ t_mat	rotation_from_axis_angle(t_vec axis, double angle)
 
 int	parse_plane(t_world *w, t_parse_node *n)
 {
+	printf("Parsing plane\n");
 	char		*p;
 	t_obj		*pl;
 	t_vec		centre;
@@ -81,7 +83,7 @@ int	parse_plane(t_world *w, t_parse_node *n)
 	if (!w || !n || !n->content)
 		return (-1);
 	pl = obj_create(OT_PLANE);
-	pl->material = material_default_sp();
+	pl->material = material_default_pl();
 	p = n->content + 3;
 	centre = ato3dcrds(p);
 	p = skip_spaces(p);
