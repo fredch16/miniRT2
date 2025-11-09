@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimath.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:09:38 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/08 01:08:46 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/09 23:36:31 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ t_mat	rotation_z(double r);
 t_vec	ray_pos(t_ray ray, double t_val);
 t_xsn	*intersect_sp(t_ray ray, t_obj *o);
 t_xsn	*intersect_pl(t_ray ray, t_obj *o);
+t_xsn	*intersect_cy(t_ray ray, t_obj *o);
 t_xsn	*x_hit(t_xsn *xs);
 t_xsn	*intersect_world(t_world *w, t_ray r);
 
@@ -116,6 +117,7 @@ t_mat	shearing(double xy, double xz, double yx, double yz, double zx, double zy)
 
 t_vec	normal_at_sp(t_obj *o, t_vec p);
 t_vec	normal_at_pl(t_obj *o, t_vec world_point);
+t_vec	normal_at_cy(t_obj *o, t_vec world_point);
 t_vec	reflect(t_vec in, t_vec normal);
 
 // lighting.c

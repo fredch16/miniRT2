@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   computations.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 16:36:47 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/07 14:12:03 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/10 00:20:56 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_comps	prep_comps(t_xsn *xs, t_ray r)
 		comps.normalv = normal_at_sp(comps.obj, comps.point);
 	else if (comps.obj->type == OT_PLANE)
 		comps.normalv = normal_at_pl(comps.obj, comps.point);
+	else if (comps.obj->type == OT_CYLINDER)
+		comps.normalv = normal_at_cy(comps.obj, comps.point);
 	if (tuple_dot(comps.normalv, comps.eyev) < 0)
 	{
 		comps.inside = true;
@@ -53,7 +55,7 @@ bool	is_shadowed(t_world *w, t_vec point)
 	r = ray(point, poi_to_light);
 	xs = intersect_world(w, r);
 	xs = x_hit(xs);
-	if (xs && xs->t < distance)
+	if (xs && xs->t < (distance - EPSILON))
 		return (true);
 	else
 		return (false);
