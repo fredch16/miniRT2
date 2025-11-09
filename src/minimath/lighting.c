@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lighting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 21:47:29 by swied             #+#    #+#             */
-/*   Updated: 2025/11/07 19:57:11 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/10 00:20:11 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ static t_colour	calc_specular(t_material m, t_point_light light, t_vec lightv, t
 	if (reflect_dot_eye <= 0)
 		return (colour(0, 0, 0));
 	factor = pow(reflect_dot_eye, m.shininess);
-	spec = colour_scm(m.specular * factor, light.colour);
-	spec = colour_scm(light.intensity, spec);
+	spec = colour_scm(m.specular * light.intensity * factor, light.colour);
 	return (spec);
 }
 
@@ -86,7 +85,7 @@ t_colour	lighting(t_material material, t_world *w, t_comps c, bool in_shade)
 		return (ambient);
 	effective_color = colour_mul(material.colour, w->light.colour);
 	effective_color = colour_scm(w->light.intensity, effective_color);
-	lightv = tuple_norm(tuple_sub(w->light.position, c.point));
+	lightv = tuple_norm(tuple_sub(w->light.position, c.over_point));
 	light_dot_normal = tuple_dot(lightv, c.normalv);
 	if (light_dot_normal < 0)
 	{
