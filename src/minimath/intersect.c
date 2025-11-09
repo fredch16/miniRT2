@@ -157,7 +157,7 @@ t_xsn	*x_hit(t_xsn *xs)
 	lnn = __DBL_MAX__;
 	while (tmp)
 	{
-		if (tmp->t > 0 && tmp->t < lnn)
+		if (tmp->t > EPSILON && tmp->t < lnn)
 		{
 			lnn = tmp->t;
 			hit = tmp;
