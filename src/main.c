@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/09 16:34:32 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/10 00:45:09 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,14 @@ int	main(int ac, char **av)
 	// if (verify_pn_list(pn) < 0)
 	// 	return (printf("Incorrect object entered!\n"), -1);
 	t_world	world = {0}; 
-	while (pn && construct_world(&world, pn) >= 0)
+	world.parser.error_flag = 0;
+	while (pn && world.parser.error_flag == 0)
+	{
+		world.parser.error_flag = construct_world(&world, pn);
+		if (world.parser.error_flag < 0)
+			return (printf("Error\n"), -1);
 		pn = pn->next;
+	}
 	printf("OKAYYYY LETS GO\n");
 	print_colour(world.ambient);
 

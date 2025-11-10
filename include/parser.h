@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 12:35:08 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/09 22:40:13 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/10 00:53:04 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,3 +60,7 @@ int				parse_camera(t_world *w, t_parse_node *n);
 
 int				parse_sphere(t_world *w, t_parse_node *n);
 int				parse_plane(t_world *w, t_parse_node *n);
+
+// verify_utils.c
+
+int				verify_colours(t_colour col);

@@ -126,7 +126,7 @@ typedef struct	s_camera
 
 typedef struct	s_parser
 {
-	bool	error_flag;
+	int		error_flag;
 	int		A_count;
 	int		L_count;
 	int		C_count;
