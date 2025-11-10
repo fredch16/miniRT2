@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 18:29:46 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/10 01:34:05 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/10 01:36:02 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,15 @@ int	parse_sphere(t_world *w, t_parse_node *n)
 	p = move_to_space(p);
 	p = skip_spaces(p);
 	radius = ft_atod(p) * 0.5; // remember because this is radius x2
+	if (radius < 0)
+		return (w->parser.error_flag++, printf("Sphere's radius can't be negative\n"), -1);
 	sp->transform = mat_mul_mat( \
 		translation(centre.x, centre.y, centre.z), \
 		scaling(radius, radius, radius));
 	p = move_to_space(p);
 	sp->material.colour = atocol(p);
+	if (verify_colours(sp->material.colour) < 0)
+		return (w->parser.error_flag++, printf("Sphere Colour out of range 0 - 255\n"), -1);
 	obj_add_back(&w->obj_list, sp);
 	return (0);
 }
