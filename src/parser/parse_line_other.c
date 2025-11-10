@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 17:22:59 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/10 01:19:43 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/10 01:25:35 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	parse_camera(t_world *w, t_parse_node *n)
 	char		*p;
 	t_vec		pos;
 	t_vec		to;
+	t_camera	cam;
 	double		FOV;
 	if (!w || !n || !n->content)
 		return (-1);
@@ -73,6 +74,8 @@ int	parse_camera(t_world *w, t_parse_node *n)
 	p = move_to_space(p);
 	p = skip_spaces(p);
 	to = ato3dcrds(p);
+	if (verify_3dnorm(to) < 0)
+		return (w->parser.error_flag++, printf("Camera vector not normalised\n"), -1);
 	to = tuple_add(pos, to);
 	p = move_to_space(p);
 	p = skip_spaces(p);
@@ -80,10 +83,9 @@ int	parse_camera(t_world *w, t_parse_node *n)
 	printf("FOV parsed as |%10.5f|\n", FOV);
 	if (FOV < 0 || FOV > 180)
 		return (printf("FOV out of range |0-180|\n"), -1);
-	t_camera cam = camera(WIDTH, HEIGHT, (M_PI / 180.0) * FOV);
+	cam = camera(WIDTH, HEIGHT, (M_PI / 180.0) * FOV);
 	cam.transform = view_transform(pos, to, vector(0, 1, 0));
 	w->camera = cam;
-	/* debug prints */
 	print_mat(w->camera.transform);
 	return (0);
 }
