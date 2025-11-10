@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 17:22:59 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/10 00:56:40 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/10 01:19:43 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,13 @@ int	parse_ambient(t_world *w, t_parse_node *n)
 	p = n->content + 1;
 	intensity = ft_atod(p);
 	if (intensity < 0.0 || intensity > 1.0)
-		return (w->parser.error_flag++, printf("Intensity of Ambient Light our of range 0 - 1\n"), -1);
+		return (w->parser.error_flag++, printf("Intensity of Ambient Light out of range 0 - 1\n"), -1);
 	p = skip_spaces(p);
 	p = move_to_space(p);
 	p = skip_spaces(p);
 	w->ambient = atocol(p);
-	print_colour(w->ambient);
 	if (verify_colours(w->ambient) < 0)
-		return (w->parser.error_flag++, printf("Ambient Light our of range 0 - 255\n"), -1);
+		return (w->parser.error_flag++, printf("Ambient Light out of range 0 - 255\n"), -1);
 	w->ambient = colour_scm(intensity, w->ambient);
 	return (0);
 }
@@ -49,9 +48,11 @@ int	parse_light(t_world *w, t_parse_node *n)
 	p = skip_spaces(p);
 	w->light.intensity = ft_atod(p);
 	if (w->light.intensity < 0.0 || w->light.intensity > 1.0)
-		return (printf("Intensity of Ambient Light our of range 0 - 1\n"), -1);
+		return (printf("Intensity of Ambient Light out of range 0 - 1\n"), -1);
 	p = move_to_space(p);
 	w->light.colour = atocol(p);
+	if (verify_colours(w->light.colour) < 0)
+		return (w->parser.error_flag++, printf("Point Light out of range 0 - 255\n"), -1);
 	printf("Light colour:\n");
 	print_colour(w->light.colour);
 	return (0);
