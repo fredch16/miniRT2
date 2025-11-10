@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 13:01:19 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/10 01:22:46 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/10 01:32:01 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,15 @@ int	verify_colours(t_colour col)
 
 int	verify_3dnorm(t_vec	vec)
 {
-	if (tuple_mag(vec) > 1 + EPSILON)
+	double	mag;
+	double	lowerlim;
+	double	upperlim;
+
+	upperlim = 1 + EPSILON;
+	lowerlim = 1 - EPSILON;
+	mag = tuple_mag(vec);
+
+	if (mag < lowerlim || mag > upperlim)
 		return (-1);
 	return (0);
 }

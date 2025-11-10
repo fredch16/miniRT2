@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 18:29:46 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/09 23:15:14 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/10 01:34:05 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ int	parse_plane(t_world *w, t_parse_node *n)
 	p = move_to_space(p);
 	p = skip_spaces(p);
 	normal = ato3dcrds(p);
+	if (verify_3dnorm(normal) < 0)
+		return (w->parser.error_flag++, printf("Plane orientation vector not normalised\n"), -1);
 	t_vec	up_default = {0, 1, 0, 0};
 
 	// in the case of the input vector being equal to default
@@ -109,6 +111,8 @@ int	parse_plane(t_world *w, t_parse_node *n)
 	}
 	p = move_to_space(p);
 	pl->material.colour = atocol(p);
+	if (verify_colours(pl->material.colour) < 0)
+		return (w->parser.error_flag++, printf("Plane Colour out of range 0 - 255\n"), -1);
 	obj_add_back(&w->obj_list, pl);
 	return (0);
 }
