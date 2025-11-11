@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 12:35:08 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/10 01:22:54 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/11 18:10:40 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int				allowed_chars(char *str);
 
 // parse_line_other.c
 
+t_colour		default_light();
 int				parse_ambient(t_world *w, t_parse_node *n);
 int				parse_light(t_world *w, t_parse_node *n);
 int				parse_camera(t_world *w, t_parse_node *n);

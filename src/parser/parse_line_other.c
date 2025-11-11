@@ -6,11 +6,21 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 17:22:59 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/10 01:25:35 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/11 18:10:24 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minimath.h"
+
+t_colour	default_light()
+{
+	t_colour	col;
+	
+	col.blue = 1;
+	col.red = 1;
+	col.green = 1;
+	return (col);
+}
 
 int	parse_ambient(t_world *w, t_parse_node *n)
 {
