@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:04:28 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/07 13:17:22 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/09 22:37:34 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int				ft_isalpha(int c);
 int				ft_isdigit(int c);
 int				ft_isprint(int c);
 int				ft_isascii(int c);
+int				ft_isspace(char c);
 int				ft_toupper(int c);
 int				ft_tolower(int c);
 size_t			ft_strlen(const char *str);

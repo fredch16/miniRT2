@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 14:42:13 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/08 01:40:09 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/11 18:10:48 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ t_colour atocol(char *str)
 	t_colour	col;
 	double		mul;
 
+	str = skip_spaces(str);
+	if (!(*str))
+		return (default_light());
 	mul = 0.00392156863;
 	col.red = mul * ft_atoi(str);
 	while (*str != ',')
@@ -55,4 +58,15 @@ char	*move_to_space(char *str)
 	while (*str && *str != ' ')
 		str++;
 	return (str);
+}
+
+int	allowed_chars(char *str)
+{
+	while (*str)
+	{
+		if (!(ft_isdigit(*str) || *str == '.' || *str == ',' || *str == '-' || ft_isspace(*str)))
+			return (0);
+		str++;
+	}
+	return (1);
 }

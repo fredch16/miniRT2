@@ -6,11 +6,21 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 17:22:59 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/09 16:35:59 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/11 18:10:24 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minimath.h"
+
+t_colour	default_light()
+{
+	t_colour	col;
+	
+	col.blue = 1;
+	col.red = 1;
+	col.green = 1;
+	return (col);
+}
 
 int	parse_ambient(t_world *w, t_parse_node *n)
 {
@@ -23,13 +33,14 @@ int	parse_ambient(t_world *w, t_parse_node *n)
 	p = n->content + 1;
 	intensity = ft_atod(p);
 	if (intensity < 0.0 || intensity > 1.0)
-		return (printf("Intensity of Ambient Light our of range 0 - 1\n"), -1);
+		return (w->parser.error_flag++, printf("Intensity of Ambient Light out of range 0 - 1\n"), -1);
 	p = skip_spaces(p);
 	p = move_to_space(p);
 	p = skip_spaces(p);
 	w->ambient = atocol(p);
+	if (verify_colours(w->ambient) < 0)
+		return (w->parser.error_flag++, printf("Ambient Light out of range 0 - 255\n"), -1);
 	w->ambient = colour_scm(intensity, w->ambient);
-	// verify colours innit
 	return (0);
 }
 
@@ -47,9 +58,11 @@ int	parse_light(t_world *w, t_parse_node *n)
 	p = skip_spaces(p);
 	w->light.intensity = ft_atod(p);
 	if (w->light.intensity < 0.0 || w->light.intensity > 1.0)
-		return (printf("Intensity of Ambient Light our of range 0 - 1\n"), -1);
+		return (printf("Intensity of Ambient Light out of range 0 - 1\n"), -1);
 	p = move_to_space(p);
 	w->light.colour = atocol(p);
+	if (verify_colours(w->light.colour) < 0)
+		return (w->parser.error_flag++, printf("Point Light out of range 0 - 255\n"), -1);
 	printf("Light colour:\n");
 	print_colour(w->light.colour);
 	return (0);
@@ -61,6 +74,7 @@ int	parse_camera(t_world *w, t_parse_node *n)
 	char		*p;
 	t_vec		pos;
 	t_vec		to;
+	t_camera	cam;
 	double		FOV;
 	if (!w || !n || !n->content)
 		return (-1);
@@ -70,6 +84,8 @@ int	parse_camera(t_world *w, t_parse_node *n)
 	p = move_to_space(p);
 	p = skip_spaces(p);
 	to = ato3dcrds(p);
+	if (verify_3dnorm(to) < 0)
+		return (w->parser.error_flag++, printf("Camera vector not normalised\n"), -1);
 	to = tuple_add(pos, to);
 	p = move_to_space(p);
 	p = skip_spaces(p);
@@ -77,10 +93,9 @@ int	parse_camera(t_world *w, t_parse_node *n)
 	printf("FOV parsed as |%10.5f|\n", FOV);
 	if (FOV < 0 || FOV > 180)
 		return (printf("FOV out of range |0-180|\n"), -1);
-	t_camera cam = camera(WIDTH, HEIGHT, (M_PI / 180.0) * FOV);
+	cam = camera(WIDTH, HEIGHT, (M_PI / 180.0) * FOV);
 	cam.transform = view_transform(pos, to, vector(0, 1, 0));
 	w->camera = cam;
-	/* debug prints */
 	print_mat(w->camera.transform);
 	return (0);
 }
