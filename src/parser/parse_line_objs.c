@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 18:29:46 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/16 17:10:56 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/16 17:19:52 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,73 @@ int	parse_plane(t_world *w, t_parse_node *n)
 	if (verify_colours(pl->material.colour) < 0)
 		return (w->parser.error_flag++, printf("Plane Colour out of range 0 - 255\n"), -1);
 	obj_add_back(&w->obj_list, pl);
+	return (0);
+}
+
+
+int	parse_cylinder(t_world *w, t_parse_node *n)
+{
+	printf("Parsing Cylinder\n");
+	char		*p;
+	t_obj		*cy;
+	t_vec		centre;
+	t_vec		normal;
+
+	if (!w || !n || !n->content)
+		return (-1);
+	cy = obj_create(OT_CYLINDER);
+	cy->material = material_default_pl();
+	p = n->content + 3;
+	centre = ato3dcrds(p);
+	p = skip_spaces(p);
+	p = move_to_space(p);
+	p = skip_spaces(p);
+	normal = ato3dcrds(p);
+	if (verify_3dnorm(normal) < 0)
+		return (w->parser.error_flag++, printf("Plane orientation vector not normalised\n"), -1);
+	t_vec	up_default = {0, 1, 0, 0};
+	p = move_to_space(p);
+	p = skip_spaces(p);
+	cy->closed = 1;
+	double	radius = ft_atod(p) * 0.5;
+	p = move_to_space(p);
+	p = skip_spaces(p);
+	double height = ft_atod(p);
+
+	// in the case of the input vector being equal to default
+	if (equal_tuple(normal, up_default))
+		cy->transform = translation(centre.x, centre.y, centre.z);
+	else if (equal_tuple(normal, tuple_scm(-1, up_default))) // input is opposite
+		cy->transform = mat_mul_mat(translation(centre.x, centre.y, centre.z), rotation_x(M_PI));
+	else
+	{
+		t_vec	axis = tuple_norm(tuple_cro(up_default, normal));
+		double	angle = acos(tuple_dot(normal, up_default));
+		t_mat	rotate = rotation_from_axis_angle(axis, angle);
+		t_mat	translate = translation(centre.x, centre.y, centre.z);
+		cy->transform = mat_mul_mat(translate, rotate);
+	}
+	
+	/* advance to colour token (move past height token) */
+	p = move_to_space(p);
+	p = skip_spaces(p);
+	cy->material.colour = atocol(p);
+	if (verify_colours(cy->material.colour) < 0)
+		return (w->parser.error_flag++, printf("Plane Colour out of range 0 - 255\n"), -1);
+
+	/* apply radius scaling: scale x and z by radius, keep y unscaled
+	 * so that min_y/max_y can be set in object space as ±height/2
+	 * Order: translate * rotate * scale => scale applied in object space
+	 */
+	cy->transform = mat_mul_mat(cy->transform, scaling(radius, radius, radius));
+
+	/* set cylinder y-bounds in object space (half-height centered at origin) */
+	cy->min_y = 0;
+	cy->max_y = height;
+
+	/* parse caps token if present (after the colour token) */
+	p = move_to_space(p);
+	p = skip_spaces(p);
+	obj_add_back(&w->obj_list, cy);
 	return (0);
 }
