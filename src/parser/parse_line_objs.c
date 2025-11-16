@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 18:29:46 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/10 01:36:02 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/16 17:10:56 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ inline	t_material	material_default_sp()
 
 inline	t_material	material_default_pl()
 {
-	return ((t_material){0.1, 0.7, 0.3, 20, {0, 0, 0}});
+    return ((t_material){0.1, 0.9, 0.0, 200, {0, 0, 0}});
 }
 
 int	parse_sphere(t_world *w, t_parse_node *n)
