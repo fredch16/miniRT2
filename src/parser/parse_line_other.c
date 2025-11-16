@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 17:22:59 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/11 18:10:24 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/16 16:57:11 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	parse_light(t_world *w, t_parse_node *n)
 	p = skip_spaces(p);
 	w->light.intensity = ft_atod(p);
 	if (w->light.intensity < 0.0 || w->light.intensity > 1.0)
-		return (printf("Intensity of Ambient Light out of range 0 - 1\n"), -1);
+		return (printf("Intensity of Light out of range 0 - 1\n"), -1);
 	p = move_to_space(p);
 	w->light.colour = atocol(p);
 	if (verify_colours(w->light.colour) < 0)
