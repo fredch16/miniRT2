@@ -24,7 +24,6 @@ t_colour	default_light()
 
 int	parse_ambient(t_world *w, t_parse_node *n)
 {
-	printf("PARSING AMBIENT\n");
 	char		*p;
 	double		intensity;
 
@@ -46,7 +45,6 @@ int	parse_ambient(t_world *w, t_parse_node *n)
 
 int	parse_light(t_world *w, t_parse_node *n)
 {
-	printf("parsing light\n");
 	char		*p;
 
 	if (!w || !n || !n->content)
@@ -63,14 +61,11 @@ int	parse_light(t_world *w, t_parse_node *n)
 	w->light.colour = atocol(p);
 	if (verify_colours(w->light.colour) < 0)
 		return (w->parser.error_flag++, printf("Point Light out of range 0 - 255\n"), -1);
-	printf("Light colour:\n");
-	print_colour(w->light.colour);
 	return (0);
 }
 
 int	parse_camera(t_world *w, t_parse_node *n)
 {
-	printf("Parsing camera\n");
 	char		*p;
 	t_vec		pos;
 	t_vec		to;
@@ -91,18 +86,10 @@ int	parse_camera(t_world *w, t_parse_node *n)
 	{
 		t_vec parsed_dir = to;
 		to = tuple_add(pos, parsed_dir);
-		t_vec forward = tuple_norm(tuple_sub(to, pos));
-		printf("Camera parsed position:\n");
-		print_vec4(pos);
-		printf("Camera parsed direction (raw):\n");
-		print_vec4(parsed_dir);
-		printf("Camera forward (normalized):\n");
-		print_vec4(forward);
 	}
 	p = move_to_space(p);
 	p = skip_spaces(p);
 	FOV = ft_atod(p);
-	printf("FOV parsed as |%10.5f|\n", FOV);
 	if (FOV < 0 || FOV > 180)
 		return (printf("FOV out of range |0-180|\n"), -1);
 	cam = camera(WIDTH, HEIGHT, (M_PI / 180.0) * FOV);
@@ -110,6 +97,5 @@ int	parse_camera(t_world *w, t_parse_node *n)
 	/* store forward direction (world-space) for ray generation */
 	cam.forward = tuple_norm(tuple_sub(to, pos));
 	w->camera = cam;
-	print_mat(w->camera.transform);
 	return (0);
 }

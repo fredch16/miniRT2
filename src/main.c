@@ -63,20 +63,7 @@ int	main(int ac, char **av)
 	printf("OKAYYYY LETS GO\n");
 	print_colour(world.ambient);
 
-	/* Debug: inspect center pixel ray and intersections */
-	{
-		t_ray dbg_r = ray_for_pixel(world.camera, WIDTH / 2, HEIGHT / 2);
-		printf("DEBUG CENTER RAY ORIGIN: (%.5f, %.5f, %.5f)\n", dbg_r.origin.x, dbg_r.origin.y, dbg_r.origin.z);
-		printf("DEBUG CENTER RAY DIR:    (%.5f, %.5f, %.5f)\n", dbg_r.direction.x, dbg_r.direction.y, dbg_r.direction.z);
-		t_xsn *dbg_xs = intersect_world(&world, dbg_r);
-		if (!dbg_xs)
-			printf("DEBUG: No intersections for center ray\n");
-		else
-		{
-			printf("DEBUG: Intersections for center ray:\n");
-			print_xs(dbg_xs);
-		}
-	}
+	(void)0;
 
 	// return (0);
 	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "miniRT - Ray Tracer", true);
@@ -104,12 +91,7 @@ int	main(int ac, char **av)
 	}
 	printf("Render complete!\n");
 
-	printf("\n\n\n\nDEBUGGING ZONE:\n");
-	printf("Ambient\n");
-	print_colour(world.ambient);
-	printf("World Light\n");
-	print_colour(world.light.colour);
-	print_colour(colour_at(&world, ray_for_pixel(world.camera, 0, 0)));
+	(void)0;
 
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
