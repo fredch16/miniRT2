@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 17:22:59 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/16 16:57:11 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/16 18:21:07 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,19 @@ int	parse_camera(t_world *w, t_parse_node *n)
 	to = ato3dcrds(p);
 	if (verify_3dnorm(to) < 0)
 		return (w->parser.error_flag++, printf("Camera vector not normalised\n"), -1);
-	to = tuple_add(pos, to);
+	/* keep parsed direction for debug printing; set 'to' as pos + parsed_dir
+	   so view_transform's forward = normalize(to - pos) matches parsed_dir */
+	{
+		t_vec parsed_dir = to;
+		to = tuple_add(pos, parsed_dir);
+		t_vec forward = tuple_norm(tuple_sub(to, pos));
+		printf("Camera parsed position:\n");
+		print_vec4(pos);
+		printf("Camera parsed direction (raw):\n");
+		print_vec4(parsed_dir);
+		printf("Camera forward (normalized):\n");
+		print_vec4(forward);
+	}
 	p = move_to_space(p);
 	p = skip_spaces(p);
 	FOV = ft_atod(p);
@@ -95,6 +107,8 @@ int	parse_camera(t_world *w, t_parse_node *n)
 		return (printf("FOV out of range |0-180|\n"), -1);
 	cam = camera(WIDTH, HEIGHT, (M_PI / 180.0) * FOV);
 	cam.transform = view_transform(pos, to, vector(0, 1, 0));
+	/* store forward direction (world-space) for ray generation */
+	cam.forward = tuple_norm(tuple_sub(to, pos));
 	w->camera = cam;
 	print_mat(w->camera.transform);
 	return (0);

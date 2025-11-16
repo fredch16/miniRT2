@@ -122,6 +122,7 @@ typedef struct	s_camera
 	int		vsize;
 	double	field_of_view;
 	t_mat	transform;
+	t_vec		forward;
 	double	pixel_size;
 	double	half_width;
 	double	half_height;
