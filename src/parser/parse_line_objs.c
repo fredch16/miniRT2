@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line_objs.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 18:29:46 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/14 17:41:09 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/17 14:43:30 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,9 @@ int	parse_plane(t_world *w, t_parse_node *n)
 	p = move_to_space(p);
 	p = skip_spaces(p);
 	normal = ato3dcrds(p);
+	normal = tuple_norm(normal);
 	if (verify_3dnorm(normal) < 0)
-		return (w->parser.error_flag++, printf("Plane orientation vector not normalised\n"), -1);
+		return (w->parser.error_flag++, printf("Cylinder orientation vector not normalised\n"), -1);
 	t_vec	up_default = {0, 1, 0, 0};
 
 	// in the case of the input vector being equal to default
@@ -140,8 +141,9 @@ int	parse_cylinder(t_world *w, t_parse_node *n)
 	p = move_to_space(p);
 	p = skip_spaces(p);
 	normal = ato3dcrds(p);
+	normal = tuple_norm(normal);
 	if (verify_3dnorm(normal) < 0)
-		return (w->parser.error_flag++, printf("Plane orientation vector not normalised\n"), -1);
+		return (w->parser.error_flag++, printf("Cylinder orientation vector not normalised\n"), -1);
 	t_vec	up_default = {0, 1, 0, 0};
 	p = move_to_space(p);
 	p = skip_spaces(p);

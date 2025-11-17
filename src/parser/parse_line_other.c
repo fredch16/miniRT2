@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line_other.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 17:22:59 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/11 18:10:24 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/11/17 14:39:32 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	parse_camera(t_world *w, t_parse_node *n)
 {
 	printf("Parsing camera\n");
 	char		*p;
-	t_vec		pos;
+	t_vec		pos; 
 	t_vec		to;
 	t_camera	cam;
 	double		FOV;
@@ -84,6 +84,7 @@ int	parse_camera(t_world *w, t_parse_node *n)
 	p = move_to_space(p);
 	p = skip_spaces(p);
 	to = ato3dcrds(p);
+	to = tuple_norm(to);
 	if (verify_3dnorm(to) < 0)
 		return (w->parser.error_flag++, printf("Camera vector not normalised\n"), -1);
 	to = tuple_add(pos, to);
