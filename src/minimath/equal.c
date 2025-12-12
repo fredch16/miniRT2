@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   equal.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 13:52:10 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/22 16:01:52 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/12 15:09:01 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ inline bool	equal_matrix(const t_mat a, const t_mat b)
 	int	i;
 
 	i = 0;
-	while (i < 3)
+	while (i < 4)
 	{
 		if (!(equal_tuple(a.c[i], b.c[i])))
 			return (false);
