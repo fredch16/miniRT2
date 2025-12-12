@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 21:47:29 by swied             #+#    #+#             */
-/*   Updated: 2025/11/10 00:20:11 by swied            ###   ########.fr       */
+/*   Updated: 2025/12/12 15:19:42 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,19 +73,12 @@ t_colour	lighting(t_material material, t_world *w, t_comps c, bool in_shade)
 	t_vec		lightv;
 	double		light_dot_normal;
 
-	// printf("1\n");
-	// print_colour(material.colour);
-	// print_colour(w->ambient);
 	ambient = colour_mul(material.colour, w->ambient);
-	// printf("2\n");
-	ambient = colour_scm(material.ambient, ambient);
-	// print_colour(ambient);
 	
 	if (in_shade)
 		return (ambient);
 	effective_color = colour_mul(material.colour, w->light.colour);
-	effective_color = colour_scm(w->light.intensity, effective_color);
-	lightv = tuple_norm(tuple_sub(w->light.position, c.over_point));
+	lightv = tuple_norm(tuple_sub(w->light.position, c.point));
 	light_dot_normal = tuple_dot(lightv, c.normalv);
 	if (light_dot_normal < 0)
 	{
@@ -94,7 +87,7 @@ t_colour	lighting(t_material material, t_world *w, t_comps c, bool in_shade)
 	}
 	else
 	{
-		diffuse = colour_scm(material.diffuse * light_dot_normal,
+		diffuse = colour_scm(material.diffuse * light_dot_normal * w->light.intensity,
 				effective_color);
 		specular = calc_specular(material, w->light, lightv, c);
 	}
