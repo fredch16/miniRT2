@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:17:45 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/14 15:57:49 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/13 22:19:46 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	construct_world(t_world *w, t_parse_node *n)
 		return (parse_plane(w, n));
 	else if (ft_strncmp(n->content, "cy ", 3) == 0)
 		return (parse_cylinder(w, n));
+	else if (ft_strncmp(n->content, "# ", 2) == 0)
+		return (0);
 	printf("2\n");
 	return (-1); // unknown ID
 }
