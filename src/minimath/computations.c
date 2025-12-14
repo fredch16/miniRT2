@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 16:36:47 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/10 00:20:56 by swied            ###   ########.fr       */
+/*   Updated: 2025/12/14 17:14:21 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,14 @@ t_colour	colour_at(t_world *w, t_ray r)
 	xs = NULL;
 	hit = NULL;
 	xs = intersect_world(w, r);
-	// print_xs(xs);
 	if (!xs)
 		return ((t_colour){0, 0, 0});
-	// printf("\n\nLOOKING FOR HIT\n\n");
 	hit = x_hit(xs);
-	// print_xs(hit);
 	if (!hit)
 		return ((t_colour){0, 0, 0});
 	t_comps comps;
 	comps = prep_comps(hit, r);
-	// print_comps(comps);
 	in_shade = is_shadowed(w, comps.over_point);
-	t_colour col = lighting(xs->xs_obj->material, w, comps, in_shade);
+	t_colour col = lighting(hit->xs_obj->material, w, comps, in_shade);
 	return (col);
 }

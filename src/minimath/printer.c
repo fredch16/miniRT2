@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printer.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:38:35 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/02 18:43:20 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/14 15:44:32 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,6 @@ void	print_comps(t_comps comps)
 		printf("obj ptr = %p | type = ", (void *)comps.obj);
 		if (comps.obj->type == OT_SPHERE)
 			printf("SPHERE\n");
-		else if (comps.obj->type == OT_PLANE)
-			printf("PLANE\n");
-		else if (comps.obj->type == OT_CYLINDER)
-			printf("CYLINDER\n");
 		else
 			printf("UNKNOWN(%d)\n", comps.obj->type);
 	}

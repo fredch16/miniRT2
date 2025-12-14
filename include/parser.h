@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 12:35:08 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/14 15:58:25 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/14 15:45:22 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ int				parse_camera(t_world *w, t_parse_node *n);
 // parse_line_objs.c
 
 int				parse_sphere(t_world *w, t_parse_node *n);
-int				parse_plane(t_world *w, t_parse_node *n);
-int				parse_cylinder(t_world *w, t_parse_node *n);
 
 // verify_utils.c
 

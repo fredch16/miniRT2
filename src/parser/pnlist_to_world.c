@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pnlist_to_world.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:17:45 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/14 15:57:49 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/14 15:44:33 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,6 @@ int	construct_world(t_world *w, t_parse_node *n)
 		return (parse_light(w, n));
 	else if (ft_strncmp(n->content, "sp ", 3) == 0)
 		return (parse_sphere(w, n));
-	else if (ft_strncmp(n->content, "pl ", 3) == 0)
-		return (parse_plane(w, n));
-	else if (ft_strncmp(n->content, "cy ", 3) == 0)
-		return (parse_cylinder(w, n));
 	printf("2\n");
 	return (-1); // unknown ID
 }

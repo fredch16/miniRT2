@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 17:39:14 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/07 17:57:48 by swied            ###   ########.fr       */
+/*   Updated: 2025/12/14 17:02:55 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,15 @@ t_vec	normal_at_sp(t_obj *o, t_vec world_point)
 
 t_vec	normal_at_pl(t_obj *o, t_vec world_point)
 {
+	t_mat	inverse;
 	t_mat	transpose_inverse;
 	t_vec	object_normal;
 	t_vec	world_normal;
 
 	(void)world_point;
+	inverse = mat_inverse(o->transform);
 	object_normal = vector(0, 1, 0);
-	transpose_inverse = mat_transpose(mat_inverse(o->transform));
+	transpose_inverse = mat_transpose(inverse);
 	world_normal = mat_mul_vec(transpose_inverse, object_normal);
 	world_normal.w = 0;
 	return (tuple_norm(world_normal));
@@ -65,9 +67,9 @@ t_vec	normal_at_cy(t_obj *o, t_vec world_point)
 	inverse = mat_inverse(o->transform);
 	object_point = mat_mul_vec(inverse, world_point);
 	dist = object_point.x * object_point.x + object_point.z * object_point.z;
-	if (dist < 1.0 && fabs(object_point.y - o->max_y) < EPSILON)
+	if (dist < 1 && object_point.y >= o->max_y - EPSILON)
 		object_normal = vector(0, 1, 0);
-	else if (dist < 1.0 && fabs(object_point.y - o->min_y) < EPSILON)
+	else if (dist < 1 && object_point.y <= o->min_y + EPSILON)
 		object_normal = vector(0, -1, 0);
 	else
 		object_normal = vector(object_point.x, 0, object_point.z);

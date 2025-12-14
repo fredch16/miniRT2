@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:09:38 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/09 23:36:31 by swied            ###   ########.fr       */
+/*   Updated: 2025/12/14 17:02:54 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,8 @@ t_mat	shearing(double xy, double xz, double yx, double yz, double zx, double zy)
 // normals.c
 
 t_vec	normal_at_sp(t_obj *o, t_vec p);
-t_vec	normal_at_pl(t_obj *o, t_vec world_point);
-t_vec	normal_at_cy(t_obj *o, t_vec world_point);
+t_vec	normal_at_pl(t_obj *o, t_vec p);
+t_vec	normal_at_cy(t_obj *o, t_vec p);
 t_vec	reflect(t_vec in, t_vec normal);
 
 // lighting.c
