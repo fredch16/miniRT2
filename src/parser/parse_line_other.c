@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 17:22:59 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/17 14:39:32 by swied            ###   ########.fr       */
+/*   Updated: 2025/12/15 18:45:22 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	parse_light(t_world *w, t_parse_node *n)
 		return (-1);
 	p = n->content + 1;
 	w->light.position = ato3dcrds(p);
+	w->light.position.w = 1;
 	p = skip_spaces(p);
 	p = move_to_space(p);
 	p = skip_spaces(p);
@@ -81,6 +82,7 @@ int	parse_camera(t_world *w, t_parse_node *n)
 	p = n->content + 1;
 	p = skip_spaces(p);
 	pos = ato3dcrds(p);
+	pos.w = 1;
 	p = move_to_space(p);
 	p = skip_spaces(p);
 	to = ato3dcrds(p);
@@ -88,6 +90,7 @@ int	parse_camera(t_world *w, t_parse_node *n)
 	if (verify_3dnorm(to) < 0)
 		return (w->parser.error_flag++, printf("Camera vector not normalised\n"), -1);
 	to = tuple_add(pos, to);
+	to.w = 1;
 	p = move_to_space(p);
 	p = skip_spaces(p);
 	FOV = ft_atod(p);
