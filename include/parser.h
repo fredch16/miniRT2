@@ -5,63 +5,41 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 12:35:08 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/14 15:45:22 by swied            ###   ########.fr       */
+/*   Created: 2025/12/15 15:30:00 by swied            #+#    #+#             */
+/*   Updated: 2025/12/15 15:30:00 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#ifndef PARSER_H
+# define PARSER_H
 
-t_parse_node	*pn_new(char *content);
-void			pn_add_back(t_parse_node **pnlist, t_parse_node *n);
+# include "miniRT.h"
+# include "types.h"
+# include <fcntl.h>
+# include <stdio.h>
 
-/* Build a null-terminated linked list of parse nodes from a file */
-// parser.c
-t_parse_node	*pn_from_file(const char *filepath);
-void			pn_print(t_parse_node *head);
-int 			verify_pn_list(t_parse_node *pnlist);
+/* parse_scene.c */
+int			parse_scene(const char *filename, t_world *world);
+void		free_world(t_world *world);
 
-// verify_line_objs.c
+/* parse_utils.c */
+int			parse_vector(char *str, t_vec *vec);
+int			parse_colour(char *str, t_colour *colour);
+int			parse_double(char *str, double *value);
+int			skip_whitespace(char **str);
+char		**ft_split_whitespace(char *str);
 
-int				verify_plane(t_parse_node *n);
-int				verify_cylinder(t_parse_node *n);
-int				verify_sphere(t_parse_node *n);
+/* parse_elements.c */
+int			parse_ambient(char *line, t_world *world);
+int			parse_light(char *line, t_world *world);
+int			parse_camera(char *line, t_world *world);
 
-// verify_line_other.c
+/* parse_objects.c */
+int			parse_sphere(char *line, t_world *world);
+int			parse_plane(char *line, t_world *world);
+int			parse_cylinder(char *line, t_world *world);
 
-int				verify_camera(t_parse_node *n);
-int				verify_light(t_parse_node *n);
-int				verify_ambient(t_parse_node *n);
-int 			full_empty(char *content);
+/* Error handling */
+void		parser_error(const char *msg);
 
-/* parser helper utilities */
-char			*skip_spaces(char *p);
-char			*move_to_space(char *str);
-int				parse_double_range(char **src, double min, double max, double *out);
-int				parse_rgb_triplet(char **src, t_colour *out);
-
-// pnlist_to_world.c
-
-int				construct_world(t_world *w, t_parse_node *n);
-
-// parse_utils.c
-
-t_colour 		atocol(char *str);
-t_vec			ato3dcrds(char *str);
-int				allowed_chars(char *str);
-
-// parse_line_other.c
-
-t_colour		default_light();
-int				parse_ambient(t_world *w, t_parse_node *n);
-int				parse_light(t_world *w, t_parse_node *n);
-int				parse_camera(t_world *w, t_parse_node *n);
-
-// parse_line_objs.c
-
-int				parse_sphere(t_world *w, t_parse_node *n);
-
-// verify_utils.c
-
-int				verify_colours(t_colour col);
-int				verify_3dnorm(t_vec	vec);
+#endif

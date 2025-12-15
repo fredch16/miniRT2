@@ -3,70 +3,148 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/07 14:42:13 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/11 18:10:48 by fredchar         ###   ########.fr       */
+/*   Created: 2025/12/15 15:30:00 by swied            #+#    #+#             */
+/*   Updated: 2025/12/15 15:30:00 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minimath.h"
+#include "../include/parser.h"
+#include "../include/libft/libft.h"
+#include <stdlib.h>
 
-t_colour atocol(char *str)
+void	parser_error(const char *msg)
 {
-	t_colour	col;
-	double		mul;
-
-	str = skip_spaces(str);
-	if (!(*str))
-		return (default_light());
-	mul = 0.00392156863;
-	col.red = mul * ft_atoi(str);
-	while (*str != ',')
-		str++;
-	col.green = mul * ft_atoi(++str);
-	while (*str != ',')
-		str++;
-	col.blue = mul * ft_atoi(++str);
-	return (col);
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd((char *)msg, 2);
+	ft_putstr_fd("\n", 2);
 }
 
-t_vec	ato3dcrds(char *str)
+int	skip_whitespace(char **str)
 {
-	t_vec	res;
-
-	res.x = ft_atod(str);
-	while (*str != ',')
-		str++;
-	res.y = ft_atod(++str);
-	while (*str != ',')
-		str++;
-	res.z = ft_atod(++str);
-	res.w = 0;
-	return (res);
+	while (**str && ft_isspace(**str))
+		(*str)++;
+	return (0);
 }
 
-char	*skip_spaces(char *str)
+/* Parse a vector in format "x,y,z" */
+int	parse_vector(char *str, t_vec *vec)
 {
-	while (*str && *str == ' ')
-		str++;
-	return (str);
-}
+	char	**parts;
+	int		count;
 
-char	*move_to_space(char *str)
-{
-	while (*str && *str != ' ')
-		str++;
-	return (str);
-}
-
-int	allowed_chars(char *str)
-{
-	while (*str)
+	parts = ft_split(str, ',');
+	if (!parts)
+		return (-1);
+	count = 0;
+	while (parts[count])
+		count++;
+	if (count != 3)
 	{
-		if (!(ft_isdigit(*str) || *str == '.' || *str == ',' || *str == '-' || ft_isspace(*str)))
-			return (0);
-		str++;
+		ft_free_array(parts);
+		return (-1);
 	}
-	return (1);
+	vec->x = ft_atod(parts[0]);
+	vec->y = ft_atod(parts[1]);
+	vec->z = ft_atod(parts[2]);
+	vec->w = 0.0;
+	ft_free_array(parts);
+	return (0);
+}
+
+/* Parse RGB colour in format "R,G,B" where each is 0-255 */
+int	parse_colour(char *str, t_colour *colour)
+{
+	char	**parts;
+	int		count;
+	int		r;
+	int		g;
+	int		b;
+
+	parts = ft_split(str, ',');
+	if (!parts)
+		return (-1);
+	count = 0;
+	while (parts[count])
+		count++;
+	if (count != 3)
+	{
+		ft_free_array(parts);
+		return (-1);
+	}
+	r = ft_atoi(parts[0]);
+	g = ft_atoi(parts[1]);
+	b = ft_atoi(parts[2]);
+	ft_free_array(parts);
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+		return (-1);
+	colour->red = r / 255.0;
+	colour->green = g / 255.0;
+	colour->blue = b / 255.0;
+	return (0);
+}
+
+/* Parse a double value from string */
+int	parse_double(char *str, double *value)
+{
+	if (!str || !*str)
+		return (-1);
+	*value = ft_atod(str);
+	return (0);
+}
+
+/* Split string by whitespace and commas for easier parsing */
+char	**ft_split_whitespace(char *str)
+{
+	int		i;
+	int		count;
+	char	**result;
+	char	*start;
+	int		len;
+
+	if (!str)
+		return (NULL);
+	count = 0;
+	i = 0;
+	while (str[i])
+	{
+		while (str[i] && ft_isspace(str[i]))
+			i++;
+		if (str[i] && !ft_isspace(str[i]))
+		{
+			count++;
+			while (str[i] && !ft_isspace(str[i]))
+				i++;
+		}
+	}
+	result = malloc(sizeof(char *) * (count + 1));
+	if (!result)
+		return (NULL);
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		while (str[i] && ft_isspace(str[i]))
+			i++;
+		if (str[i] && !ft_isspace(str[i]))
+		{
+			start = &str[i];
+			len = 0;
+			while (str[i] && !ft_isspace(str[i]))
+			{
+				len++;
+				i++;
+			}
+			result[count] = ft_substr(start, 0, len);
+			if (!result[count])
+			{
+				ft_free_array(result);
+				return (NULL);
+			}
+			count++;
+		}
+	}
+	result[count] = NULL;
+	return (result);
 }

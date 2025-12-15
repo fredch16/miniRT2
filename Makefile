@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/28 16:10:43 by swied             #+#    #+#              #
-#    Updated: 2025/11/07 19:14:51 by fredchar         ###   ########.fr        #
+#    Updated: 2025/12/15 15:18:31 by swied            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,15 +42,10 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/minimath/list_intersect.c \
 			$(SRCD)/minimath/camera.c \
 			$(SRCD)/minimath/colour.c \
-			$(SRCD)/parser/parser.c \
+			$(SRCD)/parser/parse_scene.c \
 			$(SRCD)/parser/parse_utils.c \
-			$(SRCD)/parser/parse_line_other.c \
-			$(SRCD)/parser/parse_line_objs.c \
-			$(SRCD)/parser/validate.c \
-			$(SRCD)/parser/verify_line_objs.c \
-			$(SRCD)/parser/verify_line_other.c \
-			$(SRCD)/parser/verify_utils.c \
-			$(SRCD)/parser/pnlist_to_world.c \
+			$(SRCD)/parser/parse_elements.c \
+			$(SRCD)/parser/parse_objects.c \
 
 
 OBJS :=		$(SRCS:$(SRCD)/%.c=$(OBJD)/%.o)

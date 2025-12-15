@@ -6,7 +6,7 @@
 /*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/14 17:14:20 by swied            ###   ########.fr       */
+/*   Updated: 2025/12/15 15:26:55 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,7 @@ void	mlx_hook(mlx_key_data_t mlx_key_data, void *param)
 	mlx_t *mlx = param;
 
 	if (mlx_key_data.key == MLX_KEY_ESCAPE)
-	{
-		//free
-		printf("WINDOW IS BEING CLOSED DUE TO ESCAPE KEY\n");
 		mlx_close_window(mlx);
-	}
 }
 
 t_obj *create_sphere(double x, double y, double z, double radius, int r, int g, int b)
@@ -159,156 +155,56 @@ void add_sphere(t_world *world, t_obj *sphere)
 
 int	main(int ac, char **av)
 {
-	(void)ac;
-	(void)av;
+	t_world	world;
 	
-	// Hardcoded scene setup
-	t_world	world = {0};
-	
-	// Ambient light: 0.2 intensity, white
-	world.ambient = (t_colour){0.2, 0.2, 0.2};
-	
-	// Camera: pos(0,0,-50), looking at (0,0,1), FOV 70
-	world.camera.hsize = WIDTH;
-	world.camera.vsize = HEIGHT;
-	world.camera.field_of_view = 70.0 * M_PI / 180.0;
-	world.camera.transform = view_transform(
-		point(0, 0, -50),
-		point(0, 0, 0),
-		vector(0, 1, 0)
-	);
-	double half_view = tan(world.camera.field_of_view / 2.0);
-	double aspect = (double)WIDTH / (double)HEIGHT;
-	if (aspect >= 1) {
-		world.camera.half_width = half_view;
-		world.camera.half_height = half_view / aspect;
-	} else {
-		world.camera.half_width = half_view * aspect;
-		world.camera.half_height = half_view;
+	// Check for correct usage
+	if (ac != 2)
+	{
+		ft_putstr_fd("Error\nUsage: ./miniRT <scene_file.rt>\n", 2);
+		return (EXIT_FAILURE);
 	}
-	world.camera.pixel_size = (world.camera.half_width * 2) / WIDTH;
 	
-	// Point light: pos(0,100,-80), intensity 0.8, white
-	world.light.position = point(0, 100, -80);
-	world.light.colour = (t_colour){0.8, 0.8, 0.8};
-	world.light.intensity = 0.8;
+	// Parse the scene file
+	printf("Parsing scene file: %s\n", av[1]);
+	if (parse_scene(av[1], &world) < 0)
+	{
+		ft_putstr_fd("Error\nFailed to parse scene file\n", 2);
+		return (EXIT_FAILURE);
+	}
 	
-	// Create all spheres from many_spheres.rt
-	add_sphere(&world, create_sphere(0, 0, 0, 8, 255, 0, 0));
-	add_sphere(&world, create_sphere(-15, 0, 0, 6, 0, 255, 0));
-	add_sphere(&world, create_sphere(15, 0, 0, 6, 0, 0, 255));
-	add_sphere(&world, create_sphere(0, -15, 0, 6, 255, 255, 0));
-	add_sphere(&world, create_sphere(0, 15, 0, 6, 255, 0, 255));
-	add_sphere(&world, create_sphere(0, 0, 15, 6, 0, 255, 255));
+	printf("Scene loaded successfully!\n");
+	printf("Ambient: R=%.2f G=%.2f B=%.2f\n", 
+		world.ambient.red, world.ambient.green, world.ambient.blue);
+	printf("Light position: (%.2f, %.2f, %.2f) intensity: %.2f\n",
+		world.light.position.x, world.light.position.y, world.light.position.z,
+		world.light.intensity);
 	
-	add_sphere(&world, create_sphere(-10, -10, 10, 4, 200, 100, 50));
-	add_sphere(&world, create_sphere(10, -10, 10, 4, 100, 200, 50));
-	add_sphere(&world, create_sphere(-10, 10, 10, 4, 50, 200, 100));
-	add_sphere(&world, create_sphere(10, 10, 10, 4, 200, 50, 100));
-	
-	add_sphere(&world, create_sphere(-20, 0, 10, 5, 150, 150, 150));
-	add_sphere(&world, create_sphere(20, 0, 10, 5, 100, 100, 100));
-	add_sphere(&world, create_sphere(0, -20, 10, 5, 200, 200, 0));
-	add_sphere(&world, create_sphere(0, 20, 10, 5, 0, 200, 200));
-	
-	add_sphere(&world, create_sphere(-7, -7, 5, 3, 255, 128, 0));
-	add_sphere(&world, create_sphere(7, -7, 5, 3, 128, 255, 0));
-	add_sphere(&world, create_sphere(-7, 7, 5, 3, 0, 255, 128));
-	add_sphere(&world, create_sphere(7, 7, 5, 3, 128, 0, 255));
-	
-	add_sphere(&world, create_sphere(-12, 0, 20, 4, 255, 100, 100));
-	add_sphere(&world, create_sphere(12, 0, 20, 4, 100, 255, 100));
-	add_sphere(&world, create_sphere(0, -12, 20, 4, 100, 100, 255));
-	add_sphere(&world, create_sphere(0, 12, 20, 4, 255, 255, 100));
-	
-	add_sphere(&world, create_sphere(-5, -5, -5, 2, 180, 90, 0));
-	add_sphere(&world, create_sphere(5, -5, -5, 2, 90, 180, 0));
-	add_sphere(&world, create_sphere(-5, 5, -5, 2, 0, 180, 90));
-	add_sphere(&world, create_sphere(5, 5, -5, 2, 180, 0, 90));
-	
-	add_sphere(&world, create_sphere(-18, -8, 15, 3, 200, 50, 200));
-	add_sphere(&world, create_sphere(18, -8, 15, 3, 50, 200, 200));
-	add_sphere(&world, create_sphere(-18, 8, 15, 3, 200, 200, 50));
-	add_sphere(&world, create_sphere(18, 8, 15, 3, 100, 150, 200));
-	
-	add_sphere(&world, create_sphere(-3, -3, 8, 2.5, 255, 200, 150));
-	add_sphere(&world, create_sphere(3, -3, 8, 2.5, 150, 255, 200));
-	add_sphere(&world, create_sphere(-3, 3, 8, 2.5, 200, 150, 255));
-	add_sphere(&world, create_sphere(3, 3, 8, 2.5, 220, 220, 100));
-	
-	add_sphere(&world, create_sphere(-25, 0, 5, 4, 255, 50, 50));
-	add_sphere(&world, create_sphere(25, 0, 5, 4, 50, 255, 50));
-	add_sphere(&world, create_sphere(0, -25, 5, 4, 50, 50, 255));
-	add_sphere(&world, create_sphere(0, 25, 5, 4, 255, 255, 50));
-	
-	add_sphere(&world, create_sphere(-8, -15, 12, 3, 170, 85, 170));
-	add_sphere(&world, create_sphere(8, -15, 12, 3, 85, 170, 170));
-	add_sphere(&world, create_sphere(-8, 15, 12, 3, 170, 170, 85));
-	add_sphere(&world, create_sphere(8, 15, 12, 3, 120, 120, 200));
-	
-	// Additional larger spheres for stress test
-	add_sphere(&world, create_sphere(-30, -30, 25, 10, 255, 100, 100));
-	add_sphere(&world, create_sphere(30, -30, 25, 10, 100, 255, 100));
-	add_sphere(&world, create_sphere(-30, 30, 25, 10, 100, 100, 255));
-	add_sphere(&world, create_sphere(30, 30, 25, 10, 255, 255, 100));
-	
-	add_sphere(&world, create_sphere(-22, -22, 35, 8, 200, 150, 100));
-	add_sphere(&world, create_sphere(22, -22, 35, 8, 150, 200, 100));
-	add_sphere(&world, create_sphere(-22, 22, 35, 8, 100, 200, 150));
-	add_sphere(&world, create_sphere(22, 22, 35, 8, 200, 100, 150));
-	
-	add_sphere(&world, create_sphere(0, 0, 40, 12, 180, 180, 255));
-	add_sphere(&world, create_sphere(-15, 0, 30, 7, 255, 180, 180));
-	add_sphere(&world, create_sphere(15, 0, 30, 7, 180, 255, 180));
-	
-	add_sphere(&world, create_sphere(0, -35, 20, 9, 200, 200, 100));
-	add_sphere(&world, create_sphere(0, 35, 20, 9, 100, 200, 200));
-	
-	add_sphere(&world, create_sphere(-28, 0, 15, 6, 150, 100, 200));
-	add_sphere(&world, create_sphere(28, 0, 15, 6, 100, 150, 200));
-	
-	// Wall spheres
-	add_sphere(&world, create_sphere(0, -250, 0, 200, 180, 180, 180));
-	add_sphere(&world, create_sphere(0, 0, 250, 200, 150, 150, 200));
-	add_sphere(&world, create_sphere(-250, 0, 0, 200, 200, 150, 150));
-	add_sphere(&world, create_sphere(250, 0, 0, 200, 150, 200, 150));
-	add_sphere(&world, create_sphere(0, 600, 0, 200, 200, 200, 180));
-	
-	// Add a floor plane
-	add_sphere(&world, (t_obj*)create_plane(0, -50, 0, 0, 1, 0, 100, 100, 100));
-	
-	// Add back wall plane
-	add_sphere(&world, (t_obj*)create_plane(0, 0, 80, 0, 0, -1, 120, 120, 150));
-	
-	// Add left wall plane
-	add_sphere(&world, (t_obj*)create_plane(-60, 0, 0, 1, 0, 0, 150, 120, 120));
-	
-	// Add right wall plane
-	add_sphere(&world, (t_obj*)create_plane(60, 0, 0, -1, 0, 0, 120, 150, 120));
-	
-	// Add ceiling plane
-	add_sphere(&world, (t_obj*)create_plane(0, 120, 0, 0, -1, 0, 130, 130, 130));
-	
-	// Add angled planes for interest
-	add_sphere(&world, (t_obj*)create_plane(-45, 0, 40, 0.707, 0, -0.707, 200, 180, 100));
-	add_sphere(&world, (t_obj*)create_plane(45, 0, 40, -0.707, 0, -0.707, 100, 180, 200));
-	
-	// Add some cylinders
-	add_sphere(&world, (t_obj*)create_cylinder(-40, -50, 10, 3, 30, 0, 1, 0, true, 200, 100, 50));
-	add_sphere(&world, (t_obj*)create_cylinder(40, -50, 10, 3, 30, 0, 1, 0, true, 50, 200, 100));
-	add_sphere(&world, (t_obj*)create_cylinder(0, -50, -10, 4, 40, 0, 1, 0, true, 100, 100, 200));
-	
-	printf("OKAYYYY LETS GO - Hardcoded scene loaded\n");
-	print_colour(world.ambient);
+	// Count objects
+	int obj_count = 0;
+	t_obj *curr = world.obj_list;
+	while (curr)
+	{
+		obj_count++;
+		curr = curr->next;
+	}
+	printf("Number of objects: %d\n", obj_count);
 
-	// return (0);
+	printf("Number of objects: %d\n", obj_count);
+
+	// Initialize MLX
 	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "miniRT - Ray Tracer", true);
 	if (!mlx)
+	{
+		free_world(&world);
 		ft_error();
+	}
 
 	mlx_image_t* img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
+	{
+		free_world(&world);
 		ft_error();
+	}
 
 	// Render scene
 	printf("Starting render: %dx%d pixels...\n", WIDTH, HEIGHT);
@@ -327,17 +223,14 @@ int	main(int ac, char **av)
 	}
 	printf("Render complete!\n");
 
-	printf("\n\n\n\nDEBUGGING ZONE:\n");
-	printf("Ambient\n");
-	print_colour(world.ambient);
-	printf("World Light\n");
-	print_colour(world.light.colour);
-	print_colour(colour_at(&world, ray_for_pixel(world.camera, 0, 0)));
-
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
 	mlx_key_hook(mlx, mlx_hook, mlx);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
+	
+	// Clean up
+	free_world(&world);
+	
 	return (EXIT_SUCCESS);
 }
