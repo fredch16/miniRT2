@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line_objs.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 18:29:46 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/17 14:43:30 by swied            ###   ########.fr       */
+/*   Updated: 2025/12/16 16:07:51 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,8 +181,8 @@ int	parse_cylinder(t_world *w, t_parse_node *n)
 	cy->transform = mat_mul_mat(cy->transform, scaling(radius, radius, radius));
 
 	/* set cylinder y-bounds in object space (half-height centered at origin) */
-	cy->min_y = 0;
-	cy->max_y = height;
+	cy->min_y = 0.000001;
+	cy->max_y = height - 0.000001;
 
 	/* parse caps token if present (after the colour token) */
 	p = move_to_space(p);
