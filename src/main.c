@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/11 18:12:31 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/16 18:01:19 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,19 @@ static void ft_error(void)
 	exit(EXIT_FAILURE);
 }
 
-void	mlx_hook(mlx_key_data_t mlx_key_data, void *param)
+void mlx_hook(mlx_key_data_t mlx_key_data, void *param)
 {
 	mlx_t *mlx = param;
 
 	if (mlx_key_data.key == MLX_KEY_ESCAPE)
 	{
-		//free
+		// free
 		printf("WINDOW IS BEING CLOSED DUE TO ESCAPE KEY\n");
 		mlx_close_window(mlx);
 	}
 }
 
-int	main(int ac, char **av)
+int main(int ac, char **av)
 {
 
 	(void)ac;
@@ -46,12 +46,14 @@ int	main(int ac, char **av)
 		printf("USAGE: ./miniRT <scene.rt>\n");
 		return (-1);
 	}
-	t_parse_node	*pn;
+	t_parse_node *pn;
+	t_parse_node *head;
 	pn = pn_from_file(av[1]);
+	head = pn;
 	pn_print(pn);
 	// if (verify_pn_list(pn) < 0)
 	// 	return (printf("Incorrect object entered!\n"), -1);
-	t_world	world = {0}; 
+	t_world world = {0};
 	world.parser.error_flag = 0;
 	while (pn && world.parser.error_flag == 0)
 	{
@@ -61,14 +63,14 @@ int	main(int ac, char **av)
 		pn = pn->next;
 	}
 	printf("OKAYYYY LETS GO\n");
-	print_colour(world.ambient);
+	pn_clear(&head);
 
 	// return (0);
-	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "miniRT - Ray Tracer", true);
+	mlx_t *mlx = mlx_init(WIDTH, HEIGHT, "miniRT - Ray Tracer", true);
 	if (!mlx)
 		ft_error();
 
-	mlx_image_t* img = mlx_new_image(mlx, WIDTH, HEIGHT);
+	mlx_image_t *img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
 
@@ -79,7 +81,7 @@ int	main(int ac, char **av)
 		// Progress indicator every 10%
 		if (y % (HEIGHT / 10) == 0)
 			printf("Rendering progress: %.1f%%\n", (float)y / HEIGHT * 100);
-			
+
 		for (int x = 0; x < WIDTH; x++)
 		{
 			t_ray r = ray_for_pixel(world.camera, x, y);
@@ -87,6 +89,7 @@ int	main(int ac, char **av)
 			mlx_put_pixel(img, x, y, colour_to_rgba(color));
 		}
 	}
+	obj_clear(&(world.obj_list));
 	printf("Render complete!\n");
 
 	printf("\n\n\n\nDEBUGGING ZONE:\n");

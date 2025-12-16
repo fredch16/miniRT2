@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:28:44 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/09 15:48:20 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/16 17:24:59 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define MINIRT_H
 
 # define EPSILON 0.00001
-# define WIDTH 800
-# define HEIGHT 600 
+# define WIDTH 40
+# define HEIGHT 30 
 
 # include "libft/libft.h"
 // # include "MLX42/include/MLX42/MLX42.h"

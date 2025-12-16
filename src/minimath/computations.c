@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 16:36:47 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/16 16:34:38 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/16 17:46:01 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,24 @@ bool	is_shadowed(t_world *w, t_vec point)
 	double	distance;
 	t_ray	r;
 	t_xsn	*xs;
+	t_xsn	*hit;
 
 	poi_to_light = tuple_sub(w->light.position, point);
 	distance = tuple_mag(poi_to_light);
 	poi_to_light = tuple_norm(poi_to_light);
 	r = ray(point, poi_to_light);
 	xs = intersect_world(w, r);
-	xs = x_hit(xs);
-	if (xs && xs->t < (distance - EPSILON))
+	hit = x_hit(xs);
+	if (hit && hit->t < (distance - EPSILON))
+	{
+		x_clear(&xs);
 		return (true);
+	}
 	else
+	{
+		x_clear(&xs);
 		return (false);
+	}
 }
 
 t_colour	colour_at(t_world *w, t_ray r)
@@ -70,18 +77,15 @@ t_colour	colour_at(t_world *w, t_ray r)
 	xs = NULL;
 	hit = NULL;
 	xs = intersect_world(w, r);
-	// print_xs(xs);
 	if (!xs)
 		return ((t_colour){0, 0, 0});
-	// printf("\n\nLOOKING FOR HIT\n\n");
 	hit = x_hit(xs);
-	// print_xs(hit);
 	if (!hit)
 		return ((t_colour){0, 0, 0});
 	t_comps comps;
 	comps = prep_comps(hit, r);
-	// print_comps(comps);
 	in_shade = is_shadowed(w, comps.over_point);
 	t_colour col = lighting(hit->xs_obj->material, w, comps, in_shade);
+	x_clear(&xs);
 	return (col);
 }

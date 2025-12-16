@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimath.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:09:38 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/09 23:36:31 by swied            ###   ########.fr       */
+/*   Updated: 2025/12/16 17:31:36 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ t_xsn	*x_new(t_obj *o, double t);
 void	x_add_back(t_xsn **xlist, t_xsn *n);
 t_obj	*obj_create(enum e_obj_type ot);
 void	obj_add_back(t_obj **objlist, t_obj *n);
+void	obj_clear(t_obj **objlist);
+void	x_clear(t_xsn **xlist);
 
 // rays.c
 

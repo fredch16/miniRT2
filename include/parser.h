@@ -14,6 +14,7 @@
 
 t_parse_node	*pn_new(char *content);
 void			pn_add_back(t_parse_node **pnlist, t_parse_node *n);
+void			pn_clear(t_parse_node **pnlist);
 
 /* Build a null-terminated linked list of parse nodes from a file */
 // parser.c
