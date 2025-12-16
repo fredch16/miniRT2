@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 16:36:47 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/16 17:46:01 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/16 18:59:14 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,9 @@ t_comps	prep_comps(t_xsn *xs, t_ray r)
 	}
 	else
 		comps.inside = false;
-	comps.over_point = tuple_add(tuple_scm(EPSILON, comps.normalv), comps.point);
+	comps.over_p = tuple_add(tuple_scm(EPSILON, comps.normalv), comps.point);
 	return (comps);
 }
-
-// t_colour	shade_hit(t_world *w, t_comps c)
-// {
-// 	return (lighting(&(c.obj->material), w->light, c.point, c.eyev, c.normalv));
-// }
 
 bool	is_shadowed(t_world *w, t_vec point)
 {
@@ -70,9 +65,11 @@ bool	is_shadowed(t_world *w, t_vec point)
 
 t_colour	colour_at(t_world *w, t_ray r)
 {
-	t_xsn	*xs;
-	t_xsn	*hit;
-	bool	in_shade;
+	t_xsn		*xs;
+	t_xsn		*hit;
+	bool		in_shade;
+	t_comps		comps;
+	t_colour	col;
 
 	xs = NULL;
 	hit = NULL;
@@ -82,10 +79,9 @@ t_colour	colour_at(t_world *w, t_ray r)
 	hit = x_hit(xs);
 	if (!hit)
 		return ((t_colour){0, 0, 0});
-	t_comps comps;
 	comps = prep_comps(hit, r);
-	in_shade = is_shadowed(w, comps.over_point);
-	t_colour col = lighting(hit->xs_obj->material, w, comps, in_shade);
+	in_shade = is_shadowed(w, comps.over_p);
+	col = lighting(hit->xs_obj->material, w, comps, in_shade);
 	x_clear(&xs);
 	return (col);
 }
