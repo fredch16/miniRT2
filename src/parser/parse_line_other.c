@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line_other.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 17:22:59 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/15 18:45:22 by swied            ###   ########.fr       */
+/*   Updated: 2025/12/16 15:47:54 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minimath.h"
 
-t_colour	default_light()
+t_colour default_light()
 {
-	t_colour	col;
-	
+	t_colour col;
+
 	col.blue = 1;
 	col.red = 1;
 	col.green = 1;
 	return (col);
 }
 
-int	parse_ambient(t_world *w, t_parse_node *n)
+int parse_ambient(t_world *w, t_parse_node *n)
 {
 	printf("PARSING AMBIENT\n");
-	char		*p;
-	double		intensity;
+	char *p;
+	double intensity;
 
 	if (!w || !n || !n->content)
 		return (-1);
@@ -44,10 +44,10 @@ int	parse_ambient(t_world *w, t_parse_node *n)
 	return (0);
 }
 
-int	parse_light(t_world *w, t_parse_node *n)
+int parse_light(t_world *w, t_parse_node *n)
 {
 	printf("parsing light\n");
-	char		*p;
+	char *p;
 
 	if (!w || !n || !n->content)
 		return (-1);
@@ -69,14 +69,15 @@ int	parse_light(t_world *w, t_parse_node *n)
 	return (0);
 }
 
-int	parse_camera(t_world *w, t_parse_node *n)
+int parse_camera(t_world *w, t_parse_node *n)
 {
 	printf("Parsing camera\n");
-	char		*p;
-	t_vec		pos; 
-	t_vec		to;
-	t_camera	cam;
-	double		FOV;
+	char *p;
+	t_vec pos;
+	t_vec up;
+	t_vec to;
+	t_camera cam;
+	double FOV;
 	if (!w || !n || !n->content)
 		return (-1);
 	p = n->content + 1;
@@ -86,6 +87,13 @@ int	parse_camera(t_world *w, t_parse_node *n)
 	p = move_to_space(p);
 	p = skip_spaces(p);
 	to = ato3dcrds(p);
+	if (equal_tuple(to, vector(0, 1, 0)))
+		up = (vector(0, 0, -1));
+	else if (equal_tuple(to, vector(0, -1, 0)))
+		up = (vector(0, 0, 1));
+	else
+		up = (vector(0, 1, 0));
+	print_vec4(to);
 	to = tuple_norm(to);
 	if (verify_3dnorm(to) < 0)
 		return (w->parser.error_flag++, printf("Camera vector not normalised\n"), -1);
@@ -98,7 +106,11 @@ int	parse_camera(t_world *w, t_parse_node *n)
 	if (FOV < 0 || FOV > 180)
 		return (printf("FOV out of range |0-180|\n"), -1);
 	cam = camera(WIDTH, HEIGHT, (M_PI / 180.0) * FOV);
-	cam.transform = view_transform(pos, to, vector(0, 1, 0));
+	// if normal business
+	// cam.transform = view_transform(pos, to, vector(0, 1, 0));
+	// if camera is pointing down or up need new vector of
+	cam.transform = view_transform(pos, to, up);
+
 	w->camera = cam;
 	print_mat(w->camera.transform);
 	return (0);
