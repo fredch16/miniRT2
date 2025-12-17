@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atod.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 13:06:02 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/07 13:17:35 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/17 16:02:06 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
 static void	skip_ws_and_sign(char **s, double *sign)
 {
 	if (!s || !*s)
