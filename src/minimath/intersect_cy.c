@@ -6,21 +6,34 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 16:16:56 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/17 16:22:25 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/17 16:34:25 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniRT.h"
 
 /*
+Helper: Prüft ob ein Schnittpunkt innerhalb der Höhengrenzen liegt
+*/
+bool	check_cylinder_cap(t_ray ray, double t)
+{
+	double	x;
+	double	z;
+
+	x = ray.origin.x + t * ray.direction.x;
+	z = ray.origin.z + t * ray.direction.z;
+	return ((x * x + z * z) <= 1.0);
+}
+
+/*
 Helper: Berechnet Schnittpunkte mit den Zylinderdeckeln
 */
-static void intersect_caps(t_ray ray, t_obj *o, t_xsn **xs)
+static void	intersect_caps(t_ray ray, t_obj *o, t_xsn **xs)
 {
-	double t;
+	double	t;
 
 	if (!o->closed || fabs(ray.direction.y) < EPSILON)
-		return;
+		return ;
 	t = (o->min_y - ray.origin.y) / ray.direction.y;
 	if (t > EPSILON && check_cylinder_cap(ray, t))
 	{
@@ -39,10 +52,10 @@ static void intersect_caps(t_ray ray, t_obj *o, t_xsn **xs)
 	}
 }
 
-static void add_quadratic_hits(t_ray ray, t_obj *o, t_quadratic q, t_xsn **xs)
+static void	add_quadratic_hits(t_ray ray, t_obj *o, t_quadratic q, t_xsn **xs)
 {
-	double y1;
-	double y2;
+	double	y1;
+	double	y2;
 
 	q.t1 = (-q.b - sqrt(q.d)) / (2 * q.a);
 	q.t2 = (-q.b + sqrt(q.d)) / (2 * q.a);
@@ -71,10 +84,10 @@ a = dx² + dz² (Koeffizient von t²)
 b = 2(ox×dx + oz×dz) (Koeffizient von t)
 c = ox² + oz² - 1 (Konstanter Term)
 */
-t_xsn *intersect_cy(t_ray ray, t_obj *o)
+t_xsn	*intersect_cy(t_ray ray, t_obj *o)
 {
-	t_quadratic q;
-	t_xsn *xs;
+	t_quadratic	q;
+	t_xsn		*xs;
 
 	xs = NULL;
 	ray = ray_transform(ray, mat_inverse(o->transform));
@@ -89,7 +102,6 @@ t_xsn *intersect_cy(t_ray ray, t_obj *o)
 	q.d = (q.b * q.b) - (4 * q.a * q.c);
 	if (q.d < 0)
 		return (xs);
-	/* delegate root handling to helper to satisfy norminette */
 	add_quadratic_hits(ray, o, q, &xs);
 	intersect_caps(ray, o, &xs);
 	return (xs);

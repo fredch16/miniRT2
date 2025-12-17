@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 19:27:35 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/17 16:21:12 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/17 16:33:33 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,20 +62,6 @@ t_xsn	*intersect_pl(t_ray ray, t_obj *o)
 	return (NULL);
 }
 
-/*
-Helper: Prüft ob ein Schnittpunkt innerhalb der Höhengrenzen liegt
-*/
-bool	check_cylinder_cap(t_ray ray, double t)
-{
-	double	x;
-	double	z;
-
-	x = ray.origin.x + t * ray.direction.x;
-	z = ray.origin.z + t * ray.direction.z;
-	return ((x * x + z * z) <= 1.0);
-}
-
-
 t_xsn	*x_hit(t_xsn *xs)
 {
 	t_xsn	*tmp;
@@ -95,7 +81,6 @@ t_xsn	*x_hit(t_xsn *xs)
 		tmp = tmp->next;
 	}
 	return (hit);
-
 }
 
 t_xsn	*intersect_world(t_world *w, t_ray r)
