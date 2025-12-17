@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_intersect.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 16:37:56 by swied             #+#    #+#             */
-/*   Updated: 2025/11/02 16:40:57 by swied            ###   ########.fr       */
+/*   Updated: 2025/12/17 18:28:28 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ t_xsn	*x_sort(t_xsn *xs)
 	t_xsn	*current;
 	t_xsn	*next;
 
-    sorted = NULL;
-    current = xs;
+	sorted = NULL;
+	current = xs;
 	if (!xs || !xs->next)
 		return (xs);
 	while (current)
