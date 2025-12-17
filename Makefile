@@ -6,7 +6,7 @@
 #    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/28 16:10:43 by swied             #+#    #+#              #
-#    Updated: 2025/12/17 16:38:54 by fredchar         ###   ########.fr        #
+#    Updated: 2025/12/17 18:39:50 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/minimath/intersect.c \
 			$(SRCD)/minimath/intersect_cy.c \
 			$(SRCD)/minimath/lists.c \
+			$(SRCD)/minimath/lists2.c \
 			$(SRCD)/minimath/rays.c \
 			$(SRCD)/minimath/normals.c \
 			$(SRCD)/minimath/lighting.c \
