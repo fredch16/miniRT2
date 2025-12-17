@@ -3,13 +3,11 @@
 /*                                                        :::      ::::::::   */
 /*   minimath.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:09:38 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/16 17:31:36 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/17 16:34:08 by swied            ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
-
 /* ************************************************************************** */
 
 #ifndef MINIMATH_H
@@ -24,103 +22,103 @@
 
 // printer.c
 
-void	print_mat(t_mat mat);
-void	print_vec4(t_vec tup);
-void	print_xs(t_xsn *xs);
-void	print_comps(t_comps comps);
-void	print_colour(t_colour col);
+void		print_mat(t_mat mat);
+void		print_vec4(t_vec tup);
+void		print_xs(t_xsn *xs);
+void		print_comps(t_comps comps);
+void		print_colour(t_colour col);
 
 // equal.c
 
-bool	equal(double a, double b);
-bool	equal_tuple(t_vec a, t_vec b);
-bool	equal_matrix(t_mat a, t_mat b);
+bool		equal(double a, double b);
+bool		equal_tuple(t_vec a, t_vec b);
+bool		equal_matrix(t_mat a, t_mat b);
 
 // tuple_ops1.c
 
-t_vec	tuple_sub(const t_vec a, const t_vec b);
-t_vec	tuple_add(const t_vec a, const t_vec b);
-t_vec	tuple_neg(const t_vec a);
-t_vec	tuple_scm(const double k, const t_vec a);
-t_vec	tuple_scd(const t_vec a, const double k);
+t_vec		tuple_sub(const t_vec a, const t_vec b);
+t_vec		tuple_add(const t_vec a, const t_vec b);
+t_vec		tuple_neg(const t_vec a);
+t_vec		tuple_scm(const double k, const t_vec a);
+t_vec		tuple_scd(const t_vec a, const double k);
 
 // tuple_ops2.c
 
-double	tuple_mag(const t_vec a);
-t_vec	tuple_norm(const t_vec a);
-double	tuple_dot(const t_vec a, const t_vec b);
-t_vec	tuple_cro(const t_vec a, const t_vec b);
+double		tuple_mag(const t_vec a);
+t_vec		tuple_norm(const t_vec a);
+double		tuple_dot(const t_vec a, const t_vec b);
+t_vec		tuple_cro(const t_vec a, const t_vec b);
 
 // create.c
 
-t_vec	point(double x, double y, double z);
-t_vec	vector(double x, double y, double z);
-t_vec	tuple(double x, double y, double z, double w);
-t_mat	mat(const t_vec col0, const t_vec col1, const t_vec col2, const t_vec col3);
-t_mat	mat_idt();
-t_ray	ray(t_vec origin, t_vec direction);
+t_vec		point(double x, double y, double z);
+t_vec		vector(double x, double y, double z);
+t_vec		tuple(double x, double y, double z, double w);
+t_mat		mat(const t_vec col0, const t_vec col1, const t_vec col2,
+				const t_vec col3);
+t_mat		mat_idt(void);
+t_ray		ray(t_vec origin, t_vec direction);
 
 // matmul.c
 
-t_mat	mat_mul_mat(const t_mat a, const t_mat b);
-t_vec	mat_mul_vec(const t_mat m, const t_vec v);
-t_mat	mat_transpose(const t_mat a);
+t_mat		mat_mul_mat(const t_mat a, const t_mat b);
+t_vec		mat_mul_vec(const t_mat m, const t_vec v);
+t_mat		mat_transpose(const t_mat a);
 
 // mat_determinant.c
 
-double	mat_get(const t_mat m, int row, int col);
-double	det_3x3_sub(const t_mat m, int skip_row, int skip_col);
-double	mat_determinant(const t_mat m);
+double		mat_get(const t_mat m, int row, int col);
+double		det_3x3_sub(const t_mat m, int skip_row, int skip_col);
+double		mat_determinant(const t_mat m);
 
 // mat_inverse.c
 
-bool	mat_is_invertible(const t_mat m);
-t_mat	mat_inverse(const t_mat m);
+bool		mat_is_invertible(const t_mat m);
+t_mat		mat_inverse(const t_mat m);
 
 // transformations.c
 
-t_mat	translation(double x, double y, double z);
-t_mat	scaling(double x, double y, double z);
-t_mat	rotation_x(double r);
-t_mat	rotation_y(double r);
-t_mat	rotation_z(double r);
+t_mat		translation(double x, double y, double z);
+t_mat		scaling(double x, double y, double z);
+t_mat		rotation_x(double r);
+t_mat		rotation_y(double r);
+t_mat		rotation_z(double r);
 
 // intersections.c
 
-t_vec	ray_pos(t_ray ray, double t_val);
-t_xsn	*intersect_sp(t_ray ray, t_obj *o);
-t_xsn	*intersect_pl(t_ray ray, t_obj *o);
-t_xsn	*intersect_cy(t_ray ray, t_obj *o);
-t_xsn	*x_hit(t_xsn *xs);
-t_xsn	*intersect_world(t_world *w, t_ray r);
+t_vec		ray_pos(t_ray ray, double t_val);
+t_xsn		*intersect_sp(t_ray ray, t_obj *o);
+t_xsn		*intersect_pl(t_ray ray, t_obj *o);
+t_xsn		*intersect_cy(t_ray ray, t_obj *o);
+t_xsn		*x_hit(t_xsn *xs);
+t_xsn		*intersect_world(t_world *w, t_ray r);
+
+// intersect_cy.c
+bool		check_cylinder_cap(t_ray ray, double t);
 
 // list_intersect.c
 
-t_xsn	*x_sort(t_xsn *xs);
+t_xsn		*x_sort(t_xsn *xs);
 
 // lists.c
 
-t_xsn	*x_new(t_obj *o, double t);
-void	x_add_back(t_xsn **xlist, t_xsn *n);
-t_obj	*obj_create(enum e_obj_type ot);
-void	obj_add_back(t_obj **objlist, t_obj *n);
-void	obj_clear(t_obj **objlist);
-void	x_clear(t_xsn **xlist);
+t_xsn		*x_new(t_obj *o, double t);
+void		x_add_back(t_xsn **xlist, t_xsn *n);
+t_obj		*obj_create(enum e_obj_type ot);
+void		obj_add_back(t_obj **objlist, t_obj *n);
+void		obj_clear(t_obj **objlist);
+void		x_clear(t_xsn **xlist);
 
 // rays.c
 
-t_ray	ray_transform(t_ray r, t_mat m);
-
-// shearing.c
-
-t_mat	shearing(double xy, double xz, double yx, double yz, double zx, double zy);
+t_ray		ray_transform(t_ray r, t_mat m);
 
 // normals.c
 
-t_vec	normal_at_sp(t_obj *o, t_vec p);
-t_vec	normal_at_pl(t_obj *o, t_vec world_point);
-t_vec	normal_at_cy(t_obj *o, t_vec world_point);
-t_vec	reflect(t_vec in, t_vec normal);
+t_vec		normal_at_sp(t_obj *o, t_vec p);
+t_vec		normal_at_pl(t_obj *o, t_vec world_point);
+t_vec		normal_at_cy(t_obj *o, t_vec world_point);
+t_vec		reflect(t_vec in, t_vec normal);
 
 // lighting.c
 
@@ -130,7 +128,7 @@ t_colour	colour_scm(double scalar, t_colour c);
 
 // computations.c
 
-t_comps	prep_comps(t_xsn *xs, t_ray r);
+t_comps		prep_comps(t_xsn *xs, t_ray r);
 t_colour	colour_at(t_world *w, t_ray r);
 
 // camera.c
