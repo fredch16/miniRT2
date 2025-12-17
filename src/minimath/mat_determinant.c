@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mat_determinant.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 01:36:26 by swied             #+#    #+#             */
-/*   Updated: 2025/10/28 02:49:45 by swied            ###   ########.fr       */
+/*   Updated: 2025/12/17 18:53:57 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 /*
 Laplacescher Entwicklungssatz:
-Um die Determinante einer 4×4-Matrix zu berechnen, geht man durch jedes Element der ersten Zeile.
-Für jedes Element wird eine 3×3-Submatrix gebildet, indem die Zeile und die Spalte dieses Elements
-weggelassen werden. Aus dieser Submatrix wird die 3×3-Determinante berechnet, die als Kofaktor dient.
-Dieser Kofaktor wird mit dem entsprechenden Element der ersten Zeile multipliziert,
-unter Berücksichtigung des wechselnden Vorzeichens, und alle Ergebnisse werden aufsummiert.
-Das Endergebnis ist die Determinante der gesamten 4×4-Matrix.
+Um die Determinante einer 4×4-Matrix zu berechnen, geht man durch jedes Element
+der ersten Zeile. Für jedes Element wird eine 3×3-Submatrix gebildet, indem 
+die Zeile und die Spalte dieses Elements weggelassen werden. Aus dieser 
+Submatrix wird die 3×3-Determinante berechnet, die als Kofaktor dient. Dieser
+Kofaktor wird mit dem entsprechenden Element der ersten Zeile multipliziert,
+unter Berücksichtigung des wechselnden Vorzeichens, und alle Ergebnisse werden
+aufsummiert. Das Endergebnis ist die Determinante der gesamten 4×4-Matrix.
 */
 
 // Hilfsfunktion: Holt ein Element aus der Matrix (row, col)
@@ -58,8 +59,8 @@ double	det_3x3_sub(const t_mat m, int skip_row, int skip_col)
 		}
 	}
 	return (vals[0] * (vals[4] * vals[8] - vals[5] * vals[7])
-			- vals[1] * (vals[3] * vals[8] - vals[5] * vals[6])
-			+ vals[2] * (vals[3] * vals[7] - vals[4] * vals[6]));
+		- vals[1] * (vals[3] * vals[8] - vals[5] * vals[6])
+		+ vals[2] * (vals[3] * vals[7] - vals[4] * vals[6]));
 }
 
 // Berechnet die Determinante einer 4x4 Matrix
