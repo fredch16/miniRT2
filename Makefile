@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/28 16:10:43 by swied             #+#    #+#              #
-#    Updated: 2025/11/07 19:14:51 by fredchar         ###   ########.fr        #
+#    Updated: 2025/12/17 16:31:05 by swied            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ OBJD :=		obj
 SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/minimath/equal.c \
 			$(SRCD)/minimath/create.c \
+			$(SRCD)/minimath/create2.c \
 			$(SRCD)/minimath/printer.c \
 			$(SRCD)/minimath/tuple_ops1.c \
 			$(SRCD)/minimath/tuple_ops2.c \
@@ -32,8 +33,8 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/minimath/mat_determinant.c \
 			$(SRCD)/minimath/mat_inverse.c \
 			$(SRCD)/minimath/transformations.c \
-			$(SRCD)/minimath/shearing.c \
 			$(SRCD)/minimath/intersect.c \
+			$(SRCD)/minimath/intersect_cy.c \
 			$(SRCD)/minimath/lists.c \
 			$(SRCD)/minimath/rays.c \
 			$(SRCD)/minimath/normals.c \

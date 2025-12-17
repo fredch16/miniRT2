@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/30 15:27:52 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/02 15:36:10fredchar         ###   ########.fr       */
+/*   Created: 2025/12/17 16:18:21 by swied             #+#    #+#             */
+/*   Updated: 2025/12/17 16:22:49 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,28 @@
 # include "minimath.h" // remove when fixing types
 # include <stdbool.h>
 
-
-
 // w value is in place to specify a vector or a point
 // w = 0 indicates a vector
 // w = 1 indicates a point
 typedef struct s_vec
 {
-	double	x;
-	double	y;
-	double	z;
-	double	w;
+	double				x;
+	double				y;
+	double				z;
+	double				w;
 }	t_vec;
 
 // each matrix will consist of 4 columns which will be represented
 // using the previously defined vectors (tuples)
 typedef struct s_mat
 {
-	t_vec	c[4];
+	t_vec				c[4];
 }	t_mat;
 
 typedef struct s_ray
 {
-	t_vec	origin;
-	t_vec	direction;
+	t_vec				origin;
+	t_vec				direction;
 }	t_ray;
 
 enum e_obj_type
@@ -52,51 +50,51 @@ enum e_obj_type
 
 typedef struct s_colour
 {
-	double	red;
-	double	green;
-	double	blue;
+	double				red;
+	double				green;
+	double				blue;
 }	t_colour;
 
 typedef struct s_material
 {
-	double	ambient;
-	double	diffuse;
-	double	specular;
-	double	shininess;
-	t_colour	colour;
+	double				ambient;
+	double				diffuse;
+	double				specular;
+	double				shininess;
+	t_colour			colour;
 }	t_material;
 
 typedef struct s_obj
 {
-	enum e_obj_type	type;
-	t_mat			transform;
-	struct s_obj	*next;
-	t_material		material;
-	double			min_y;
-	double			max_y;
-	bool			closed;
+	enum e_obj_type		type;
+	t_mat				transform;
+	struct s_obj		*next;
+	t_material			material;
+	double				min_y;
+	double				max_y;
+	bool				closed;
 }	t_obj;
 
 typedef struct s_quadratic
 {
-	double	a;
-	double	b;
-	double	c;
-	double	t1;
-	double	t2;
-	double	d;
+	double				a;
+	double				b;
+	double				c;
+	double				t1;
+	double				t2;
+	double				d;
 }	t_quadratic;
 
 typedef struct s_xsn
 {
-	int	id;
-	int	count;
-	double	t;
-	t_obj	*xs_obj;
-	struct s_xsn	*next;
+	int					id;
+	int					count;
+	double				t;
+	t_obj				*xs_obj;
+	struct s_xsn		*next;
 }	t_xsn;
 
-typedef struct	s_parse_node
+typedef struct s_parse_node
 {
 	char				*content;
 	struct s_parse_node	*next;
@@ -104,55 +102,55 @@ typedef struct	s_parse_node
 
 typedef struct s_rgb
 {
-	int32_t	r;
-	int32_t	g;
-	int32_t	b;
+	int32_t				r;
+	int32_t				g;
+	int32_t				b;
 }	t_rgb;
 
 typedef struct s_point_light
 {
-	t_colour	colour;
-	t_vec		position;
-	double		intensity;
+	t_colour			colour;
+	t_vec				position;
+	double				intensity;
 }	t_point_light;
 
-typedef struct	s_camera
+typedef struct s_camera
 {
-	int		hsize;
-	int		vsize;
-	double	field_of_view;
-	t_mat	transform;
-	double	pixel_size;
-	double	half_width;
-	double	half_height;
+	int					hsize;
+	int					vsize;
+	double				field_of_view;
+	t_mat				transform;
+	double				pixel_size;
+	double				half_width;
+	double				half_height;
 }	t_camera;
 
-typedef struct	s_parser
+typedef struct s_parser
 {
-	int		error_flag;
-	int		A_count;
-	int		L_count;
-	int		C_count;
+	int					error_flag;
+	int					a_count;
+	int					l_count;
+	int					c_count;
 }	t_parser;
 
-typedef struct	s_world
+typedef struct s_world
 {
-	t_obj			*obj_list;
-	t_point_light	light;
-	t_colour		ambient;
-	t_camera		camera;
-	t_parser		parser;
+	t_obj				*obj_list;
+	t_point_light		light;
+	t_colour			ambient;
+	t_camera			camera;
+	t_parser			parser;
 }	t_world;
 
-typedef struct	s_comps
+typedef struct s_comps
 {
-	double	t;
-	t_obj	*obj;
-	t_vec	point;
-	t_vec	over_p;
-	t_vec	eyev;
-	t_vec	normalv;
-	bool	inside;
+	double				t;
+	t_obj				*obj;
+	t_vec				point;
+	t_vec				over_p;
+	t_vec				eyev;
+	t_vec				normalv;
+	bool				inside;
 }	t_comps;
 
 #endif
