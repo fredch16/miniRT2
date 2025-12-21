@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 17:14:49 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/21 17:35:53 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/21 23:53:16 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	parse_plane(t_world *w, t_parse_node *n)
 	centre = ato3dcrds(p);
 	p = move_next(p);
 	normal = ato3dcrds(p);
-	normal = tuple_norm(normal);
 	if (verify_3dnorm(normal) < 0)
 		return (parse_error(w, -1, ERR_PLANE_ORIENT));
 	p = move_to_space(p);
