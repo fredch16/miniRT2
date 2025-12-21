@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:28:44 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/21 23:42:30 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/22 00:04:15 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define MINIRT_H
 
 # define EPSILON 0.00001
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 400
+# define HEIGHT 300
 # define DEBUG 0
 
 # include "libft/libft.h"
