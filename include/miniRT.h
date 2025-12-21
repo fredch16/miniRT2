@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:28:44 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/21 20:37:10 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/21 23:42:30 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define EPSILON 0.00001
 # define WIDTH 800
 # define HEIGHT 600
+# define DEBUG 0
 
 # include "libft/libft.h"
 // # include "MLX42/include/MLX42/MLX42.h"

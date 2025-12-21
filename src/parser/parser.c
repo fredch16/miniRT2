@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 12:28:33 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/21 23:31:58 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/21 23:42:31 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	parse_that_jawn(t_world *world, char *filename)
 
 	pn = pn_from_file(filename);
 	head = pn;
-	pn_print(pn);
+	if (DEBUG)
+		pn_print(pn);
 	while (pn && world->parser.error_flag == 0)
 	{
 		world->parser.error_flag = construct_world(world, pn);

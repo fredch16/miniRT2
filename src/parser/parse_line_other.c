@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 17:22:59 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/21 18:44:22 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/21 23:52:06 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	parse_ambient(t_world *w, t_parse_node *n)
 	char	*p;
 	double	intensity;
 
-	printf("PARSING AMBIENT\n");
 	if (!w || !n || !n->content)
 		return (-1);
 	p = n->content + 1;
@@ -49,7 +48,6 @@ int	parse_light(t_world *w, t_parse_node *n)
 {
 	char	*p;
 
-	printf("parsing light\n");
 	if (!w || !n || !n->content)
 		return (-1);
 	p = n->content + 1;
@@ -72,11 +70,9 @@ int	parse_light(t_world *w, t_parse_node *n)
 static int	compute_camera_vectors(char *p, t_vec pos, t_vec *to_out,
 	t_vec *up_out)
 {
-	t_vec	to_in;
 	t_vec	norm;
 
-	to_in = ato3dcrds(p);
-	norm = tuple_norm(to_in);
+	norm = ato3dcrds(p);
 	if (verify_3dnorm(norm) < 0)
 		return (-1);
 	if (equal_tuple(norm, vector(0, 1, 0)))

@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 16:17:45 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/21 20:19:43 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/21 23:42:44 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	construct_world(t_world *w, t_parse_node *n)
 {
-	printf("1\n");
 	if (full_empty(n->content) == 0)
 		return (0);
 	else if (ft_strncmp(n->content, "A ", 2) == 0)
@@ -31,6 +30,5 @@ int	construct_world(t_world *w, t_parse_node *n)
 		return (parse_cylinder(w, n));
 	else if (ft_strncmp(n->content, "# ", 2) == 0)
 		return (0);
-	printf("2\n");
 	return (-1);
 }
