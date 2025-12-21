@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:20:02 by fredchar          #+#    #+#             */
-/*   Updated: 2025/10/22 16:00:59 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/21 16:35:00 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@
 
 inline t_vec	tuple_sub(const t_vec a, const t_vec b)
 {
-	return ((t_vec){a.x - b.x, a.y - b.y,	a.z - b.z, a.w - b.w});
+	return ((t_vec){a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w});
 }
 
 inline t_vec	tuple_add(const t_vec a, const t_vec b)
 {
-	return ((t_vec){a.x + b.x, a.y + b.y,	a.z + b.z, a.w + b.w});
+	return ((t_vec){a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w});
 }
 
 inline t_vec	tuple_neg(const t_vec a)
