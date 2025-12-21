@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 12:35:08 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/21 17:33:20 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/21 18:24:09 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 # define ERR_CYLINDER_COLOUR "Cylinder Colour out of range 0 - 255"
 # define ERR_PLANE_ORIENT "Plane orientation vector is not normalised"
 # define ERR_CYLINDER_ORIENT "Cylinder orientation vector is not normalised"
+# define ERR_AMBIENT_INTENS "Ambient light intensity out of range 0 - 1"
+# define ERR_AMBIENT_COLOUR "Ambient light colour out of range 0 - 255"
+# define ERR_LIGHT_INTENS "Point Light intensity out of range 0 - 1"
+# define ERR_LIGHT_COLOUR "Point Light colour out of range 0 - 255"
+# define ERR_CAMERA_ORIENT "Camera orientation vector is not normalised"
+# define ERR_CAMERA_FOV "Camera FOV is out of range 0 - 180"
 
 t_parse_node	*pn_new(char *content);
 void			pn_add_back(t_parse_node **pnlist, t_parse_node *n);

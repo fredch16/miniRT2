@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   parse_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/13 13:28:44 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/21 20:37:10 by fredchar         ###   ########.fr       */
+/*   Created: 2025/12/21 20:26:37 by fredchar          #+#    #+#             */
+/*   Updated: 2025/12/21 20:30:52 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#include "../../include/miniRT.h"
 
-# define EPSILON 0.00001
-# define WIDTH 800
-# define HEIGHT 600
+char	*move_next(char *str)
+{
+	str = skip_spaces(str);
+	str = move_to_space(str);
+	str = skip_spaces(str);
+	return (str);
+}
 
-# include "libft/libft.h"
-// # include "MLX42/include/MLX42/MLX42.h"
-# include "minimath.h"
-# include "types.h"
-# include "parser.h"
+char	*move_skip(char *str)
+{
+	str = move_to_space(str);
+	str = skip_spaces(str);
+	return (str);
+}
 
-# include <unistd.h>
-# include <math.h>
-# include <stdbool.h>
-# include <stdlib.h>
-
-#endif
+int	parse_error(t_world *w, int error_code, char *err_msg)
+{
+	printf("Error: %s\n", err_msg);
+	w->parser.error_flag++;
+	return (error_code);
+}

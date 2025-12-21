@@ -6,10 +6,9 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 13:01:19 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/10 01:32:01 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/21 20:23:32 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../include/miniRT.h"
 #include <ctype.h>
@@ -35,7 +34,6 @@ int	verify_3dnorm(t_vec	vec)
 	upperlim = 1 + EPSILON;
 	lowerlim = 1 - EPSILON;
 	mag = tuple_mag(vec);
-
 	if (mag < lowerlim || mag > upperlim)
 		return (-1);
 	return (0);

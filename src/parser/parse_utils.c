@@ -6,13 +6,13 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 14:42:13 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/21 17:32:25 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/21 20:32:06 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minimath.h"
 
-t_colour atocol(char *str)
+t_colour	atocol(char *str)
 {
 	t_colour	col;
 	double		mul;
@@ -64,31 +64,10 @@ int	allowed_chars(char *str)
 {
 	while (*str)
 	{
-		if (!(ft_isdigit(*str) || *str == '.' || *str == ',' || *str == '-' || ft_isspace(*str)))
+		if (!(ft_isdigit(*str) || *str == '.' || *str == ','
+				|| *str == '-' || ft_isspace(*str)))
 			return (0);
 		str++;
 	}
 	return (1);
-}
-
-char *move_next(char *str)
-{
-	str = skip_spaces(str);
-	str = move_to_space(str);
-	str = skip_spaces(str);
-	return (str);
-}
-
-char *move_skip(char *str)
-{
-	str = move_to_space(str);
-	str = skip_spaces(str);
-	return (str);
-}
-
-int	parse_error(t_world *w, int error_code, char *err_msg)
-{
-	printf("Error: %s\n", err_msg);
-	w->parser.error_flag++;
-	return (error_code);
 }

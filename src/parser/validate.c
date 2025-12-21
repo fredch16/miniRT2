@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 15:36:31 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/06 13:09:03 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/21 20:20:10 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ int	verify_content(t_parse_node *n)
 		return (verify_plane(n));
 	if (ft_strncmp(n->content, "cy ", 3) == 0)
 		return (verify_cylinder(n));
-	return (-1); // unknown ID
+	return (-1);
 }
 
-int verify_pn_list(t_parse_node *pnlist)
+int	verify_pn_list(t_parse_node *pnlist)
 {
 	t_parse_node	*tmp;
-	
+
 	tmp = pnlist;
 	while (tmp)
 	{
