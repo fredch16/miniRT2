@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/16 18:01:19 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/21 17:03:52 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,11 @@ int main(int ac, char **av)
 	pn = pn_from_file(av[1]);
 	head = pn;
 	pn_print(pn);
-	// if (verify_pn_list(pn) < 0)
-	// 	return (printf("Incorrect object entered!\n"), -1);
 	t_world world = {0};
 	world.parser.error_flag = 0;
+	world.parser.a_count = 0;
+	world.parser.l_count = 0;
+	world.parser.c_count = 0;
 	while (pn && world.parser.error_flag == 0)
 	{
 		world.parser.error_flag = construct_world(&world, pn);
@@ -62,6 +63,13 @@ int main(int ac, char **av)
 			return (printf("Error\n"), -1);
 		pn = pn->next;
 	}
+	if (world.parser.a_count < 1)
+			return (printf("Error: MiniRT needs an Ambient Element\n"), -1);
+	if (world.parser.l_count < 1)
+			return (printf("Error: MiniRT needs a Light Element\n"), -1);
+	if (world.parser.c_count < 1)
+			return (printf("Error: MiniRT needs a Camera Element\n"), -1);
+
 	printf("OKAYYYY LETS GO\n");
 	pn_clear(&head);
 

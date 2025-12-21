@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 17:22:59 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/16 15:47:54 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/21 17:04:20 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int parse_ambient(t_world *w, t_parse_node *n)
 	if (verify_colours(w->ambient) < 0)
 		return (w->parser.error_flag++, printf("Ambient Light out of range 0 - 255\n"), -1);
 	w->ambient = colour_scm(intensity, w->ambient);
+	w->parser.a_count++;
 	return (0);
 }
 
@@ -66,6 +67,7 @@ int parse_light(t_world *w, t_parse_node *n)
 		return (w->parser.error_flag++, printf("Point Light out of range 0 - 255\n"), -1);
 	printf("Light colour:\n");
 	print_colour(w->light.colour);
+	w->parser.l_count++;
 	return (0);
 }
 
@@ -113,5 +115,6 @@ int parse_camera(t_world *w, t_parse_node *n)
 
 	w->camera = cam;
 	print_mat(w->camera.transform);
+	w->parser.c_count++;
 	return (0);
 }

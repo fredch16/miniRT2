@@ -6,29 +6,29 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 18:29:46 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/16 16:07:51 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/21 17:06:00 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/miniRT.h"
 
-inline	t_material	material_default_sp()
+inline t_material material_default_sp()
 {
 	return ((t_material){0.1, 0.7, 0.3, 200, {0, 0, 0}});
 }
 
-inline	t_material	material_default_pl()
+inline t_material material_default_pl()
 {
 	return ((t_material){0.1, 0.7, 0.3, 20, {0, 0, 0}});
 }
 
-int	parse_sphere(t_world *w, t_parse_node *n)
+int parse_sphere(t_world *w, t_parse_node *n)
 {
 	printf("Parsing sphere\n");
-	char		*p;
-	t_obj		*sp;
-	t_vec		centre;
-	double		radius;
+	char *p;
+	t_obj *sp;
+	t_vec centre;
+	double radius;
 
 	if (!w || !n || !n->content)
 		return (-1);
@@ -41,11 +41,11 @@ int	parse_sphere(t_world *w, t_parse_node *n)
 	p = skip_spaces(p);
 	p = move_to_space(p);
 	p = skip_spaces(p);
-	radius = ft_atod(p) * 0.5; // remember because this is radius x2
+	radius = ft_atod(p) * 0.5;
 	if (radius < 0)
 		return (w->parser.error_flag++, printf("Sphere's radius can't be negative\n"), -1);
-	sp->transform = mat_mul_mat( \
-		translation(centre.x, centre.y, centre.z), \
+	sp->transform = mat_mul_mat(
+		translation(centre.x, centre.y, centre.z),
 		scaling(radius, radius, radius));
 	p = move_to_space(p);
 	sp->material.colour = atocol(p);
@@ -55,12 +55,12 @@ int	parse_sphere(t_world *w, t_parse_node *n)
 	return (0);
 }
 
-t_mat	rotation_from_axis_angle(t_vec axis, double angle)
+t_mat rotation_from_axis_angle(t_vec axis, double angle)
 {
-	t_mat	r;
-	double	c = cos(angle);
-	double	s = sin(angle);
-	double	t = 1.0 - c;
+	t_mat r;
+	double c = cos(angle);
+	double s = sin(angle);
+	double t = 1.0 - c;
 
 	r = mat_idt();
 	r.c[0].x = c + axis.x * axis.x * t;
@@ -77,14 +77,13 @@ t_mat	rotation_from_axis_angle(t_vec axis, double angle)
 	return (r);
 }
 
-
-int	parse_plane(t_world *w, t_parse_node *n)
+int parse_plane(t_world *w, t_parse_node *n)
 {
 	printf("Parsing plane\n");
-	char		*p;
-	t_obj		*pl;
-	t_vec		centre;
-	t_vec		normal;
+	char *p;
+	t_obj *pl;
+	t_vec centre;
+	t_vec normal;
 
 	if (!w || !n || !n->content)
 		return (-1);
@@ -99,7 +98,7 @@ int	parse_plane(t_world *w, t_parse_node *n)
 	normal = tuple_norm(normal);
 	if (verify_3dnorm(normal) < 0)
 		return (w->parser.error_flag++, printf("Cylinder orientation vector not normalised\n"), -1);
-	t_vec	up_default = {0, 1, 0, 0};
+	t_vec up_default = {0, 1, 0, 0};
 
 	// in the case of the input vector being equal to default
 	if (equal_tuple(normal, up_default))
@@ -108,10 +107,10 @@ int	parse_plane(t_world *w, t_parse_node *n)
 		pl->transform = mat_mul_mat(translation(centre.x, centre.y, centre.z), rotation_x(M_PI));
 	else
 	{
-		t_vec	axis = tuple_norm(tuple_cro(up_default, normal));
-		double	angle = acos(tuple_dot(normal, up_default));
-		t_mat	rotate = rotation_from_axis_angle(axis, angle);
-		t_mat	translate = translation(centre.x, centre.y, centre.z);
+		t_vec axis = tuple_norm(tuple_cro(up_default, normal));
+		double angle = acos(tuple_dot(normal, up_default));
+		t_mat rotate = rotation_from_axis_angle(axis, angle);
+		t_mat translate = translation(centre.x, centre.y, centre.z);
 		pl->transform = mat_mul_mat(translate, rotate);
 	}
 	p = move_to_space(p);
@@ -122,14 +121,13 @@ int	parse_plane(t_world *w, t_parse_node *n)
 	return (0);
 }
 
-
-int	parse_cylinder(t_world *w, t_parse_node *n)
+int parse_cylinder(t_world *w, t_parse_node *n)
 {
 	printf("Parsing Cylinder\n");
-	char		*p;
-	t_obj		*cy;
-	t_vec		centre;
-	t_vec		normal;
+	char *p;
+	t_obj *cy;
+	t_vec centre;
+	t_vec normal;
 
 	if (!w || !n || !n->content)
 		return (-1);
@@ -144,11 +142,11 @@ int	parse_cylinder(t_world *w, t_parse_node *n)
 	normal = tuple_norm(normal);
 	if (verify_3dnorm(normal) < 0)
 		return (w->parser.error_flag++, printf("Cylinder orientation vector not normalised\n"), -1);
-	t_vec	up_default = {0, 1, 0, 0};
+	t_vec up_default = {0, 1, 0, 0};
 	p = move_to_space(p);
 	p = skip_spaces(p);
 	cy->closed = 1;
-	double	radius = ft_atod(p) * 0.5;
+	double radius = ft_atod(p) * 0.5;
 	p = move_to_space(p);
 	p = skip_spaces(p);
 	double height = ft_atod(p);
@@ -160,13 +158,13 @@ int	parse_cylinder(t_world *w, t_parse_node *n)
 		cy->transform = mat_mul_mat(translation(centre.x, centre.y, centre.z), rotation_x(M_PI));
 	else
 	{
-		t_vec	axis = tuple_norm(tuple_cro(up_default, normal));
-		double	angle = acos(tuple_dot(normal, up_default));
-		t_mat	rotate = rotation_from_axis_angle(axis, angle);
-		t_mat	translate = translation(centre.x, centre.y, centre.z);
+		t_vec axis = tuple_norm(tuple_cro(up_default, normal));
+		double angle = acos(tuple_dot(normal, up_default));
+		t_mat rotate = rotation_from_axis_angle(axis, angle);
+		t_mat translate = translation(centre.x, centre.y, centre.z);
 		cy->transform = mat_mul_mat(translate, rotate);
 	}
-	
+
 	/* advance to colour token (move past height token) */
 	p = move_to_space(p);
 	p = skip_spaces(p);
