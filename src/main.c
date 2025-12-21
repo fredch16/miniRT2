@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/21 23:32:55 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/21 23:38:36 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,13 @@ void	render(t_world *world, mlx_image_t *img)
 
 int	main(int ac, char **av)
 {
-	t_world		world = {0};
+	t_world		world;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 
+	ft_bzero(&world, sizeof(t_world));
 	if (ac != 2)
-	{
-		printf("USAGE: ./miniRT <scene.rt>\n");
-		return (-1);
-	}
+		return (printf("USAGE: ./miniRT <scene.rt>\n"), -1);
 	init(&world);
 	if (parse_that_jawn(&world, av[1]) < 0)
 		return (-1);
