@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 12:35:08 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/21 18:24:09 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/21 23:31:09 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void			pn_clear(t_parse_node **pnlist);
 t_parse_node	*pn_from_file(const char *filepath);
 void			pn_print(t_parse_node *head);
 int				verify_pn_list(t_parse_node *pnlist);
+int				parse_that_jawn(t_world *world, char *filename);
 
 // verify_line_objs.c
 

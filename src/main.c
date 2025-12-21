@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:24:39 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/21 17:03:52 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/21 23:32:55 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,97 +18,80 @@
 #include "MLX42/include/MLX42/MLX42.h"
 
 // Exit the program as failure.
-static void ft_error(void)
+static void	ft_error(void)
 {
 	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
 	exit(EXIT_FAILURE);
 }
 
-void mlx_hook(mlx_key_data_t mlx_key_data, void *param)
+void	mlx_hook(mlx_key_data_t mlx_key_data, void *param)
 {
-	mlx_t *mlx = param;
+	mlx_t	*mlx;
 
+	mlx = param;
 	if (mlx_key_data.key == MLX_KEY_ESCAPE)
 	{
-		// free
 		printf("WINDOW IS BEING CLOSED DUE TO ESCAPE KEY\n");
 		mlx_close_window(mlx);
 	}
 }
 
-int main(int ac, char **av)
+void	init(t_world *world)
 {
+	world->parser.error_flag = 0;
+	world->parser.a_count = 0;
+	world->parser.l_count = 0;
+	world->parser.c_count = 0;
+}
 
-	(void)ac;
-	(void)av;
+void	render(t_world *world, mlx_image_t *img)
+{
+	int			y;
+	int			x;
+	t_ray		r;
+	t_colour	color;
+
+	y = 0;
+	printf("Starting render: %dx%d pixels...\n", WIDTH, HEIGHT);
+	while (y < HEIGHT)
+	{
+		if (y % (HEIGHT / 10) == 0)
+			printf("Rendering progress: %.1f%%\n", (float)y / HEIGHT * 100);
+		x = 0;
+		while (x < WIDTH)
+		{
+			r = ray_for_pixel(world->camera, x, y);
+			color = colour_at(world, r);
+			mlx_put_pixel(img, x, y, colour_to_rgba(color));
+			x++;
+		}
+		y++;
+	}
+	obj_clear(&(world->obj_list));
+	printf("Render complete!\n");
+}
+
+int	main(int ac, char **av)
+{
+	t_world		world = {0};
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+
 	if (ac != 2)
 	{
 		printf("USAGE: ./miniRT <scene.rt>\n");
 		return (-1);
 	}
-	t_parse_node *pn;
-	t_parse_node *head;
-	pn = pn_from_file(av[1]);
-	head = pn;
-	pn_print(pn);
-	t_world world = {0};
-	world.parser.error_flag = 0;
-	world.parser.a_count = 0;
-	world.parser.l_count = 0;
-	world.parser.c_count = 0;
-	while (pn && world.parser.error_flag == 0)
-	{
-		world.parser.error_flag = construct_world(&world, pn);
-		if (world.parser.error_flag < 0)
-			return (printf("Error\n"), -1);
-		pn = pn->next;
-	}
-	if (world.parser.a_count < 1)
-			return (printf("Error: MiniRT needs an Ambient Element\n"), -1);
-	if (world.parser.l_count < 1)
-			return (printf("Error: MiniRT needs a Light Element\n"), -1);
-	if (world.parser.c_count < 1)
-			return (printf("Error: MiniRT needs a Camera Element\n"), -1);
-
-	printf("OKAYYYY LETS GO\n");
-	pn_clear(&head);
-
-	// return (0);
-	mlx_t *mlx = mlx_init(WIDTH, HEIGHT, "miniRT - Ray Tracer", true);
+	init(&world);
+	if (parse_that_jawn(&world, av[1]) < 0)
+		return (-1);
+	mlx = mlx_init(WIDTH, HEIGHT, "miniRT - Ray Tracer", true);
 	if (!mlx)
 		ft_error();
-
-	mlx_image_t *img = mlx_new_image(mlx, WIDTH, HEIGHT);
+	img = mlx_new_image(mlx, WIDTH, HEIGHT);
+	render(&world, img);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
-
-	// Render scene
-	printf("Starting render: %dx%d pixels...\n", WIDTH, HEIGHT);
-	for (int y = 0; y < HEIGHT; y++)
-	{
-		// Progress indicator every 10%
-		if (y % (HEIGHT / 10) == 0)
-			printf("Rendering progress: %.1f%%\n", (float)y / HEIGHT * 100);
-
-		for (int x = 0; x < WIDTH; x++)
-		{
-			t_ray r = ray_for_pixel(world.camera, x, y);
-			t_colour color = colour_at(&world, r);
-			mlx_put_pixel(img, x, y, colour_to_rgba(color));
-		}
-	}
-	obj_clear(&(world.obj_list));
-	printf("Render complete!\n");
-
-	printf("\n\n\n\nDEBUGGING ZONE:\n");
-	printf("Ambient\n");
-	print_colour(world.ambient);
-	printf("World Light\n");
-	print_colour(world.light.colour);
-	print_colour(colour_at(&world, ray_for_pixel(world.camera, 0, 0)));
-
-	// Register a hook and pass mlx as an optional param.
-	// NOTE: Do this before calling mlx_loop!
 	mlx_key_hook(mlx, mlx_hook, mlx);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
