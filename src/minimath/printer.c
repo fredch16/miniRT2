@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:38:35 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/21 16:33:47 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/21 20:46:14 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 void	print_mat(t_mat mat)
 {
 	printf("Matrix is as follows:\n");
-	printf("| %10.5f | %10.5f | %10.5f | %10.5f |\n", mat.c[0].x, mat.c[1].x, mat.c[2].x, mat.c[3].x);
-	printf("| %10.5f | %10.5f | %10.5f | %10.5f |\n", mat.c[0].y, mat.c[1].y, mat.c[2].y, mat.c[3].y);
-	printf("| %10.5f | %10.5f | %10.5f | %10.5f |\n", mat.c[0].z, mat.c[1].z, mat.c[2].z, mat.c[3].z);
-	printf("| %10.5f | %10.5f | %10.5f | %10.5f |\n", mat.c[0].w, mat.c[1].w, mat.c[2].w, mat.c[3].w);
+	printf("| %10.5f | %10.5f | %10.5f | %10.5f |\n", mat.c[0].x,
+		mat.c[1].x, mat.c[2].x, mat.c[3].x);
+	printf("| %10.5f | %10.5f | %10.5f | %10.5f |\n", mat.c[0].y,
+		mat.c[1].y, mat.c[2].y, mat.c[3].y);
+	printf("| %10.5f | %10.5f | %10.5f | %10.5f |\n", mat.c[0].z,
+		mat.c[1].z, mat.c[2].z, mat.c[3].z);
+	printf("| %10.5f | %10.5f | %10.5f | %10.5f |\n", mat.c[0].w,
+		mat.c[1].w, mat.c[2].w, mat.c[3].w);
 }
 
 void	print_vec4(t_vec tup)
@@ -58,32 +62,32 @@ void	print_xs(t_xsn *xs)
 	}
 }
 
-void	print_comps(t_comps comps)
-{
-	printf("---- t_comps ----\n");
-	printf("t = %10.5f\n", comps.t);
-	if (comps.obj)
-	{
-		printf("obj ptr = %p | type = ", (void *)comps.obj);
-		if (comps.obj->type == OT_SPHERE)
-			printf("SPHERE\n");
-		else if (comps.obj->type == OT_PLANE)
-			printf("PLANE\n");
-		else if (comps.obj->type == OT_CYLINDER)
-			printf("CYLINDER\n");
-		else
-			printf("UNKNOWN(%d)\n", comps.obj->type);
-	}
-	else
-		printf("obj = NULL\n");
-	printf("inside = %s\n", comps.inside ? "true" : "false");
-	printf("point:\n");
-	print_vec4(comps.point);
-	printf("eyev:\n");
-	print_vec4(comps.eyev);
-	printf("normalv:\n");
-	print_vec4(comps.normalv);
-}
+// void	print_comps(t_comps comps)
+// {
+// 	printf("---- t_comps ----\n");
+// 	printf("t = %10.5f\n", comps.t);
+// 	if (comps.obj)
+// 	{
+// 		printf("obj ptr = %p | type = ", (void *)comps.obj);
+// 		if (comps.obj->type == OT_SPHERE)
+// 			printf("SPHERE\n");
+// 		else if (comps.obj->type == OT_PLANE)
+// 			printf("PLANE\n");
+// 		else if (comps.obj->type == OT_CYLINDER)
+// 			printf("CYLINDER\n");
+// 		else
+// 			printf("UNKNOWN(%d)\n", comps.obj->type);
+// 	}
+// 	else
+// 		printf("obj = NULL\n");
+// 	printf("inside = %s\n", comps.inside ? "true" : "false");
+// 	printf("point:\n");
+// 	print_vec4(comps.point);
+// 	printf("eyev:\n");
+// 	print_vec4(comps.eyev);
+// 	printf("normalv:\n");
+// 	print_vec4(comps.normalv);
+// }
 
 void	print_colour(t_colour col)
 {
