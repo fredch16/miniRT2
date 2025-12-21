@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   normals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 17:39:14 by fredchar          #+#    #+#             */
-/*   Updated: 2025/11/07 17:57:48 by swied            ###   ########.fr       */
+/*   Updated: 2025/12/21 16:28:27 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ t_vec	normal_at_pl(t_obj *o, t_vec world_point)
 t_vec	normal_at_cy(t_obj *o, t_vec world_point)
 {
 	t_mat	inverse;
-	t_mat	transpose_inverse;
 	t_vec	object_point;
 	t_vec	object_normal;
 	t_vec	world_normal;
@@ -71,8 +70,7 @@ t_vec	normal_at_cy(t_obj *o, t_vec world_point)
 		object_normal = vector(0, -1, 0);
 	else
 		object_normal = vector(object_point.x, 0, object_point.z);
-	transpose_inverse = mat_transpose(inverse);
-	world_normal = mat_mul_vec(transpose_inverse, object_normal);
+	world_normal = mat_mul_vec(mat_transpose(inverse), object_normal);
 	world_normal.w = 0;
 	return (tuple_norm(world_normal));
 }
