@@ -6,7 +6,7 @@
 #    By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/28 16:10:43 by swied             #+#    #+#              #
-#    Updated: 2025/12/17 18:39:50 by fredchar         ###   ########.fr        #
+#    Updated: 2025/12/21 17:36:00 by fredchar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,8 @@ SRCS :=		$(SRCD)/main.c \
 			$(SRCD)/parser/parse_utils.c \
 			$(SRCD)/parser/parse_line_other.c \
 			$(SRCD)/parser/parse_line_objs.c \
+			$(SRCD)/parser/parse_line_objs2.c \
+			$(SRCD)/parser/parse_line_objs3.c \
 			$(SRCD)/parser/validate.c \
 			$(SRCD)/parser/verify_line_objs.c \
 			$(SRCD)/parser/verify_line_other.c \

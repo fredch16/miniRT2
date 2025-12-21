@@ -6,7 +6,7 @@
 /*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 20:56:22 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/17 18:39:30 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/21 17:57:58 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ t_obj	*obj_create(enum e_obj_type ot)
 		return (NULL);
 	new->type = ot;
 	new->transform = mat_idt();
+	new->closed = 1;
 	return (new);
 }
 

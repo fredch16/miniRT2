@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 12:35:08 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/17 16:17:43 by swied            ###   ########.fr       */
+/*   Updated: 2025/12/21 17:33:20 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define PARSER_H
 
 # include "miniRT.h"
+# define ERR_SPHERE_DIAMETER "Sphere's diameter can't be negative"
+# define ERR_SPHERE_COLOUR "Sphere Colour out of range 0 - 255"
+# define ERR_PLANE_COLOUR "Plane Colour out of range 0 - 255"
+# define ERR_CYLINDER_COLOUR "Cylinder Colour out of range 0 - 255"
+# define ERR_PLANE_ORIENT "Plane orientation vector is not normalised"
+# define ERR_CYLINDER_ORIENT "Cylinder orientation vector is not normalised"
 
 t_parse_node	*pn_new(char *content);
 void			pn_add_back(t_parse_node **pnlist, t_parse_node *n);
@@ -54,6 +60,9 @@ int				construct_world(t_world *w, t_parse_node *n);
 t_colour		atocol(char *str);
 t_vec			ato3dcrds(char *str);
 int				allowed_chars(char *str);
+char			*move_next(char *str);
+int				parse_error(t_world *w, int error_code, char *err_msg);
+char			*move_skip(char *str);
 
 // parse_line_other.c
 
@@ -62,11 +71,16 @@ int				parse_ambient(t_world *w, t_parse_node *n);
 int				parse_light(t_world *w, t_parse_node *n);
 int				parse_camera(t_world *w, t_parse_node *n);
 
-// parse_line_objs.c
+// parse_line_objs.c (all)
 
 int				parse_sphere(t_world *w, t_parse_node *n);
 int				parse_plane(t_world *w, t_parse_node *n);
 int				parse_cylinder(t_world *w, t_parse_node *n);
+int				parse_sphere_color(t_obj *sp, char *p);
+t_mat			get_plane_transform(t_vec centre, t_vec normal);
+t_mat			rotation_from_axis_angle(t_vec axis, double angle);
+t_material		material_default_pl(void);
+t_material		material_default_sp(void);
 
 // verify_utils.c
 
