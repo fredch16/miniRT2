@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
+/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 15:21:31 by swied             #+#    #+#             */
-/*   Updated: 2025/12/22 15:21:32 by swied            ###   ########.fr       */
+/*   Updated: 2025/12/22 15:28:15 by fredchar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ t_parse_node	*pn_from_file(const char *filepath)
 		return (NULL);
 	fd = open(filepath, O_RDONLY);
 	if (fd < 0)
+	{
+		printf("Error: Failed to read input file\n");
 		return (NULL);
+	}
 	if (read_file_lines(fd, &head) < 0)
 		return (NULL);
 	close(fd);
