@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 12:35:08 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/21 23:31:09 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/22 15:17:51 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,19 @@ void			pn_clear(t_parse_node **pnlist);
 
 /* Build a null-terminated linked list of parse nodes from a file */
 // parser.c
-t_parse_node	*pn_from_file(const char *filepath);
-void			pn_print(t_parse_node *head);
-int				verify_pn_list(t_parse_node *pnlist);
 int				parse_that_jawn(t_world *world, char *filename);
+
+// parser_file.c
+t_parse_node	*pn_from_file(const char *filepath);
+
+// parser_utils.c
+void			pn_print(t_parse_node *head);
+void			cleanup_pn_list(t_parse_node *head, char *ln, int fd);
+int				process_line(char **ln, t_parse_node **head);
+int				check_file_extension(const char *filepath);
+
+// validate.c
+int				verify_pn_list(t_parse_node *pnlist);
 
 // verify_line_objs.c
 

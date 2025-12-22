@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fredchar <fredchar@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: swied <swied@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:28:44 by fredchar          #+#    #+#             */
-/*   Updated: 2025/12/22 00:04:15 by fredchar         ###   ########.fr       */
+/*   Updated: 2025/12/22 14:12:49 by swied            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define MINIRT_H
 
 # define EPSILON 0.00001
-# define WIDTH 400
-# define HEIGHT 300
+# define WIDTH 800
+# define HEIGHT 600
 # define DEBUG 0
 
 # include "libft/libft.h"
